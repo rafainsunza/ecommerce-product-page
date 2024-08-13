@@ -1,6 +1,10 @@
-<button><img src="../../assets/icon-menu.svg" alt="Open Menu" /></button>
+<button class="open-nav-btn">
+  <img src="/src/assets/icon-menu.svg" alt="Open Menu" class="open-icon" />
+</button>
 
-<div class="nav-menu-container">
-  <button><img src="../../assets/icon-close.svg" alt="Close Menu" /></button>
-  <slot name="nav-item"></slot>
+<div class="nav-menu-container hidden">
+  <button class="close-nav-btn">
+    <img src="/src/assets/icon-close.svg" alt="Close Menu" class="close-icon" />
+  </button>
+  <div class="nav-items"></div>
 </div>

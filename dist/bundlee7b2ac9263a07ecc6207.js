@@ -33,7 +33,11 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n    </style>\n    ".concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var reset = "\n    button {\n        border: none;\n        padding: 0;\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n    }\n";
+var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-family: 'Kumbh Sans';\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        } \n        \n        .hidden {\n            display: none;\n        }\n";
+var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: var(--nav-link-text-color-mobile);\n\n            padding: 15px 0;\n        }\n";
+var btnStyle = "\n        .close-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n            width: 20px;\n            margin-bottom: 30px;\n        }\n\n        .open-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n            height: 30px;\n        }\n\n";
+template.innerHTML = "\n    <style>\n        ".concat(reset, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
     var _this;
@@ -43,17 +47,11 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-    // const navItems = JSON.parse(this.getAttribute('nav-items'));
-    // const navContainer = this.shadowRoot.querySelector('.nav-menu-container');
-    // navItems.forEach((navItem) => {
-    //     const navLink = document.createElement('a');
-    //     navLink.href = `${navItem.toLowerCase()}`;
-    //     navLink.textContent = navItem;
-    //     navLink.className = 'nav-link';
-
-    //     navContainer.appendChild(navLink)
-    // })
+    var menuLinks = document.querySelectorAll('nav-menu a');
+    console.log('menuLinks', menuLinks);
+    menuLinks.forEach(function (link) {
+      _this.shadowRoot.querySelector('.nav-items').append(link);
+    });
     return _this;
   }
   _inherits(NavMenu, _HTMLElement);
@@ -83,7 +81,23 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, `:root {
+  --nav-btn-background-color: hsl(0, 0%, 100%);
+  --nav-link-text-color-mobile: hsl(0, 0%, 0%);
+  --active-btn: hsl(26, 100%, 55%);
+  --light-weight: 400;
+  --heavy-weight: 700;
+  --overlay: hsla(0, 0%, 0%, 0.75);
+}
+
+html {
+  font-family: "Kumbh Sans";
+  height: 100%;
+}
+
+header {
+  border-bottom: 1px solid black;
+}`, "",{"version":3,"sources":["webpack://./src/styles/_variables.sass","webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,4CAAA;EACA,4CAAA;EAEA,gCAAA;EAEA,mBAAA;EACA,mBAAA;EAEA,gCAAA;ACFJ;;AALA;EACI,yBAAA;EACA,YAAA;AAQJ;;AANA;EACI,8BAAA;AASJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -109,9 +123,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.nav-item {
-  color: red;
-}`, "",{"version":3,"sources":["webpack://./src/web-components/nav-menu/nav-menu.sass"],"names":[],"mappings":"AAAA;EACE,UAAA;AACF","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, `:root {
+  --nav-btn-background-color: hsl(0, 0%, 100%);
+  --nav-link-text-color-mobile: hsl(0, 0%, 0%);
+  --active-btn: hsl(26, 100%, 55%);
+  --light-weight: 400;
+  --heavy-weight: 700;
+  --overlay: hsla(0, 0%, 0%, 0.75);
+}`, "",{"version":3,"sources":["webpack://./src/styles/_variables.sass","webpack://./src/web-components/nav-menu/nav-menu.sass"],"names":[],"mappings":"AAAA;EACI,4CAAA;EACA,4CAAA;EAEA,gCAAA;EAEA,mBAAA;EACA,mBAAA;EAEA,gCAAA;ACFJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -403,12 +422,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Imports
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-menu.svg */ "./src/assets/icon-menu.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-menu.svg */ "./src/assets/icon-menu.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-close.svg */ "./src/assets/icon-close.svg"), __webpack_require__.b);
 // Module
-var code = `<button><img src="${___HTML_LOADER_IMPORT_0___}" alt="Open Menu" /></button>
+var code = `<button class="open-nav-btn">
+  <img src="${___HTML_LOADER_IMPORT_0___}" alt="Open Menu" class="open-icon" />
+</button>
 
-<div class="nav-menu-container">
-  <slot name="nav-item"></slot>
+<div class="nav-menu-container hidden">
+  <button class="close-nav-btn">
+    <img src="${___HTML_LOADER_IMPORT_1___}" alt="Close Menu" class="close-icon" />
+  </button>
+  <div class="nav-items"></div>
 </div>
 `;
 // Exports
@@ -839,6 +864,16 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/assets/icon-close.svg":
+/*!***********************************!*\
+  !*** ./src/assets/icon-close.svg ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/icon-close.svg";
+
+/***/ }),
+
 /***/ "./src/assets/icon-menu.svg":
 /*!**********************************!*\
   !*** ./src/assets/icon-menu.svg ***!
@@ -999,4 +1034,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle7b117f43c0ff9b47859b.js.map
+//# sourceMappingURL=bundlee7b2ac9263a07ecc6207.js.map
