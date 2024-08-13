@@ -14,6 +14,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _nav_menu_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nav-menu.html */ "./src/web-components/nav-menu/nav-menu.html");
 /* harmony import */ var _nav_menu_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./nav-menu.sass */ "./src/web-components/nav-menu/nav-menu.sass");
+/* harmony import */ var _menu_items_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./menu-items.json */ "./src/web-components/nav-menu/menu-items.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
@@ -32,12 +33,14 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 
+
 var template = document.createElement('template');
-var reset = "\n    button {\n        border: none;\n        padding: 0;\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n    }\n";
-var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-family: 'Kumbh Sans';\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        } \n        \n        .hidden {\n            display: none;\n        }\n";
+var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n    }\n\n    .hidden {\n        display: none;\n    }\n";
+var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-family: 'Kumbh Sans';\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
 var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: var(--nav-link-text-color-mobile);\n\n            padding: 15px 0;\n        }\n";
-var btnStyle = "\n        .close-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n            width: 20px;\n            margin-bottom: 30px;\n        }\n\n        .open-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n            height: 30px;\n        }\n\n";
-template.innerHTML = "\n    <style>\n        ".concat(reset, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var btnStyle = "\n        .close-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n            margin-bottom: 30px;\n        }\n\n        .open-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n        }\n";
+var overLayStyle = "\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n\n            height: 100vh;\n            width: 30%;\n\n            background-color: hsla(0, 0%, 0%, 0.75);\n        }\n";
+template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n        ").concat(overLayStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
     var _this;
@@ -47,11 +50,24 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
-    var menuLinks = document.querySelectorAll('nav-menu a');
-    console.log('menuLinks', menuLinks);
-    menuLinks.forEach(function (link) {
+    _menu_items_json__WEBPACK_IMPORTED_MODULE_2__.forEach(function (item) {
+      var link = document.createElement('a');
+      link.href = item.url;
+      link.innerText = item.title;
+      link.classList.add('nav-link');
       _this.shadowRoot.querySelector('.nav-items').append(link);
     });
+    var openNavBtn = _this.shadowRoot.querySelector('.open-nav-btn');
+    var closeNavBtn = _this.shadowRoot.querySelector('.close-nav-btn');
+    var navMenuContainer = _this.shadowRoot.querySelector('.nav-menu-container');
+    var overlay = _this.shadowRoot.querySelector('.overlay');
+    function openCloseNavMenu(e) {
+      var clickedBtn = e.target.closest('button');
+      clickedBtn.classList.contains('open-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.classList.toggle('hidden');
+      clickedBtn.classList.contains('close-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.classList.toggle('hidden');
+    }
+    closeNavBtn.addEventListener('click', openCloseNavMenu);
+    openNavBtn.addEventListener('click', openCloseNavMenu);
     return _this;
   }
   _inherits(NavMenu, _HTMLElement);
@@ -81,23 +97,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `:root {
-  --nav-btn-background-color: hsl(0, 0%, 100%);
-  --nav-link-text-color-mobile: hsl(0, 0%, 0%);
-  --active-btn: hsl(26, 100%, 55%);
-  --light-weight: 400;
-  --heavy-weight: 700;
-  --overlay: hsla(0, 0%, 0%, 0.75);
-}
-
-html {
+___CSS_LOADER_EXPORT___.push([module.id, `html {
   font-family: "Kumbh Sans";
   height: 100%;
-}
-
-header {
-  border-bottom: 1px solid black;
-}`, "",{"version":3,"sources":["webpack://./src/styles/_variables.sass","webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,4CAAA;EACA,4CAAA;EAEA,gCAAA;EAEA,mBAAA;EACA,mBAAA;EAEA,gCAAA;ACFJ;;AALA;EACI,yBAAA;EACA,YAAA;AAQJ;;AANA;EACI,8BAAA;AASJ","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -435,6 +438,8 @@ var code = `<button class="open-nav-btn">
   </button>
   <div class="nav-items"></div>
 </div>
+
+<div class="overlay hidden"></div>
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -882,6 +887,16 @@ module.exports = __webpack_require__.p + "assets/icon-close.svg";
 
 module.exports = __webpack_require__.p + "assets/icon-menu.svg";
 
+/***/ }),
+
+/***/ "./src/web-components/nav-menu/menu-items.json":
+/*!*****************************************************!*\
+  !*** ./src/web-components/nav-menu/menu-items.json ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('[{"title":"Home","url":"/"},{"title":"Collections","url":"#"},{"title":"Men","url":"#"},{"title":"Women","url":"#"},{"title":"About","url":"#"},{"title":"Contact","url":"#"}]');
+
 /***/ })
 
 /******/ 	});
@@ -1034,4 +1049,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundlee7b2ac9263a07ecc6207.js.map
+//# sourceMappingURL=bundle12ca55b3ce090dbcda27.js.map

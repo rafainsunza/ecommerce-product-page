@@ -4,7 +4,7 @@ import menuItems from './menu-items.json';
 
 const template = document.createElement('template');
 
-const reset = `
+const componentStyle = `
     button {
         border: none;
         padding: 0;
@@ -21,6 +21,10 @@ const reset = `
     * {
         box-sizing: border-box;
     }
+
+    .hidden {
+        display: none;
+    }
 `;
 
 const navMenuContainerStyle = `
@@ -36,11 +40,7 @@ const navMenuContainerStyle = `
             font-family: 'Kumbh Sans';
             font-weight: 700;
             background-color: hsl(0, 0%, 100%);
-        } 
-        
-        .hidden {
-            // display: none;
-        }
+        }         
 `;
 
 const navItemsStyle = `
@@ -69,12 +69,26 @@ const btnStyle = `
         }
 `;
 
+const overLayStyle = `
+        .overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+
+            height: 100vh;
+            width: 30%;
+
+            background-color: hsla(0, 0%, 0%, 0.75);
+        }
+`;
+
 template.innerHTML = `
     <style>
-        ${reset}
+        ${componentStyle}
         ${navMenuContainerStyle}
         ${btnStyle}
         ${navItemsStyle}
+        ${overLayStyle}
     </style>
 
     ${html}
@@ -95,6 +109,26 @@ class NavMenu extends HTMLElement {
 
             this.shadowRoot.querySelector('.nav-items').append(link);
         })
+
+        const openNavBtn = this.shadowRoot.querySelector('.open-nav-btn');
+        const closeNavBtn = this.shadowRoot.querySelector('.close-nav-btn');
+        const navMenuContainer = this.shadowRoot.querySelector('.nav-menu-container');
+        const overlay = this.shadowRoot.querySelector('.overlay');
+
+        function openCloseNavMenu(e) {
+            const clickedBtn = e.target.closest('button');
+
+            clickedBtn.classList.contains('open-nav-btn') ?
+                navMenuContainer.classList.toggle('hidden') :
+                overlay.classList.toggle('hidden');
+
+            clickedBtn.classList.contains('close-nav-btn') ?
+                navMenuContainer.classList.toggle('hidden') :
+                overlay.classList.toggle('hidden');
+        }
+
+        closeNavBtn.addEventListener('click', openCloseNavMenu);
+        openNavBtn.addEventListener('click', openCloseNavMenu);
     }
 
 }
