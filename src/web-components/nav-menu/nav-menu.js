@@ -8,6 +8,7 @@ const componentStyle = `
     button {
         border: none;
         padding: 0;
+        background-color: hsl(0, 0%, 100%);
     }
 
     button:hover {
@@ -20,6 +21,8 @@ const componentStyle = `
 
     * {
         box-sizing: border-box;
+        font-family: 'Kumbh Sans';
+
     }
 
     .hidden {
@@ -37,7 +40,6 @@ const navMenuContainerStyle = `
             width: 70%;
             padding: 30px;
 
-            font-family: 'Kumbh Sans';
             font-weight: 700;
             background-color: hsl(0, 0%, 100%);
         }         
@@ -50,7 +52,7 @@ const navItemsStyle = `
         }
 
         .nav-link {
-            color: var(--nav-link-text-color-mobile);
+            color: hsl(220, 13%, 13%);
 
             padding: 15px 0;
         }
@@ -58,14 +60,7 @@ const navItemsStyle = `
 
 const btnStyle = `
         .close-nav-btn {
-            background-color: hsl(0, 0%, 100%);
-
             margin-bottom: 30px;
-        }
-
-        .open-nav-btn {
-            background-color: hsl(0, 0%, 100%);
-
         }
 `;
 

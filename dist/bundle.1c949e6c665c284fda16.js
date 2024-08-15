@@ -2,6 +2,88 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/data/icons.js":
+/*!***************************!*\
+  !*** ./src/data/icons.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   deleteItemIcon: () => (/* reexport default export from named module */ _assets_icon_delete_svg__WEBPACK_IMPORTED_MODULE_0__)
+/* harmony export */ });
+/* harmony import */ var _assets_icon_delete_svg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/icon-delete.svg */ "./src/assets/icon-delete.svg");
+
+
+
+/***/ }),
+
+/***/ "./src/data/product-data.js":
+/*!**********************************!*\
+  !*** ./src/data/product-data.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   product_data: () => (/* binding */ product_data)
+/* harmony export */ });
+/* harmony import */ var _assets_image_product_1_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../assets/image-product-1.jpg */ "./src/assets/image-product-1.jpg");
+/* harmony import */ var _assets_image_product_1_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/image-product-1-thumbnail.jpg */ "./src/assets/image-product-1-thumbnail.jpg");
+/* harmony import */ var _assets_image_product_2_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/image-product-2.jpg */ "./src/assets/image-product-2.jpg");
+/* harmony import */ var _assets_image_product_2_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../assets/image-product-2-thumbnail.jpg */ "./src/assets/image-product-2-thumbnail.jpg");
+/* harmony import */ var _assets_image_product_3_jpg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/image-product-3.jpg */ "./src/assets/image-product-3.jpg");
+/* harmony import */ var _assets_image_product_3_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/image-product-3-thumbnail.jpg */ "./src/assets/image-product-3-thumbnail.jpg");
+/* harmony import */ var _assets_image_product_4_jpg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../assets/image-product-4.jpg */ "./src/assets/image-product-4.jpg");
+/* harmony import */ var _assets_image_product_4_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../assets/image-product-4-thumbnail.jpg */ "./src/assets/image-product-4-thumbnail.jpg");
+
+
+
+
+
+
+
+
+var product_data = [{
+  id: 1,
+  brand: "Sneaker Company",
+  title: "Fall Limited Edition Sneakers",
+  description: "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
+  price: 250,
+  currency: "$",
+  discount_percentage: 50,
+  images: {
+    thumbnails: [_assets_image_product_1_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_1__, _assets_image_product_2_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_3__, _assets_image_product_3_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_5__, _assets_image_product_4_thumbnail_jpg__WEBPACK_IMPORTED_MODULE_7__],
+    full_size: [_assets_image_product_1_jpg__WEBPACK_IMPORTED_MODULE_0__, _assets_image_product_2_jpg__WEBPACK_IMPORTED_MODULE_2__, _assets_image_product_3_jpg__WEBPACK_IMPORTED_MODULE_4__, _assets_image_product_4_jpg__WEBPACK_IMPORTED_MODULE_6__]
+  }
+}];
+product_data.forEach(function (product) {
+  if (product.discount_percentage !== 0) {
+    product.price = product.price * (1 - product.discount_percentage / 100);
+  }
+});
+
+
+/***/ }),
+
+/***/ "./src/js/global-variables.js":
+/*!************************************!*\
+  !*** ./src/js/global-variables.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cartItems: () => (/* binding */ cartItems)
+/* harmony export */ });
+var cartItems = [{
+  productId: 1,
+  quantity: 3
+}];
+
+
+/***/ }),
+
 /***/ "./src/web-components/nav-menu/nav-menu.js":
 /*!*************************************************!*\
   !*** ./src/web-components/nav-menu/nav-menu.js ***!
@@ -35,11 +117,11 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n    }\n\n    .hidden {\n        display: none;\n    }\n";
-var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-family: 'Kumbh Sans';\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
-var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: var(--nav-link-text-color-mobile);\n\n            padding: 15px 0;\n        }\n";
-var btnStyle = "\n        .close-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n            margin-bottom: 30px;\n        }\n\n        .open-nav-btn {\n            background-color: hsl(0, 0%, 100%);\n\n        }\n";
-var overLayStyle = "\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n\n            height: 100vh;\n            width: 30%;\n\n            background-color: hsla(0, 0%, 0%, 0.75);\n        }\n";
+var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n        background-color: hsl(0, 0%, 100%);\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
+var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
+var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: var(--primary-text-color);\n\n            padding: 15px 0;\n        }\n";
+var btnStyle = "\n        .close-nav-btn {\n            margin-bottom: 30px;\n        }\n";
+var overLayStyle = "\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n\n            height: 100vh;\n            width: 30%;\n\n            background-color: var(--overlay);\n        }\n";
 template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n        ").concat(overLayStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
@@ -78,6 +160,83 @@ customElements.define('nav-menu', NavMenu);
 
 /***/ }),
 
+/***/ "./src/web-components/shopping-cart/shopping-cart.js":
+/*!***********************************************************!*\
+  !*** ./src/web-components/shopping-cart/shopping-cart.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ShoppingCart: () => (/* binding */ ShoppingCart)
+/* harmony export */ });
+/* harmony import */ var _shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shopping-cart.html */ "./src/web-components/shopping-cart/shopping-cart.html");
+/* harmony import */ var _shopping_cart_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./shopping-cart.sass */ "./src/web-components/shopping-cart/shopping-cart.sass");
+/* harmony import */ var _data_icons_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../data/icons.js */ "./src/data/icons.js");
+/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
+/* harmony import */ var _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/global-variables.js */ "./src/js/global-variables.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _wrapNativeSuper(t) { var r = "function" == typeof Map ? new Map() : void 0; return _wrapNativeSuper = function _wrapNativeSuper(t) { if (null === t || !_isNativeFunction(t)) return t; if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function"); if (void 0 !== r) { if (r.has(t)) return r.get(t); r.set(t, Wrapper); } function Wrapper() { return _construct(t, arguments, _getPrototypeOf(this).constructor); } return Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } }), _setPrototypeOf(Wrapper, t); }, _wrapNativeSuper(t); }
+function _construct(t, e, r) { if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments); var o = [null]; o.push.apply(o, e); var p = new (t.bind.apply(t, o))(); return r && _setPrototypeOf(p, r.prototype), p; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).indexOf("[native code]"); } catch (n) { return "function" == typeof t; } }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+
+
+
+
+
+var template = document.createElement('template');
+var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n        background-color: hsl(0, 0%, 100%);\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
+var cartContainerStyle = "\n    .cart-wrapper {\n        position: relative;\n        display: flex;\n        justify-content: center;\n    }\n\n    .cart-container {\n        position: absolute;\n        top: 10px;\n\n        width: 95%;\n        height: 265px;\n\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n        border-radius: 5px;\n        background-color: hsl(0, 0%, 100%);\n    }\n";
+var cartHeaderStyle = "\n    .cart-header {\n        border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n        font-weight: 700;\n        color: hsl(220, 13%, 13%);\n\n        padding: 30px 15px;\n    }\n";
+var cartBodyStyle = "\n    .cart-thumbnail {\n        width: 50px;\n        border-radius: 5px;\n    }\n\n    .product-title {\n        color: hsl(219, 9%, 45%);\n    }\n   \n ";
+template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(cartContainerStyle, "\n        ").concat(cartHeaderStyle, "\n        ").concat(cartBodyStyle, "\n    </style>\n\n    ").concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
+  function ShoppingCart() {
+    var _this;
+    _classCallCheck(this, ShoppingCart);
+    _this = _callSuper(this, ShoppingCart);
+    _this.attachShadow({
+      mode: 'open'
+    });
+    _this.shadowRoot.appendChild(template.content.cloneNode(true));
+    var productsInCart = [];
+    console.log(_js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems);
+    _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems.forEach(function (cartItem) {
+      _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__.product_data.forEach(function (product) {
+        product.id === cartItem.productId ? productsInCart.push(product) : null;
+      });
+    });
+    productsInCart.forEach(function (product, index) {
+      var price = product.price;
+      var quantity = _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems[index].quantity;
+      var totalPrice = price * quantity;
+      var div = document.createElement('div');
+      div.classList.add('product-data');
+      div.innerHTML = "\n                <img src=\"".concat(product.images.thumbnails[0], "\" class=\"cart-thumbnail\" /> \n                <p class=\"product-title\">").concat(product.title, "</p>\n                <div class=\"price\">\n                    <span class=\"currency\">").concat(product.currency, "</span>\n                    <span class=\"product-price\">").concat(price, "</span>\n                    <span class=\"product-amount\">x ").concat(quantity, "</span>\n                    <span class=\"total-price\">").concat(totalPrice, "</span>\n                </div>\n                <button class=\"remove-cart-item-btn\">\n                    <img src=\"").concat(_data_icons_js__WEBPACK_IMPORTED_MODULE_2__.deleteItemIcon, "\" alt=\"Delete Item\" />\n                </button>\n                ");
+      _this.shadowRoot.querySelector('.product-data-container').appendChild(div);
+    });
+    return _this;
+  }
+  _inherits(ShoppingCart, _HTMLElement);
+  return _createClass(ShoppingCart);
+}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+customElements.define('shopping-cart', ShoppingCart);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.sass":
 /*!***********************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/styles/main.sass ***!
@@ -100,7 +259,17 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, `html {
   font-family: "Kumbh Sans";
   height: 100%;
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ","sourceRoot":""}]);
+}
+
+header {
+  display: flex;
+  background-color: hsl(0, 0%, 100%);
+}
+
+body {
+  height: 100%;
+  background-color: red;
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,aAAA;EACA,kCAAA;AAEJ;;AAAA;EACI,YAAA;EACA,qBAAA;AAGJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -126,14 +295,33 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `:root {
-  --nav-btn-background-color: hsl(0, 0%, 100%);
-  --nav-link-text-color-mobile: hsl(0, 0%, 0%);
-  --active-btn: hsl(26, 100%, 55%);
-  --light-weight: 400;
-  --heavy-weight: 700;
-  --overlay: hsla(0, 0%, 0%, 0.75);
-}`, "",{"version":3,"sources":["webpack://./src/styles/_variables.sass","webpack://./src/web-components/nav-menu/nav-menu.sass"],"names":[],"mappings":"AAAA;EACI,4CAAA;EACA,4CAAA;EAEA,gCAAA;EAEA,mBAAA;EACA,mBAAA;EAEA,gCAAA;ACFJ","sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/web-components/shopping-cart/shopping-cart.sass":
+/*!******************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/web-components/shopping-cart/shopping-cart.sass ***!
+  \******************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+// Imports
+
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ``, "",{"version":3,"sources":[],"names":[],"mappings":"","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -446,6 +634,38 @@ var code = `<button class="open-nav-btn">
 
 /***/ }),
 
+/***/ "./src/web-components/shopping-cart/shopping-cart.html":
+/*!*************************************************************!*\
+  !*** ./src/web-components/shopping-cart/shopping-cart.html ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Imports
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-cart.svg */ "./src/assets/icon-cart.svg"), __webpack_require__.b);
+// Module
+var code = `<button class="cart-btn">
+  <img src="${___HTML_LOADER_IMPORT_0___}" alt="Cart Icon" />
+</button>
+
+<div class="cart-wrapper">
+  <div class="cart-container">
+    <div class="cart-header">Cart</div>
+    <div class="cart-body">
+      <div class="product-data-container"></div>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </div>
+</div>
+`;
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
+
+/***/ }),
+
 /***/ "./src/styles/main.sass":
 /*!******************************!*\
   !*** ./src/styles/main.sass ***!
@@ -546,6 +766,58 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
        /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_nav_menu_sass__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_nav_menu_sass__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_nav_menu_sass__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./src/web-components/shopping-cart/shopping-cart.sass":
+/*!*************************************************************!*\
+  !*** ./src/web-components/shopping-cart/shopping-cart.sass ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_shopping_cart_sass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js!../../../node_modules/sass-loader/dist/cjs.js!./shopping-cart.sass */ "./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/web-components/shopping-cart/shopping-cart.sass");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_shopping_cart_sass__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_shopping_cart_sass__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_shopping_cart_sass__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_node_modules_sass_loader_dist_cjs_js_shopping_cart_sass__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
 
 
 /***/ }),
@@ -869,6 +1141,16 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
+/***/ "./src/assets/icon-cart.svg":
+/*!**********************************!*\
+  !*** ./src/assets/icon-cart.svg ***!
+  \**********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/icon-cart.svg";
+
+/***/ }),
+
 /***/ "./src/assets/icon-close.svg":
 /*!***********************************!*\
   !*** ./src/assets/icon-close.svg ***!
@@ -876,6 +1158,16 @@ module.exports = styleTagTransform;
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "assets/icon-close.svg";
+
+/***/ }),
+
+/***/ "./src/assets/icon-delete.svg":
+/*!************************************!*\
+  !*** ./src/assets/icon-delete.svg ***!
+  \************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/icon-delete.svg";
 
 /***/ }),
 
@@ -889,13 +1181,93 @@ module.exports = __webpack_require__.p + "assets/icon-menu.svg";
 
 /***/ }),
 
+/***/ "./src/assets/image-product-1-thumbnail.jpg":
+/*!**************************************************!*\
+  !*** ./src/assets/image-product-1-thumbnail.jpg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-1-thumbnail.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-1.jpg":
+/*!****************************************!*\
+  !*** ./src/assets/image-product-1.jpg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-1.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-2-thumbnail.jpg":
+/*!**************************************************!*\
+  !*** ./src/assets/image-product-2-thumbnail.jpg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-2-thumbnail.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-2.jpg":
+/*!****************************************!*\
+  !*** ./src/assets/image-product-2.jpg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-2.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-3-thumbnail.jpg":
+/*!**************************************************!*\
+  !*** ./src/assets/image-product-3-thumbnail.jpg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-3-thumbnail.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-3.jpg":
+/*!****************************************!*\
+  !*** ./src/assets/image-product-3.jpg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-3.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-4-thumbnail.jpg":
+/*!**************************************************!*\
+  !*** ./src/assets/image-product-4-thumbnail.jpg ***!
+  \**************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-4-thumbnail.jpg";
+
+/***/ }),
+
+/***/ "./src/assets/image-product-4.jpg":
+/*!****************************************!*\
+  !*** ./src/assets/image-product-4.jpg ***!
+  \****************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__.p + "assets/image-product-4.jpg";
+
+/***/ }),
+
 /***/ "./src/web-components/nav-menu/menu-items.json":
 /*!*****************************************************!*\
   !*** ./src/web-components/nav-menu/menu-items.json ***!
   \*****************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('[{"title":"Home","url":"/"},{"title":"Collections","url":"#"},{"title":"Men","url":"#"},{"title":"Women","url":"#"},{"title":"About","url":"#"},{"title":"Contact","url":"#"}]');
+module.exports = /*#__PURE__*/JSON.parse('[{"id":1,"title":"Home","url":"/"},{"id":2,"title":"Collections","url":"#"},{"id":3,"title":"Men","url":"#"},{"id":4,"title":"Women","url":"#"},{"id":5,"title":"About","url":"#"},{"id":6,"title":"Contact","url":"#"}]');
 
 /***/ })
 
@@ -1042,11 +1414,13 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _web_components_nav_menu_nav_menu_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./web-components/nav-menu/nav-menu.js */ "./src/web-components/nav-menu/nav-menu.js");
-/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
-/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+/* harmony import */ var _web_components_shopping_cart_shopping_cart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./web-components/shopping-cart/shopping-cart.js */ "./src/web-components/shopping-cart/shopping-cart.js");
+/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
+/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+
 
 
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle12ca55b3ce090dbcda27.js.map
+//# sourceMappingURL=bundle.1c949e6c665c284fda16.js.map
