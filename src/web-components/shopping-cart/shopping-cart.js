@@ -43,6 +43,10 @@ const cartContainerStyle = `
         position: absolute;
         top: 10px;
 
+        max-width: 350px;
+        min-width: 300px;
+        width: 100%;
+
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         border-radius: 5px;
         background-color: hsl(0, 0%, 100%);
@@ -127,6 +131,13 @@ const cartBodyStyle = `
         border-radius: 7.5px;
         background-color: hsl(26, 100%, 55%);
     }
+    
+    .empty-cart {
+        color: hsl(219, 9%, 45%);
+        font-weight: 700;
+
+        text-align: center;
+    }
 
  `;
 
@@ -191,6 +202,15 @@ class ShoppingCart extends HTMLElement {
                 this.shadowRoot.querySelector('.product-data-container').appendChild(div);
 
             });
+        } else {
+            const div = document.createElement('div');
+            div.classList.add('empty-cart');
+
+            div.innerHTML = `
+                    <p>Your cart is empty.</p>
+                    `;
+            this.shadowRoot.querySelector('.product-data-container').appendChild(div);
+
         }
 
 

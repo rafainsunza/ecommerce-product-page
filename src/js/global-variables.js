@@ -1,6 +1,6 @@
 const cartItems = [{
-    // productId: 1,
-    // quantity: 3,
+    productId: 1,
+    quantity: 3,
 }]
 
 
