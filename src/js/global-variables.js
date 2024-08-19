@@ -1,7 +1,15 @@
-const cartItems = [{
-    productId: 1,
-    quantity: 3,
-}]
+let cartTotal = 0;
+
+let cartItems = [
+    {
+        productId: 1,
+        quantity: 3,
+    },
+];
 
 
-export { cartItems }
+cartItems.forEach((cartItem) => {
+    cartTotal = cartTotal + cartItem.quantity
+})
+
+export { cartItems, cartTotal }
