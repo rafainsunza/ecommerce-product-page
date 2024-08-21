@@ -35,6 +35,7 @@ const navMenuContainerStyle = `
             position: fixed;
             top: 0;
             left: 0;    
+            z-index: 2;
 
             height: 100vh;
             width: 70%;
@@ -62,6 +63,10 @@ const btnStyle = `
         .close-nav-btn {
             margin-bottom: 30px;
         }
+
+        .open-nav-btn {
+            display: flex;
+        }
 `;
 
 const overLayStyle = `
@@ -69,9 +74,10 @@ const overLayStyle = `
             position: fixed;
             top: 0;
             right: 0;
+            z-index: 1;
 
             height: 100vh;
-            width: 30%;
+            width: 100%;
 
             background-color: hsla(0, 0%, 0%, 0.75);
         }

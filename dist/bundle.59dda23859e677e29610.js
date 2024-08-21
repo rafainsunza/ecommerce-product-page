@@ -49,7 +49,7 @@ var product_data = [{
   brand: "Sneaker Company",
   title: "Fall Limited Edition Sneakers",
   description: "These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
-  price: 250,
+  price: 250.00,
   currency: "$",
   discount_percentage: 50,
   images: {
@@ -74,12 +74,17 @@ product_data.forEach(function (product) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   cartItems: () => (/* binding */ cartItems)
+/* harmony export */   cartItems: () => (/* binding */ cartItems),
+/* harmony export */   cartTotal: () => (/* binding */ cartTotal)
 /* harmony export */ });
+var cartTotal = 0;
 var cartItems = [{
   productId: 1,
   quantity: 3
 }];
+cartItems.forEach(function (cartItem) {
+  cartTotal = cartTotal + cartItem.quantity;
+});
 
 
 /***/ }),
@@ -118,10 +123,10 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 var template = document.createElement('template');
 var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n        background-color: hsl(0, 0%, 100%);\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
-var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
-var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: var(--primary-text-color);\n\n            padding: 15px 0;\n        }\n";
+var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 2;\n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
+var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n\n            padding: 15px 0;\n        }\n";
 var btnStyle = "\n        .close-nav-btn {\n            margin-bottom: 30px;\n        }\n";
-var overLayStyle = "\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n\n            height: 100vh;\n            width: 30%;\n\n            background-color: var(--overlay);\n        }\n";
+var overLayStyle = "\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n            z-index: 1;\n\n            height: 100vh;\n            width: 100%;\n\n            background-color: hsla(0, 0%, 0%, 0.75);\n        }\n";
 template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n        ").concat(overLayStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
@@ -176,11 +181,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
 /* harmony import */ var _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/global-variables.js */ "./src/js/global-variables.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -197,11 +208,11 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n        background-color: hsl(0, 0%, 100%);\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
-var cartContainerStyle = "\n    .cart-wrapper {\n        position: relative;\n        display: flex;\n        justify-content: center;\n    }\n\n    .cart-container {\n        position: absolute;\n        top: 10px;\n\n        width: 95%;\n        height: 265px;\n\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n        border-radius: 5px;\n        background-color: hsl(0, 0%, 100%);\n    }\n";
-var cartHeaderStyle = "\n    .cart-header {\n        border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n        font-weight: 700;\n        color: hsl(220, 13%, 13%);\n\n        padding: 30px 15px;\n    }\n";
-var cartBodyStyle = "\n    .cart-thumbnail {\n        width: 50px;\n        border-radius: 5px;\n    }\n\n    .product-title {\n        color: hsl(219, 9%, 45%);\n    }\n   \n ";
-template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(cartContainerStyle, "\n        ").concat(cartHeaderStyle, "\n        ").concat(cartBodyStyle, "\n    </style>\n\n    ").concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var componentStyle = "\n    button {\n        border: none;\n        padding: 0;\n        background-color: hsl(0, 0%, 100%);\n    }\n\n    button:hover {\n        cursor: pointer;\n    }\n\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n        margin: 0;\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
+var cartContainerStyle = "\n    .cart-wrapper {\n        // display: flex;\n        // justify-content: center;\n    }\n\n    .cart-container {\n        display: flex;\n        flex-direction: column;\n        justify-content: space-between;\n\n        position: absolute;\n        top: calc(100% + 20px);\n\n        left: 50%;\n        transform: translateX(-50%);\n\n        margin-top: 15px;\n        min-height: 250px;\n        max-width: 350px;\n        min-width: 300px;\n        width: 100%;\n\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n        border-radius: 5px;\n        background-color: hsl(0, 0%, 100%);\n        color: hsl(220, 13%, 13%);\n    }\n\n    .cart-container.hidden {\n        display: none;\n    }\n";
+var cartContentStyle = "\n    .cart-header {\n        border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n        font-weight: 700;\n\n        padding: 25px 15px;\n    }\n\n    .cart-body {\n        padding: 20px 20px 0 20px;\n    }\n\n    .cart-footer {\n        padding: 0 20px 20px 20px;\n        height: 70px;\n    }\n\n    .product-data {\n        display: flex;\n        margin-bottom: 20px;\n    }\n\n    .cart-thumbnail {\n        width: 50px;\n        border-radius: 5px;\n    }\n\n    .product-title-and-price {\n        display: flex;\n        flex-direction: column;\n\n        padding: 5px 15px;\n    }\n\n    .product-title {\n        color: hsl(219, 9%, 45%);\n\n        margin: 0;\n    }   \n        \n    .price {\n        display: flex;\n\n        margin-top: auto;\n\n        font-weight: 500;\n    }\n\n    .product-price {\n        display: flex;\n\n        color: hsl(219, 9%, 45%);\n    }\n\n    .product-quantity {\n        color: hsl(219, 9%, 45%);\n\n        margin: 0 5px;\n    }\n    \n    .total-price {\n        display: flex;\n\n        font-weight: 700;\n    }\n\n    .checkout-btn {\n        font-weight: 700;\n        font-size: 16px;\n\n        padding: 15px;\n        width: 100%;\n\n        border-radius: 7.5px;\n        background-color: hsl(26, 100%, 55%);\n    }\n    \n    .empty-cart {\n        text-align: center;\n        color: hsl(219, 9%, 45%);\n        font-weight: 700;\n\n    }\n";
+var cartBtnStyle = "\n    .cart-btn {\n        position: relative;\n        z-index: 0;\n    }\n\n    .cart-total {\n        position: absolute;\n        top: -7.5px;\n        right: -7.5px;\n\n        padding: 1px 8px;\n        border-radius: 15px;\n\n        background-color: hsl(26, 100%, 55%);\n\n        color: hsl(0, 0%, 100%);\n        font-weight: 700;\n        font-size: 10px;\n    }\n\n ";
+template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(cartContainerStyle, "\n        ").concat(cartContentStyle, "\n        ").concat(cartBtnStyle, "\n    </style>\n\n    ").concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
   function ShoppingCart() {
     var _this;
@@ -211,26 +222,81 @@ var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
-    var productsInCart = [];
-    console.log(_js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems);
-    _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems.forEach(function (cartItem) {
-      _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__.product_data.forEach(function (product) {
-        product.id === cartItem.productId ? productsInCart.push(product) : null;
-      });
+    var cartContainer = _this.shadowRoot.querySelector('.cart-container');
+    var cartBtn = _this.shadowRoot.querySelector('.cart-btn');
+    var cartContent = [];
+    _this.updateCartContent(_js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems, cartContent);
+    _this.displayCartContent(cartContent);
+    cartBtn.addEventListener('click', function () {
+      return _this.openAndCloseCart(cartContainer);
     });
-    productsInCart.forEach(function (product, index) {
-      var price = product.price;
-      var quantity = _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems[index].quantity;
-      var totalPrice = price * quantity;
-      var div = document.createElement('div');
-      div.classList.add('product-data');
-      div.innerHTML = "\n                <img src=\"".concat(product.images.thumbnails[0], "\" class=\"cart-thumbnail\" /> \n                <p class=\"product-title\">").concat(product.title, "</p>\n                <div class=\"price\">\n                    <span class=\"currency\">").concat(product.currency, "</span>\n                    <span class=\"product-price\">").concat(price, "</span>\n                    <span class=\"product-amount\">x ").concat(quantity, "</span>\n                    <span class=\"total-price\">").concat(totalPrice, "</span>\n                </div>\n                <button class=\"remove-cart-item-btn\">\n                    <img src=\"").concat(_data_icons_js__WEBPACK_IMPORTED_MODULE_2__.deleteItemIcon, "\" alt=\"Delete Item\" />\n                </button>\n                ");
-      _this.shadowRoot.querySelector('.product-data-container').appendChild(div);
+    cartContainer.addEventListener('click', function (e) {
+      if (e.target.closest('.remove-cart-item-btn')) {
+        _this.removeItemFromCart(e, cartContent);
+      }
     });
     return _this;
   }
   _inherits(ShoppingCart, _HTMLElement);
-  return _createClass(ShoppingCart);
+  return _createClass(ShoppingCart, [{
+    key: "openAndCloseCart",
+    value: function openAndCloseCart(cartContainer) {
+      cartContainer.classList.toggle('hidden');
+    }
+  }, {
+    key: "updateCartContent",
+    value: function updateCartContent(cartItems, cartContent) {
+      var cartProductIds = new Set(cartItems.map(function (item) {
+        return item.productId;
+      }));
+      var updatedCartContent = _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__.product_data.filter(function (product) {
+        return cartProductIds.has(product.id);
+      });
+      cartContent.length = 0;
+      cartContent.push.apply(cartContent, _toConsumableArray(updatedCartContent));
+    }
+  }, {
+    key: "displayCartContent",
+    value: function displayCartContent(cartContent) {
+      var productDataContainer = this.shadowRoot.querySelector('.product-data-container');
+      var cartTotalIcon = this.shadowRoot.querySelector('.cart-total');
+      productDataContainer.innerHTML = '';
+      if (cartContent.length > 0) {
+        cartContent.forEach(function (product, index) {
+          var price = product.price.toFixed(2);
+          var quantity = _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems[index].quantity;
+          var totalPrice = (price * quantity).toFixed(2);
+          var div = document.createElement('div');
+          div.classList.add('product-data');
+          div.id = product.id;
+          div.innerHTML = "\n                    <img src=\"".concat(product.images.thumbnails[0], "\" class=\"cart-thumbnail\" /> \n                    <div class=\"product-title-and-price\">\n                        <p class=\"product-title\">").concat(product.title, "</p>\n                        <div class=\"price\">\n                            <div class=\"product-price\">\n                                <span>").concat(product.currency, "</span>\n                                <span>").concat(price, "</span>\n                            </div>\n\n                            <span class=\"product-quantity\">x ").concat(quantity, "</span>\n\n                            <div class=\"total-price\">\n                                <span>").concat(product.currency, "</span>\n                                <span>").concat(totalPrice, "</span>\n                            </div>\n                        </div>\n                    </div>\n                    <button class=\"remove-cart-item-btn\">\n                        <img src=\"").concat(_data_icons_js__WEBPACK_IMPORTED_MODULE_2__.deleteItemIcon, "\" alt=\"Delete Item\" />\n                    </button>\n                    ");
+          productDataContainer.appendChild(div);
+        });
+        cartTotalIcon.classList.remove('hidden');
+        cartTotalIcon.innerHTML = "\n                <span>".concat(_js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartTotal, "</span>\n            ");
+      } else {
+        var div = document.createElement('div');
+        div.classList.add('empty-cart');
+        div.innerHTML = "\n                <p>Your cart is empty.</p>\n                ";
+        productDataContainer.appendChild(div);
+        cartTotalIcon.classList.add('hidden');
+        this.shadowRoot.querySelector('.checkout-btn').classList.add('hidden');
+      }
+    }
+  }, {
+    key: "removeItemFromCart",
+    value: function removeItemFromCart(e, cartContent) {
+      var productDataIdToRemove = parseInt(e.target.closest('.product-data').id);
+      var itemIndex = _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems.findIndex(function (item) {
+        return item.productId === productDataIdToRemove;
+      });
+      if (itemIndex !== -1) {
+        _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems.splice(itemIndex, 1);
+      }
+      this.updateCartContent(_js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__.cartItems, cartContent);
+      this.displayCartContent(cartContent);
+    }
+  }]);
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('shopping-cart', ShoppingCart);
 
@@ -261,15 +327,41 @@ ___CSS_LOADER_EXPORT___.push([module.id, `html {
   height: 100%;
 }
 
-header {
-  display: flex;
-  background-color: hsl(0, 0%, 100%);
-}
-
 body {
   height: 100%;
   background-color: red;
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,aAAA;EACA,kCAAA;AAEJ;;AAAA;EACI,YAAA;EACA,qBAAA;AAGJ","sourceRoot":""}]);
+}
+
+header {
+  background-color: hsl(0, 0%, 100%);
+  padding: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  margin: 0 10px 0 10px;
+}
+
+.cart-section {
+  display: flex;
+  align-items: flex-end;
+}
+
+shopping-cart {
+  margin: 0 20px 0 20px;
+}
+
+.profile-btn {
+  background-color: hsl(0, 0%, 100%);
+  border: none;
+}
+
+.profile-img {
+  height: 25px;
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;EACA,qBAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,aAAA;EAEA,kBAAA;EAEA,aAAA;EACA,mBAAA;EACA,8BAAA;AACJ;;AACA;EACI,qBAAA;AAEJ;;AAAA;EACI,aAAA;EACA,qBAAA;AAGJ;;AADA;EACI,qBAAA;AAIJ;;AAFA;EACI,kCAAA;EACA,YAAA;AAKJ;;AAHA;EACI,YAAA;AAMJ","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -649,17 +741,20 @@ var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(
 // Module
 var code = `<button class="cart-btn">
   <img src="${___HTML_LOADER_IMPORT_0___}" alt="Cart Icon" />
+  <div class="cart-total hidden"></div>
 </button>
 
-<div class="cart-wrapper">
-  <div class="cart-container">
-    <div class="cart-header">Cart</div>
-    <div class="cart-body">
-      <div class="product-data-container"></div>
-      <button class="checkout-btn">Checkout</button>
-    </div>
+<!-- <div class="cart-wrapper"> -->
+<div class="cart-container hidden">
+  <div class="cart-header">Cart</div>
+  <div class="cart-body">
+    <div class="product-data-container"></div>
+  </div>
+  <div class="cart-footer">
+    <button class="checkout-btn">Checkout</button>
   </div>
 </div>
+<!-- </div> -->
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1415,12 +1510,12 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _web_components_nav_menu_nav_menu_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./web-components/nav-menu/nav-menu.js */ "./src/web-components/nav-menu/nav-menu.js");
 /* harmony import */ var _web_components_shopping_cart_shopping_cart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./web-components/shopping-cart/shopping-cart.js */ "./src/web-components/shopping-cart/shopping-cart.js");
-/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
-/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
 
 
 
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.1c949e6c665c284fda16.js.map
+//# sourceMappingURL=bundle.59dda23859e677e29610.js.map

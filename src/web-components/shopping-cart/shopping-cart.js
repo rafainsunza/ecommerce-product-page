@@ -34,22 +34,16 @@ const componentStyle = `
 `;
 
 const cartContainerStyle = `
-    .cart-wrapper {
-        position: relative;
-
-        display: flex;
-        justify-content: center;
-    }
-
     .cart-container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
         position: absolute;
-        top: calc(100% + 20px);
 
-        margin-top: 15px;
+        top: calc(100% + 15px); 
+        left: 50%;
+        transform: translateX(-50%);
+
         min-height: 250px;
         max-width: 350px;
         min-width: 300px;
@@ -224,6 +218,7 @@ class ShoppingCart extends HTMLElement {
 
     displayCartContent(cartContent) {
         const productDataContainer = this.shadowRoot.querySelector('.product-data-container');
+        const cartTotalIcon = this.shadowRoot.querySelector('.cart-total');
 
         productDataContainer.innerHTML = '';
 
@@ -264,8 +259,7 @@ class ShoppingCart extends HTMLElement {
 
             });
 
-            const cartTotalIcon = this.shadowRoot.querySelector('.cart-total');
-            cartTotalIcon.classList.toggle('hidden');
+            cartTotalIcon.classList.remove('hidden');
             cartTotalIcon.innerHTML = `
                 <span>${cartTotal}</span>
             `;
@@ -280,6 +274,8 @@ class ShoppingCart extends HTMLElement {
                 `;
 
             productDataContainer.appendChild(div);
+
+            cartTotalIcon.classList.add('hidden');
 
             this.shadowRoot.querySelector('.checkout-btn').classList.add('hidden');
 
