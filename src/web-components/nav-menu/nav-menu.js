@@ -5,16 +5,6 @@ import menuItems from './menu-items.json';
 const template = document.createElement('template');
 
 const componentStyle = `
-    button {
-        border: none;
-        padding: 0;
-        background-color: hsl(0, 0%, 100%);
-    }
-
-    button:hover {
-        cursor: pointer;
-    }
-
     a {
         text-decoration: none;
     }
@@ -117,7 +107,7 @@ class NavMenu extends HTMLElement {
         const overlay = this.shadowRoot.querySelector('.overlay');
 
         function openCloseNavMenu(e) {
-            const clickedBtn = e.target.closest('button');
+            const clickedBtn = e.target.closest('custom-button');
 
             clickedBtn.classList.contains('open-nav-btn') ?
                 navMenuContainer.classList.toggle('hidden') :

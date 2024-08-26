@@ -1,0 +1,20 @@
+<img src="${product.images.thumbnails[0]}" class="cart-thumbnail" />
+<div class="product-title-and-price">
+  <p class="product-title">${product.title}</p>
+  <div class="price">
+    <div class="product-price">
+      <span>${product.currency}</span>
+      <span>${price}</span>
+    </div>
+
+    <span class="product-quantity">x ${quantity}</span>
+
+    <div class="total-price">
+      <span>${product.currency}</span>
+      <span>${totalPrice}</span>
+    </div>
+  </div>
+</div>
+<custom-button class="remove-cart-item-btn"
+  ><img src="${deleteItemIcon}" alt="Delete Item"
+/></custom-button>

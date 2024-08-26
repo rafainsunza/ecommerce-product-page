@@ -1,22 +1,13 @@
 import html from './shopping-cart.html';
 import style from './shopping-cart.sass';
-import { deleteItemIcon } from '../../data/icons.js';
+import deleteItemIcon from '../../assets/icon-delete.svg';
 import { product_data } from '../../data/product-data.js'
 import { cartItems, cartTotal } from '../../js/global-variables.js';
+import { CustomButton } from '../custom-button/custom-button.js';
 
 
 const template = document.createElement('template');
 const componentStyle = `
-    button {
-        border: none;
-        padding: 0;
-        background-color: hsl(0, 0%, 100%);
-    }
-
-    button:hover {
-        cursor: pointer;
-    }
-
     a {
         text-decoration: none;
     }
@@ -126,15 +117,26 @@ const cartContentStyle = `
         font-weight: 700;
     }
 
+    .remove-cart-item-btn {
+        display: flex;
+        align-items: center;
+    }
+
     .checkout-btn {
+        display: flex;
+        justify-content: center;
+
         font-weight: 700;
         font-size: 16px;
 
         padding: 15px;
-        width: 100%;
 
         border-radius: 7.5px;
         background-color: hsl(26, 100%, 55%);
+    }
+
+    .checkout-btn:hover {
+        cursor: pointer;
     }
     
     .empty-cart {
@@ -250,9 +252,7 @@ class ShoppingCart extends HTMLElement {
                             </div>
                         </div>
                     </div>
-                    <button class="remove-cart-item-btn">
-                        <img src="${deleteItemIcon}" alt="Delete Item" />
-                    </button>
+                    <custom-button class="remove-cart-item-btn"><img src="${deleteItemIcon}" alt="Delete Item"/></custom-button>
                     `;
 
                 productDataContainer.appendChild(div);
