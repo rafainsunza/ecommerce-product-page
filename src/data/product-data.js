@@ -1,3 +1,14 @@
+import image_product_1_thumbnail from '../assets/image-product-1-thumbnail.jpg';
+import image_product_2_thumbnail from '../assets/image-product-2-thumbnail.jpg';
+import image_product_3_thumbnail from '../assets/image-product-3-thumbnail.jpg';
+import image_product_4_thumbnail from '../assets/image-product-4-thumbnail.jpg';
+import image_product_1 from '../assets/image-product-1.jpg';
+import image_product_2 from '../assets/image-product-2.jpg';
+import image_product_3 from '../assets/image-product-3.jpg';
+import image_product_4 from '../assets/image-product-4.jpg';
+
+
+
 const product_data = [
     {
         id: 1,
@@ -9,16 +20,16 @@ const product_data = [
         discount_percentage: 50,
         images: {
             thumbnails: [
-                "../assets/image-product-1-thumbnail.jpg",
-                "../assets/image-product-2-thumbnail.jpg",
-                "../assets/image-product-3-thumbnail.jpg",
-                "../assets/image-product-4-thumbnail.jpg"
+                image_product_1_thumbnail,
+                image_product_2_thumbnail,
+                image_product_3_thumbnail,
+                image_product_4_thumbnail
             ],
             full_size: [
-                "../assets/image-product-1.jpg",
-                "../assets/image-product-2.jpg",
-                "../assets/image-product-3.jpg",
-                "../assets/image-product-4.jpg"
+                image_product_1,
+                image_product_2,
+                image_product_3,
+                image_product_4
             ]
         }
     },
