@@ -159,8 +159,7 @@ var componentStyle = "\n    a {\n        text-decoration: none;\n    }\n\n    * 
 var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 2;\n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
 var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n\n            padding: 15px 0;\n        }\n";
 var btnStyle = "\n        .close-nav-btn {\n            margin-bottom: 30px;\n        }\n\n        .open-nav-btn {\n            display: flex;\n        }\n";
-var overLayStyle = "\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n            z-index: 1;\n\n            height: 100vh;\n            width: 100%;\n\n            background-color: hsla(0, 0%, 0%, 0.75);\n        }\n";
-template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n        ").concat(overLayStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
     var _this;
@@ -180,11 +179,11 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
     var openNavBtn = _this.shadowRoot.querySelector('.open-nav-btn');
     var closeNavBtn = _this.shadowRoot.querySelector('.close-nav-btn');
     var navMenuContainer = _this.shadowRoot.querySelector('.nav-menu-container');
-    var overlay = _this.shadowRoot.querySelector('.overlay');
+    var overlay = document.querySelector('screen-overlay');
     function openCloseNavMenu(e) {
       var clickedBtn = e.target.closest('custom-button');
-      clickedBtn.classList.contains('open-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.classList.toggle('hidden');
-      clickedBtn.classList.contains('close-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.classList.toggle('hidden');
+      clickedBtn.classList.contains('open-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
+      clickedBtn.classList.contains('close-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
     }
     closeNavBtn.addEventListener('click', openCloseNavMenu);
     openNavBtn.addEventListener('click', openCloseNavMenu);
@@ -194,6 +193,60 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   return _createClass(NavMenu);
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('nav-menu', NavMenu);
+
+
+/***/ }),
+
+/***/ "./src/web-components/screen-overlay/screen-overlay.js":
+/*!*************************************************************!*\
+  !*** ./src/web-components/screen-overlay/screen-overlay.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ScreenOverlay: () => (/* binding */ ScreenOverlay)
+/* harmony export */ });
+/* harmony import */ var _screen_overlay_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./screen-overlay.html */ "./src/web-components/screen-overlay/screen-overlay.html");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _wrapNativeSuper(t) { var r = "function" == typeof Map ? new Map() : void 0; return _wrapNativeSuper = function _wrapNativeSuper(t) { if (null === t || !_isNativeFunction(t)) return t; if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function"); if (void 0 !== r) { if (r.has(t)) return r.get(t); r.set(t, Wrapper); } function Wrapper() { return _construct(t, arguments, _getPrototypeOf(this).constructor); } return Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } }), _setPrototypeOf(Wrapper, t); }, _wrapNativeSuper(t); }
+function _construct(t, e, r) { if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments); var o = [null]; o.push.apply(o, e); var p = new (t.bind.apply(t, o))(); return r && _setPrototypeOf(p, r.prototype), p; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).indexOf("[native code]"); } catch (n) { return "function" == typeof t; } }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+
+var template = document.createElement('template');
+template.innerHTML = "\n    <style>\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n        }\n\n        .hidden {\n            display: none;\n        }\n\n        .overlay {\n            position: fixed;\n            top: 0;\n            right: 0;\n            z-index: 1;\n\n            height: 100vh;\n            width: 100%;\n\n            background-color: hsla(0, 0%, 0%, 0.75);\n        }\n    </style>\n\n    ".concat(_screen_overlay_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var ScreenOverlay = /*#__PURE__*/function (_HTMLElement) {
+  function ScreenOverlay() {
+    var _this;
+    _classCallCheck(this, ScreenOverlay);
+    _this = _callSuper(this, ScreenOverlay);
+    _this.attachShadow({
+      mode: 'open'
+    });
+    _this.shadowRoot.appendChild(template.content.cloneNode(true));
+    return _this;
+  }
+  _inherits(ScreenOverlay, _HTMLElement);
+  return _createClass(ScreenOverlay, [{
+    key: "toggleVisibility",
+    value: function toggleVisibility() {
+      this.shadowRoot.querySelector('.overlay').classList.toggle('hidden');
+    }
+  }]);
+}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+customElements.define('screen-overlay', ScreenOverlay);
 
 
 /***/ }),
@@ -213,7 +266,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_icon_delete_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/icon-delete.svg */ "./src/assets/icon-delete.svg");
 /* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
 /* harmony import */ var _js_global_variables_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../js/global-variables.js */ "./src/js/global-variables.js");
-/* harmony import */ var _custom_button_custom_button_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../custom-button/custom-button.js */ "./src/web-components/custom-button/custom-button.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -236,7 +288,6 @@ function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.
 function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).indexOf("[native code]"); } catch (n) { return "function" == typeof t; } }
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-
 
 
 
@@ -786,7 +837,25 @@ var code = `<custom-button class="open-nav-btn">
   <div class="nav-items"></div>
 </div>
 
-<div class="overlay hidden"></div>
+<!-- <div class="overlay hidden"></div> -->
+`;
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
+
+/***/ }),
+
+/***/ "./src/web-components/screen-overlay/screen-overlay.html":
+/*!***************************************************************!*\
+  !*** ./src/web-components/screen-overlay/screen-overlay.html ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Module
+var code = `<div class="overlay hidden"></div>
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1575,12 +1644,16 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _web_components_nav_menu_nav_menu_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./web-components/nav-menu/nav-menu.js */ "./src/web-components/nav-menu/nav-menu.js");
 /* harmony import */ var _web_components_shopping_cart_shopping_cart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./web-components/shopping-cart/shopping-cart.js */ "./src/web-components/shopping-cart/shopping-cart.js");
-/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
-/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
+/* harmony import */ var _web_components_custom_button_custom_button_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./web-components/custom-button/custom-button.js */ "./src/web-components/custom-button/custom-button.js");
+/* harmony import */ var _web_components_screen_overlay_screen_overlay_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./web-components/screen-overlay/screen-overlay.js */ "./src/web-components/screen-overlay/screen-overlay.js");
+/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
+
+
 
 
 
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.1eac22e9359d4913c8bf.js.map
+//# sourceMappingURL=bundle.1f13421a8401a8af3f3e.js.map

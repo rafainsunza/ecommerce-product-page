@@ -3,8 +3,6 @@ import style from './shopping-cart.sass';
 import deleteItemIcon from '../../assets/icon-delete.svg';
 import { product_data } from '../../data/product-data.js'
 import { cartItems, cartTotal } from '../../js/global-variables.js';
-import { CustomButton } from '../custom-button/custom-button.js';
-
 
 const template = document.createElement('template');
 const componentStyle = `

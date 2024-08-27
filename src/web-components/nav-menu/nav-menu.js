@@ -59,27 +59,12 @@ const btnStyle = `
         }
 `;
 
-const overLayStyle = `
-        .overlay {
-            position: fixed;
-            top: 0;
-            right: 0;
-            z-index: 1;
-
-            height: 100vh;
-            width: 100%;
-
-            background-color: hsla(0, 0%, 0%, 0.75);
-        }
-`;
-
 template.innerHTML = `
     <style>
         ${componentStyle}
         ${navMenuContainerStyle}
         ${btnStyle}
         ${navItemsStyle}
-        ${overLayStyle}
     </style>
 
     ${html}
@@ -104,18 +89,17 @@ class NavMenu extends HTMLElement {
         const openNavBtn = this.shadowRoot.querySelector('.open-nav-btn');
         const closeNavBtn = this.shadowRoot.querySelector('.close-nav-btn');
         const navMenuContainer = this.shadowRoot.querySelector('.nav-menu-container');
-        const overlay = this.shadowRoot.querySelector('.overlay');
+        const overlay = document.querySelector('screen-overlay');
 
         function openCloseNavMenu(e) {
             const clickedBtn = e.target.closest('custom-button');
 
             clickedBtn.classList.contains('open-nav-btn') ?
                 navMenuContainer.classList.toggle('hidden') :
-                overlay.classList.toggle('hidden');
-
+                overlay.toggleVisibility();
             clickedBtn.classList.contains('close-nav-btn') ?
                 navMenuContainer.classList.toggle('hidden') :
-                overlay.classList.toggle('hidden');
+                overlay.toggleVisibility();
         }
 
         closeNavBtn.addEventListener('click', openCloseNavMenu);
