@@ -13,10 +13,6 @@ template.innerHTML = `
             font-family: 'Kumbh Sans';
         }
 
-        .hidden {
-            display: none;
-        }
-
         .overlay {
             position: fixed;
             top: 0;
@@ -28,11 +24,14 @@ template.innerHTML = `
 
             background-color: hsla(0, 0%, 0%, 0.75);
         }
+
+        .hidden {
+            display: none;
+        }
     </style>
 
     ${html}
 `;
-
 
 class ScreenOverlay extends HTMLElement {
     constructor() {
@@ -42,7 +41,11 @@ class ScreenOverlay extends HTMLElement {
     }
 
     toggleVisibility() {
-        this.shadowRoot.querySelector('.overlay').classList.toggle('hidden')
+        this.shadowRoot.querySelector('.overlay').classList.toggle('hidden');
+    }
+
+    hideOverlay() {
+        this.shadowRoot.querySelector('.overlay').classList.add('hidden');
     }
 }
 

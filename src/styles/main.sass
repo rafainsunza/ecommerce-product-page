@@ -4,7 +4,6 @@ html
 
 body
     height: 100%
-    background-color: red
 
 header
     background-color: hsl(0, 0%, 100%)
@@ -16,19 +15,43 @@ header
     align-items: center
     justify-content: space-between
 
+    @media (min-width: 900px)
+        padding: 0 20px
+        height: 100px
+    @media (min-width: 1024px)
+        padding: 0 120px
+
 .menu-section
     display: flex
     align-items: flex-end
 
+    @media (min-width: 900px)
+        height: 100%
+        align-items: center
+
+nav-menu
+    @media (min-width: 900px)
+        order: 2
+        height: 100%
+
 .logo
     margin: 0 10px 0 10px
+
+    @media (min-width: 900px)
+        order: 1
 
 .cart-section
     display: flex
     align-items: flex-end
 
+    @media (min-width: 900px)
+        align-items: center
+
 shopping-cart
     margin: 0 20px 0 20px
+
+    @media (min-width: 900px)
+        margin: 0 40px 0 40px
 
 .profile-btn
     background-color: hsl(0, 0%, 100%)
@@ -47,3 +70,11 @@ shopping-cart
     &:hover
         cursor: pointer
         border: 1px solid hsl(26, 100%, 55%)
+
+    @media (min-width: 900px)
+        height: 50px
+        width: 50px
+        border: 3px solid hsl(0, 0%, 100%)
+
+        &:hover
+            border: 3px solid hsl(26, 100%, 55%)

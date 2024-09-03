@@ -102,7 +102,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        button {\n            box-sizing: border-box;\n            border: none;\n            padding: 0;\n            background-color: inherit;\n            font-weight: inherit;\n            font-family: inherit;\n            font-size: inherit;\n            display: inherit;\n        }\n\n        button:hover {\n            cursor: pointer;\n        }\n    </style>\n\n    ".concat(_custom_button_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        button {\n            box-sizing: border-box;\n            border: none;\n            padding: 0;\n            background-color: inherit;\n            font-weight: inherit;\n            font-family: inherit;\n            font-size: inherit;\n            display: inherit;\n        }\n\n        button:hover {\n            cursor: pointer;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_custom_button_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var CustomButton = /*#__PURE__*/function (_HTMLElement) {
   function CustomButton() {
     var _this;
@@ -156,10 +156,10 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 var template = document.createElement('template');
 var componentStyle = "\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
-var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 2;\n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n";
-var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n\n            padding: 15px 0;\n        }\n";
-var btnStyle = "\n        .close-nav-btn {\n            margin-bottom: 30px;\n        }\n\n        .open-nav-btn {\n            display: flex;\n        }\n";
-template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var navMenuContainerStyle = "\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 2;\n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n\n        @media(min-width: 900px) {\n            .nav-menu-container {\n                position: static;\n                display: flex;\n\n                height: 100%;\n                width: auto;\n                padding: 0;\n\n            }\n        }\n";
+var navItemsStyle = "\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n\n            padding: 15px 0;\n        }\n\n        @media(min-width: 900px) {\n            .nav-items {\n                flex-direction: row;\n\n                margin-left: 40px;\n            }\n\n            .nav-link {\n                display: flex;\n                align-items: center;\n\n                padding: 0 15px;\n\n                height: 100%;\n                border-bottom: 3px solid hsl(0, 0%, 100%);\n\n                font-weight: 400;\n                color: hsl(219, 9%, 45%);\n            }\n\n            .nav-link:hover {\n                color: hsl(220, 13%, 13%);\n\n                border-bottom: 3px solid hsl(26, 100%, 55%);\n            }\n        }\n";
+var btnStyle = "\n        .open-nav-btn {\n            display: flex;\n        }\n\n        .close-nav-btn {\n            margin-bottom: 30px;\n        }\n\n        @media(min-width: 900px) {\n            .open-nav-btn {\n                display: none;\n            }\n\n            .close-nav-btn {\n                display: none;\n            }\n        }\n";
+template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(navMenuContainerStyle, "\n        ").concat(btnStyle, "\n        ").concat(navItemsStyle, "\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n        }\n        /* component reset */\n\n\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 2;\n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n        }         \n\n        @media(min-width: 900px) {\n            .nav-menu-container {\n                position: static;\n                display: flex;\n\n                height: 100%;\n                width: auto;\n                padding: 0;\n\n            }\n        }\n\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n\n            padding: 15px 0;\n        }\n\n        @media(min-width: 900px) {\n            .nav-items {\n                flex-direction: row;\n\n                margin-left: 40px;\n            }\n\n            .nav-link {\n                display: flex;\n                align-items: center;\n\n                padding: 0 15px;\n\n                height: 100%;\n                border-bottom: 3px solid hsl(0, 0%, 100%);\n\n                font-weight: 400;\n                color: hsl(219, 9%, 45%);\n            }\n\n            .nav-link:hover {\n                color: hsl(220, 13%, 13%);\n\n                border-bottom: 3px solid hsl(26, 100%, 55%);\n            }\n        }\n\n        .open-nav-btn {\n            display: flex;\n        }\n\n        .close-nav-btn {\n            margin-bottom: 30px;\n        }\n\n        @media(min-width: 900px) {\n            .open-nav-btn {\n                display: none;\n            }\n\n            .close-nav-btn {\n                display: none;\n            }\n        }\n\n        @media(max-width: 900px) {\n            .hidden {\n                display: none;\n            }\n        }\n       \n    </style>\n\n    ").concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
     var _this;
@@ -182,8 +182,26 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
     var overlay = document.querySelector('screen-overlay');
     function openCloseNavMenu(e) {
       var clickedBtn = e.target.closest('custom-button');
-      clickedBtn.classList.contains('open-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
-      clickedBtn.classList.contains('close-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
+
+      // clickedBtn.classList.contains('open-nav-btn') ?
+      //     navMenuContainer.classList.toggle('hidden') :
+      //     overlay.toggleVisibility();
+      // clickedBtn.classList.contains('close-nav-btn') ?
+      //     navMenuContainer.classList.toggle('hidden') :
+      //     overlay.toggleVisibility();
+
+      if (clickedBtn.classList.contains('open-nav-btn')) {
+        navMenuContainer.classList.toggle('hidden');
+      } else {
+        if (window.innerWidth < 900) {
+          overlay.toggleVisibility();
+        }
+      }
+      if (clickedBtn.classList.contains('close-nav-btn')) {
+        navMenuContainer.classList.toggle('hidden');
+      } else {
+        overlay.toggleVisibility();
+      }
     }
     closeNavBtn.addEventListener('click', openCloseNavMenu);
     openNavBtn.addEventListener('click', openCloseNavMenu);
@@ -294,11 +312,7 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-var componentStyle = "\n    a {\n        text-decoration: none;\n    }\n\n    * {\n        box-sizing: border-box;\n        font-family: 'Kumbh Sans';\n        margin: 0;\n\n    }\n\n    .hidden {\n        display: none;\n    }\n";
-var cartContainerStyle = "\n    .cart-container {\n        display: flex;\n        flex-direction: column;\n        justify-content: space-between;\n        position: absolute;\n\n        top: calc(100% + 15px); \n        left: 50%;\n        transform: translateX(-50%);\n\n        min-height: 250px;\n        max-width: 350px;\n        min-width: 300px;\n        width: 100%;\n\n        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n        border-radius: 5px;\n        background-color: hsl(0, 0%, 100%);\n        color: hsl(220, 13%, 13%);\n    }\n\n    .cart-container.hidden {\n        display: none;\n    }\n";
-var cartContentStyle = "\n    .cart-header {\n        border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n        font-weight: 700;\n\n        padding: 25px 15px;\n    }\n\n    .cart-body {\n        padding: 20px 20px 0 20px;\n    }\n\n    .cart-footer {\n        padding: 0 20px 20px 20px;\n        height: 70px;\n    }\n\n    .product-data {\n        display: flex;\n        margin-bottom: 20px;\n    }\n\n    .cart-thumbnail {\n        width: 50px;\n        border-radius: 5px;\n    }\n\n    .product-title-and-price {\n        display: flex;\n        flex-direction: column;\n\n        padding: 5px 15px;\n    }\n\n    .product-title {\n        color: hsl(219, 9%, 45%);\n\n        margin: 0;\n    }   \n        \n    .price {\n        display: flex;\n\n        margin-top: auto;\n\n        font-weight: 500;\n    }\n\n    .product-price {\n        display: flex;\n\n        color: hsl(219, 9%, 45%);\n    }\n\n    .product-quantity {\n        color: hsl(219, 9%, 45%);\n\n        margin: 0 5px;\n    }\n    \n    .total-price {\n        display: flex;\n\n        font-weight: 700;\n    }\n\n    .remove-cart-item-btn {\n        display: flex;\n        align-items: center;\n    }\n\n    .checkout-btn {\n        display: flex;\n        justify-content: center;\n\n        font-weight: 700;\n        font-size: 16px;\n\n        padding: 15px;\n\n        border-radius: 7.5px;\n        background-color: hsl(26, 100%, 55%);\n    }\n\n    .checkout-btn:hover {\n        cursor: pointer;\n    }\n    \n    .empty-cart {\n        text-align: center;\n        color: hsl(219, 9%, 45%);\n        font-weight: 700;\n\n    }\n";
-var cartBtnStyle = "\n    .cart-btn {\n        position: relative;\n    }\n\n    .cart-total {\n        position: absolute;\n        top: -7.5px;\n        right: -7.5px;\n\n        padding: 1px 8px;\n        border-radius: 15px;\n\n        background-color: hsl(26, 100%, 55%);\n\n        color: hsl(0, 0%, 100%);\n        font-weight: 700;\n        font-size: 10px;\n    }\n\n ";
-template.innerHTML = "\n    <style>\n        ".concat(componentStyle, "\n        ").concat(cartContainerStyle, "\n        ").concat(cartContentStyle, "\n        ").concat(cartBtnStyle, "\n    </style>\n\n    ").concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
   function ShoppingCart() {
     var _this;
@@ -366,7 +380,7 @@ var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
         div.innerHTML = "\n                <p>Your cart is empty.</p>\n                ";
         productDataContainer.appendChild(div);
         cartTotalIcon.classList.add('hidden');
-        this.shadowRoot.querySelector('.checkout-btn').classList.add('hidden');
+        this.shadowRoot.querySelector('.checkout-btn').classList.toggle('hidden');
       }
     }
   }, {
@@ -415,7 +429,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `html {
 
 body {
   height: 100%;
-  background-color: red;
 }
 
 header {
@@ -426,23 +439,62 @@ header {
   align-items: center;
   justify-content: space-between;
 }
+@media (min-width: 900px) {
+  header {
+    padding: 0 20px;
+    height: 100px;
+  }
+}
+@media (min-width: 1024px) {
+  header {
+    padding: 0 120px;
+  }
+}
 
 .menu-section {
   display: flex;
   align-items: flex-end;
 }
+@media (min-width: 900px) {
+  .menu-section {
+    height: 100%;
+    align-items: center;
+  }
+}
+
+@media (min-width: 900px) {
+  nav-menu {
+    order: 2;
+    height: 100%;
+  }
+}
 
 .logo {
   margin: 0 10px 0 10px;
+}
+@media (min-width: 900px) {
+  .logo {
+    order: 1;
+  }
 }
 
 .cart-section {
   display: flex;
   align-items: flex-end;
 }
+@media (min-width: 900px) {
+  .cart-section {
+    align-items: center;
+  }
+}
 
 shopping-cart {
   margin: 0 20px 0 20px;
+}
+@media (min-width: 900px) {
+  shopping-cart {
+    margin: 0 40px 0 40px;
+  }
 }
 
 .profile-btn {
@@ -461,7 +513,17 @@ shopping-cart {
 .profile-img:hover {
   cursor: pointer;
   border: 1px solid hsl(26, 100%, 55%);
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;EACA,qBAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,aAAA;EAEA,kBAAA;EAEA,aAAA;EACA,mBAAA;EACA,8BAAA;AACJ;;AACA;EACI,aAAA;EACA,qBAAA;AAEJ;;AAAA;EACI,qBAAA;AAGJ;;AADA;EACI,aAAA;EACA,qBAAA;AAIJ;;AAFA;EACI,qBAAA;AAKJ;;AAHA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAIJ;;AAFA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAKJ;AAHI;EACI,eAAA;EACA,oCAAA;AAKR","sourceRoot":""}]);
+}
+@media (min-width: 900px) {
+  .profile-img {
+    height: 50px;
+    width: 50px;
+    border: 3px solid hsl(0, 0%, 100%);
+  }
+  .profile-img:hover {
+    border: 3px solid hsl(26, 100%, 55%);
+  }
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,aAAA;EAEA,kBAAA;EAEA,aAAA;EACA,mBAAA;EACA,8BAAA;AACJ;AACI;EAVJ;IAWQ,eAAA;IACA,aAAA;EAEN;AACF;AAFI;EAbJ;IAcQ,gBAAA;EAKN;AACF;;AAJA;EACI,aAAA;EACA,qBAAA;AAOJ;AALI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EAQN;AACF;;AANI;EADJ;IAEQ,QAAA;IACA,YAAA;EAUN;AACF;;AATA;EACI,qBAAA;AAYJ;AAVI;EAHJ;IAIQ,QAAA;EAaN;AACF;;AAZA;EACI,aAAA;EACA,qBAAA;AAeJ;AAbI;EAJJ;IAKQ,mBAAA;EAgBN;AACF;;AAfA;EACI,qBAAA;AAkBJ;AAhBI;EAHJ;IAIQ,qBAAA;EAmBN;AACF;;AAlBA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAmBJ;;AAjBA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAoBJ;AAlBI;EACI,eAAA;EACA,oCAAA;AAoBR;AAlBI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAqBN;EAnBM;IACI,oCAAA;EAqBV;AACF","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -805,7 +867,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = `<button><slot>Custom Button</slot></button>
+var code = `<button>
+  <slot>Custom Button</slot>
+</button>
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -836,8 +900,6 @@ var code = `<custom-button class="open-nav-btn">
   </custom-button>
   <div class="nav-items"></div>
 </div>
-
-<!-- <div class="overlay hidden"></div> -->
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1656,4 +1718,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.1f13421a8401a8af3f3e.js.map
+//# sourceMappingURL=bundle.4dfa243b570d9fa2333b.js.map

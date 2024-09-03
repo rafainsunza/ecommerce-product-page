@@ -4,23 +4,21 @@ import menuItems from './menu-items.json';
 
 const template = document.createElement('template');
 
-const componentStyle = `
-    a {
-        text-decoration: none;
-    }
+template.innerHTML = `
+    <style>
+     
+        /* component reset */
+        a {
+            text-decoration: none;
+        }
 
-    * {
-        box-sizing: border-box;
-        font-family: 'Kumbh Sans';
+        * {
+            box-sizing: border-box;
+            font-family: 'Kumbh Sans';
+        }
+        /* component reset */
 
-    }
 
-    .hidden {
-        display: none;
-    }
-`;
-
-const navMenuContainerStyle = `
         .nav-menu-container {
             position: fixed;
             top: 0;
@@ -34,9 +32,19 @@ const navMenuContainerStyle = `
             font-weight: 700;
             background-color: hsl(0, 0%, 100%);
         }         
-`;
 
-const navItemsStyle = `
+        @media(min-width: 900px) {
+            .nav-menu-container {
+                position: static;
+                display: flex;
+
+                height: 100%;
+                width: auto;
+                padding: 0;
+
+            }
+        }
+
         .nav-items {
             display: flex;
             flex-direction: column;
@@ -47,29 +55,62 @@ const navItemsStyle = `
 
             padding: 15px 0;
         }
-`;
 
-const btnStyle = `
-        .close-nav-btn {
-            margin-bottom: 30px;
+        @media(min-width: 900px) {
+            .nav-items {
+                flex-direction: row;
+
+                margin-left: 40px;
+            }
+
+            .nav-link {
+                display: flex;
+                align-items: center;
+
+                padding: 0 15px;
+
+                height: 100%;
+                border-bottom: 3px solid hsl(0, 0%, 100%);
+
+                font-weight: 400;
+                color: hsl(219, 9%, 45%);
+            }
+
+            .nav-link:hover {
+                color: hsl(220, 13%, 13%);
+
+                border-bottom: 3px solid hsl(26, 100%, 55%);
+            }
         }
 
         .open-nav-btn {
             display: flex;
         }
-`;
 
-template.innerHTML = `
-    <style>
-        ${componentStyle}
-        ${navMenuContainerStyle}
-        ${btnStyle}
-        ${navItemsStyle}
+        .close-nav-btn {
+            margin-bottom: 30px;
+        }
+
+        @media(min-width: 900px) {
+            .open-nav-btn {
+                display: none;
+            }
+
+            .close-nav-btn {
+                display: none;
+            }
+        }
+
+        @media(max-width: 900px) {
+            .hidden {
+                display: none;
+            }
+        }
+       
     </style>
 
     ${html}
 `;
-
 
 class NavMenu extends HTMLElement {
     constructor() {
@@ -104,6 +145,13 @@ class NavMenu extends HTMLElement {
 
         closeNavBtn.addEventListener('click', openCloseNavMenu);
         openNavBtn.addEventListener('click', openCloseNavMenu);
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 900) {
+                overlay.hideOverlay();
+                navMenuContainer.classList.add('hidden');
+            }
+        })
     }
 
 }
