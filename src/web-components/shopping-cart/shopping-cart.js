@@ -2,7 +2,7 @@ import html from './shopping-cart.html';
 import style from './shopping-cart.sass';
 import deleteItemIcon from '../../assets/icon-delete.svg';
 import { product_data } from '../../data/product-data.js'
-import { cartItems, cartTotal } from '../../js/global-variables.js';
+import { cart, removeFromCart } from '../../modules/cart-module.js';
 
 const template = document.createElement('template');
 
@@ -30,6 +30,7 @@ template.innerHTML = `
             top: calc(100% + 15px); 
             left: 50%;
             transform: translateX(-50%);
+            z-index: 1;
 
             min-height: 250px;
             max-width: 350px;
@@ -165,6 +166,9 @@ template.innerHTML = `
 `;
 
 class ShoppingCart extends HTMLElement {
+    cartContent = [];
+    cartTotal = 0;
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -172,44 +176,54 @@ class ShoppingCart extends HTMLElement {
 
         const cartContainer = this.shadowRoot.querySelector('.cart-container');
         const cartBtn = this.shadowRoot.querySelector('.cart-btn');
-        let cartContent = [];
 
-        this.updateCartContent(cartItems, cartContent);
-        this.displayCartContent(cartContent);
+        this.updateCartContent(cart);
+        this.displayCartContent();
 
         cartBtn.addEventListener('click', () => this.openAndCloseCart(cartContainer));
+
         cartContainer.addEventListener('click', (e) => {
             if (e.target.closest('.remove-cart-item-btn')) {
-                this.removeItemFromCart(e, cartContent);
+                removeFromCart(e.target.closest('.product-data').id);
+                this.updateCartContent(cart);
+                this.displayCartContent();
             }
-
         });
+    }
+
+    connectedCallback() {
+        document.addEventListener('custom-event', (event) => {
+            this.updateCartContent(cart);
+            this.displayCartContent();
+        })
     }
 
     openAndCloseCart(cartContainer) {
         cartContainer.classList.toggle('hidden');
     }
 
-    updateCartContent(cartItems, cartContent) {
-        const cartProductIds = new Set(cartItems.map(item => item.productId));
-        const updatedCartContent = product_data.filter(product => cartProductIds.has(product.id));
+    updateCartContent(cart) {
+        this.cartContent = product_data.filter(product => product.id in cart);
 
-        cartContent.length = 0;
-        cartContent.push(...updatedCartContent);
+        this.updateCartTotal(cart)
     }
 
-    displayCartContent(cartContent) {
+    updateCartTotal(cart) {
+        this.cartTotal = 0;
+
+        Object.values(cart).forEach(product => {
+            this.cartTotal += product.quantity;
+        })
+    }
+
+    displayCartContent() {
         const productDataContainer = this.shadowRoot.querySelector('.product-data-container');
         const cartTotalIcon = this.shadowRoot.querySelector('.cart-total');
 
         productDataContainer.innerHTML = '';
 
-        if (cartContent.length > 0) {
-            cartContent.forEach((product, index) => {
-                const price = product.price.toFixed(2);
-                const quantity = cartItems[index].quantity;
-                const totalPrice = (price * quantity).toFixed(2);
-
+        if (this.cartContent.length > 0) {
+            this.cartContent.forEach((product) => {
                 const div = document.createElement('div');
                 div.classList.add('product-data');
                 div.id = product.id;
@@ -221,14 +235,14 @@ class ShoppingCart extends HTMLElement {
                         <div class="price">
                             <div class="product-price">
                                 <span>${product.currency}</span>
-                                <span>${price}</span>
+                                <span>${product.price.toFixed(2)}</span>
                             </div>
 
-                            <span class="product-quantity">x ${quantity}</span>
+                            <span class="product-quantity">x ${cart[product.id].quantity}</span>
 
                             <div class="total-price">
                                 <span>${product.currency}</span>
-                                <span>${totalPrice}</span>
+                                <span>${product.price * cart[product.id].quantity}</span>
                             </div>
                         </div>
                     </div>
@@ -236,15 +250,11 @@ class ShoppingCart extends HTMLElement {
                     `;
 
                 productDataContainer.appendChild(div);
-
             });
 
             cartTotalIcon.classList.remove('hidden');
-            cartTotalIcon.innerHTML = `
-                <span>${cartTotal}</span>
-            `;
-
-
+            this.shadowRoot.querySelector('.cart-total').innerHTML = `<span>${this.cartTotal}</span>`;
+            this.shadowRoot.querySelector('.checkout-btn').classList.remove('hidden');
         } else {
             const div = document.createElement('div');
             div.classList.add('empty-cart');
@@ -257,24 +267,9 @@ class ShoppingCart extends HTMLElement {
 
             cartTotalIcon.classList.add('hidden');
 
-            this.shadowRoot.querySelector('.checkout-btn').classList.toggle('hidden');
-
+            this.shadowRoot.querySelector('.checkout-btn').classList.add('hidden');
         }
     }
-
-    removeItemFromCart(e, cartContent) {
-        const productDataIdToRemove = parseInt(e.target.closest('.product-data').id);
-        const itemIndex = cartItems.findIndex(item => item.productId === productDataIdToRemove);
-
-        if (itemIndex !== -1) {
-            cartItems.splice(itemIndex, 1)
-        }
-
-
-        this.updateCartContent(cartItems, cartContent);
-        this.displayCartContent(cartContent);
-    }
-
 }
 
 customElements.define('shopping-cart', ShoppingCart);

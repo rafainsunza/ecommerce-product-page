@@ -23,7 +23,7 @@ template.innerHTML = `
             position: fixed;
             top: 0;
             left: 0;    
-            z-index: 2;
+            z-index: 3;
 
             height: 100vh;
             width: 70%;
