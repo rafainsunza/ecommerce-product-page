@@ -1,5 +1,5 @@
 import html from './nav-menu.html';
-import style from './nav-menu.sass';
+
 import menuItems from './menu-items.json';
 
 const template = document.createElement('template');
@@ -31,39 +31,32 @@ template.innerHTML = `
 
             font-weight: 700;
             background-color: hsl(0, 0%, 100%);
-        }         
 
-        @media(min-width: 900px) {
-            .nav-menu-container {
+            @media(min-width: 900px) {
                 position: static;
                 display: flex;
 
                 height: 100%;
                 width: auto;
                 padding: 0;
-
             }
-        }
+        }          
 
         .nav-items {
             display: flex;
             flex-direction: column;
+
+            @media(min-width: 900px) {
+                flex-direction: row;
+                margin-left: 40px;
+            }
         }
 
         .nav-link {
             color: hsl(220, 13%, 13%);
-
             padding: 15px 0;
-        }
 
-        @media(min-width: 900px) {
-            .nav-items {
-                flex-direction: row;
-
-                margin-left: 40px;
-            }
-
-            .nav-link {
+            @media(min-width: 900px) {
                 display: flex;
                 align-items: center;
 
@@ -75,32 +68,31 @@ template.innerHTML = `
                 font-weight: 400;
                 color: hsl(219, 9%, 45%);
             }
+        }
 
-            .nav-link:hover {
+        .nav-link:hover {
+            @media(min-width: 900px) {
                 color: hsl(220, 13%, 13%);
-
                 border-bottom: 3px solid hsl(26, 100%, 55%);
             }
         }
 
         .open-nav-btn {
             display: flex;
+
+            @media(min-width: 900px) {
+                display: none;
+            }
         }
 
         .close-nav-btn {
             margin-bottom: 30px;
-        }
 
-        @media(min-width: 900px) {
-            .open-nav-btn {
-                display: none;
-            }
-
-            .close-nav-btn {
+            @media(min-width: 900px) {
                 display: none;
             }
         }
-
+    
         @media(max-width: 900px) {
             .hidden {
                 display: none;

@@ -1,8 +1,10 @@
 import html from './product-card.html';
-import { product_data } from '../../data/product-data.js';
-import less from '../../assets/icon-minus.svg';
-import more from '../../assets/icon-plus.svg';
+
+import lessIcon from '../../assets/icon-minus.svg';
+import moreIcon from '../../assets/icon-plus.svg';
 import cartIcon from '../../assets/icon-cart.svg';
+
+import { product_data } from '../../data/product-data.js';
 import { addToCart } from '../../modules/cart-module.js'
 
 const template = document.createElement('template');
@@ -22,27 +24,37 @@ template.innerHTML = `
         }
         /* component reset */
 
+        .card {
+            width: 320px;
+        }
+
         .images-container {
             position: relative;
+            height: 300px;
         }
 
         .full-size-image {
             width: 100%;
+            height: 300px;
+            object-fit: cover;
         }
 
-        .previous {
+        .previous, .next {
             display: flex;
             justify-content: center;
             align-items: center;
 
             position: absolute;
             top: 50%;
-            left: 20px;
 
             background-color: hsl(0, 0%, 100%);
             width: 35px;
             height: 35px;
             border-radius: 35px;
+        }
+
+        .previous {
+            left: 20px;
         }
 
         .previous:hover {
@@ -50,22 +62,121 @@ template.innerHTML = `
         }
 
         .next {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            position: absolute;
-            top: 50%;
             right: 20px;
-
-            background-color: hsl(0, 0%, 100%);
-            width: 35px;
-            height: 35px;
-            border-radius: 35px;
         }
 
         .next:hover {
             cursor: pointer;
+        }
+
+        .brand {
+            color: hsl(219, 9%, 45%);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-title {
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 30px;
+
+            padding: 20px 0;
+        }
+
+        .description {
+            color: hsl(219, 9%, 45%);
+            line-height: 24px;
+            margin-bottom: 15px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .price {
+            display: flex;
+
+            padding: 20px 0;
+        }
+
+        .currency:first-of-type, .price-after {
+            font-weight: 700;
+            font-size: 28px;    
+        }
+
+        .discount {
+            align-content: center;
+
+            font-weight: 700;
+            color: hsl(0, 0%, 100%);
+
+            background-color: hsl(220, 13%, 13%);
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-left: 20px;
+        }
+
+        .currency:nth-last-of-type(2), .price-before {
+            font-weight: 700;
+            color: hsl(219, 9%, 45%);
+            text-decoration: line-through;
+            text-decoration-color: hsl(219, 9%, 45%);
+            align-content: center;
+        }
+
+        .currency:nth-last-of-type(2) {
+            margin-left: auto;
+        }
+
+        .quantity-container {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 0 20px;
+            margin-bottom: 15px;
+
+            background-color: hsl(223, 64%, 98%);
+            border-radius: 7.5px;
+        }
+
+        .less, .more {
+            display: flex;
+            align-items: center;
+
+            height: 55px; 
+            width: 15px;  
+        }
+
+        .less:hover, .more:hover {
+            cursor: pointer;
+        }
+
+        .quantity {
+            align-content: center;
+            font-weight: 700;
+        }
+
+        .add-to-cart {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: hsl(26, 100%, 55%);
+            font-weight: 700;
+            border-radius: 7.5px;
+
+            height: 55px;
+        }
+
+        .add-to-cart:hover {
+            cursor: pointer;
+        }
+     
+        .cart-icon {
+            margin-right: 20px;
+            font-size: 15px;
         }
 
         .hidden {
@@ -109,10 +220,10 @@ class ProductCard extends HTMLElement {
 
         price.innerHTML = `
             <span class="currency">${product.currency}</span>
-            <span class="price-after">${product.price}</span>
+            <span class="price-after">${product.price.toFixed(2)}</span>
             <span class="discount">${product.discount_percentage}%</span>
             <span class="currency">${product.currency}</span>
-            <span class="price-before">${product.price_before}</span>
+            <span class="price-before">${product.price_before.toFixed(2)}</span>
         `;
 
         // handle add to cart
@@ -121,17 +232,13 @@ class ProductCard extends HTMLElement {
         const quantityContainer = this.shadowRoot.querySelector('.quantity-container');
         quantityContainer.innerHTML = `
              <custom-button class="less">
-                <img src="${less}" alt="Less" />
+                <img src="${lessIcon}" alt="Less" />
             </custom-button>
 
             <span class="quantity">${this.amountOfItemsToBeAddedToCart}</span>
 
             <custom-button class="more">
-                <img src="${more}" alt="More" />
-            </custom-button>
-
-            <custom-button class="add-to-cart">
-                <img src="${cartIcon}" /> Add to cart
+                <img src="${moreIcon}" alt="More" />
             </custom-button>
         `;
 

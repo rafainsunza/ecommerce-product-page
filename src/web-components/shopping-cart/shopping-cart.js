@@ -1,6 +1,7 @@
 import html from './shopping-cart.html';
-import style from './shopping-cart.sass';
+
 import deleteItemIcon from '../../assets/icon-delete.svg';
+
 import { product_data } from '../../data/product-data.js'
 import { cart, removeFromCart } from '../../modules/cart-module.js';
 
@@ -41,6 +42,13 @@ template.innerHTML = `
             border-radius: 5px;
             background-color: hsl(0, 0%, 100%);
             color: hsl(220, 13%, 13%);
+
+            @media(min-width: 900px) {
+                transform: none;
+                top: 90%;
+                left: auto;
+                right: 50px;
+            }
         }
 
         .cart-header {
@@ -242,7 +250,7 @@ class ShoppingCart extends HTMLElement {
 
                             <div class="total-price">
                                 <span>${product.currency}</span>
-                                <span>${product.price * cart[product.id].quantity}</span>
+                                <span>${(product.price * cart[product.id].quantity).toFixed(2)}</span>
                             </div>
                         </div>
                     </div>
