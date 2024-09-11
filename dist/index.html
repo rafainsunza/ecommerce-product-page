@@ -17,17 +17,28 @@
       rel="stylesheet"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script defer src="bundle7b117f43c0ff9b47859b.js"></script></head>
+  <script defer src="bundle.ee9d6844579971f50b68.js"></script></head>
   <body>
+    <screen-overlay></screen-overlay>
     <header>
-      <nav-menu nav-items='["Collections", "Men", "Women", "About", "Contact"]'>
-        <a href="index.html" slot="nav-item" class="nav-link">Home</a>
-        <a href="collections" slot="nav-item" class="nav-link">Collections</a>
-        <a href="men" slot="nav-item" class="nav-link">Men</a>
-        <a href="women" slot="nav-item" class="nav-link">Women</a>
-        <a href="about" slot="nav-item" class="nav-link">About</a>
-        <a href="contact" slot="nav-item" class="nav-link">Contact</a>
-      </nav-menu>
+      <div class="menu-section">
+        <nav-menu></nav-menu>
+        <img src="assets/logo.svg" alt="Sneakers Logo" class="logo" />
+      </div>
+
+      <div class="cart-section">
+        <shopping-cart></shopping-cart>
+        <button class="profile-btn">
+          <img
+            src="assets/image-avatar.png"
+            alt="Profile Image"
+            class="profile-img"
+          />
+        </button>
+      </div>
     </header>
+    <main>
+      <product-card product-id="1"></product-card>
+    </main>
   </body>
 </html>
