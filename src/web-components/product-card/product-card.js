@@ -2,7 +2,6 @@ import html from './product-card.html';
 
 import lessIcon from '../../assets/icon-minus.svg';
 import moreIcon from '../../assets/icon-plus.svg';
-import cartIcon from '../../assets/icon-cart.svg';
 
 import { product_data } from '../../data/product-data.js';
 import { addToCart } from '../../modules/cart-module.js'
@@ -23,10 +22,6 @@ template.innerHTML = `
             margin: 0;
         }
         /* component reset */
-
-        .card {
-            width: 320px;
-        }
 
         .images-container {
             position: relative;
@@ -228,19 +223,8 @@ class ProductCard extends HTMLElement {
 
         // handle add to cart
         this.amountOfItemsToBeAddedToCart = 0;
-
-        const quantityContainer = this.shadowRoot.querySelector('.quantity-container');
-        quantityContainer.innerHTML = `
-             <custom-button class="less">
-                <img src="${lessIcon}" alt="Less" />
-            </custom-button>
-
-            <span class="quantity">${this.amountOfItemsToBeAddedToCart}</span>
-
-            <custom-button class="more">
-                <img src="${moreIcon}" alt="More" />
-            </custom-button>
-        `;
+        const quantitySpan = this.shadowRoot.querySelector('.quantity');
+        quantitySpan.innerHTML = this.amountOfItemsToBeAddedToCart;
 
         this.shadowRoot.querySelector('.less').addEventListener('click', (e) => this.handleCartQuantity(e));
         this.shadowRoot.querySelector('.more').addEventListener('click', (e) => this.handleCartQuantity(e));

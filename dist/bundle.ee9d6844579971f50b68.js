@@ -137,6 +137,64 @@ customElements.define('custom-button', CustomButton);
 
 /***/ }),
 
+/***/ "./src/web-components/img-slider/img-slider.js":
+/*!*****************************************************!*\
+  !*** ./src/web-components/img-slider/img-slider.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ImgSlider: () => (/* binding */ ImgSlider)
+/* harmony export */ });
+/* harmony import */ var _img_slider_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./img-slider.html */ "./src/web-components/img-slider/img-slider.html");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _wrapNativeSuper(t) { var r = "function" == typeof Map ? new Map() : void 0; return _wrapNativeSuper = function _wrapNativeSuper(t) { if (null === t || !_isNativeFunction(t)) return t; if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function"); if (void 0 !== r) { if (r.has(t)) return r.get(t); r.set(t, Wrapper); } function Wrapper() { return _construct(t, arguments, _getPrototypeOf(this).constructor); } return Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } }), _setPrototypeOf(Wrapper, t); }, _wrapNativeSuper(t); }
+function _construct(t, e, r) { if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments); var o = [null]; o.push.apply(o, e); var p = new (t.bind.apply(t, o))(); return r && _setPrototypeOf(p, r.prototype), p; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).indexOf("[native code]"); } catch (n) { return "function" == typeof t; } }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+
+var template = document.createElement('template');
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
+  function ImgSlider() {
+    var _this;
+    _classCallCheck(this, ImgSlider);
+    _this = _callSuper(this, ImgSlider);
+    _this.attachShadow({
+      mode: 'open'
+    });
+    _this.shadowRoot.appendChild(template.content.cloneNode(true));
+    var slides = _this.querySelectorAll('[slot="slide"]');
+    var thumbnails = _this.querySelectorAll('[slot="thumbnail"]');
+    slides.forEach(function (slide) {
+      slide.classList.add('hidden');
+      slide.classList.add('slide');
+    });
+    thumbnails.forEach(function (thumbnail) {
+      thumbnail.classList.add('hidden');
+    });
+    return _this;
+  }
+  _inherits(ImgSlider, _HTMLElement);
+  return _createClass(ImgSlider);
+}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+customElements.define('img-slider', ImgSlider);
+
+
+/***/ }),
+
 /***/ "./src/web-components/nav-menu/nav-menu.js":
 /*!*************************************************!*\
   !*** ./src/web-components/nav-menu/nav-menu.js ***!
@@ -225,9 +283,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _product_card_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product-card.html */ "./src/web-components/product-card/product-card.html");
 /* harmony import */ var _assets_icon_minus_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/icon-minus.svg */ "./src/assets/icon-minus.svg");
 /* harmony import */ var _assets_icon_plus_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/icon-plus.svg */ "./src/assets/icon-plus.svg");
-/* harmony import */ var _assets_icon_cart_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../assets/icon-cart.svg */ "./src/assets/icon-cart.svg");
-/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
-/* harmony import */ var _modules_cart_module_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../modules/cart-module.js */ "./src/modules/cart-module.js");
+/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
+/* harmony import */ var _modules_cart_module_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../modules/cart-module.js */ "./src/modules/cart-module.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -249,9 +306,8 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 
-
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .card {\n            width: 320px;\n        }\n\n        .images-container {\n            position: relative;\n            height: 300px;\n        }\n\n        .full-size-image {\n            width: 100%;\n            height: 300px;\n            object-fit: cover;\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 35px;\n            height: 35px;\n            border-radius: 35px;\n        }\n\n        .previous {\n            left: 20px;\n        }\n\n        .previous:hover {\n            cursor: pointer;\n        }\n\n        .next {\n            right: 20px;\n        }\n\n        .next:hover {\n            cursor: pointer;\n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n        }\n\n        .product-info {\n            padding: 20px;\n        }\n\n        .price {\n            display: flex;\n\n            padding: 20px 0;\n        }\n\n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;    \n        }\n\n        .discount {\n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n            align-content: center;\n        }\n\n        .currency:nth-last-of-type(2) {\n            margin-left: auto;\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 50px; \n            width: 15px;  \n        }\n\n        .less:hover, .more:hover {\n            cursor: pointer;\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 50px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n        }\n     \n        .cart-icon {\n            margin-right: 20px;\n            height: 17.5px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .images-container {\n            position: relative;\n            height: 300px;\n        }\n\n        .full-size-image {\n            width: 100%;\n            height: 300px;\n            object-fit: cover;\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 35px;\n            height: 35px;\n            border-radius: 35px;\n        }\n\n        .previous {\n            left: 20px;\n        }\n\n        .previous:hover {\n            cursor: pointer;\n        }\n\n        .next {\n            right: 20px;\n        }\n\n        .next:hover {\n            cursor: pointer;\n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n\n        .product-info {\n            padding: 20px;\n        }\n\n        .price {\n            display: flex;\n\n            padding: 20px 0;\n        }\n\n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;    \n        }\n\n        .discount {\n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n            align-content: center;\n        }\n\n        .currency:nth-last-of-type(2) {\n            margin-left: auto;\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n        .less:hover, .more:hover {\n            cursor: pointer;\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n        }\n     \n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   function ProductCard() {
     var _this;
@@ -264,20 +320,19 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
 
     // handle full size images
     var productId = Number(_this.getAttribute('product-id'));
-    var product = _data_product_data_js__WEBPACK_IMPORTED_MODULE_4__.product_data.find(function (product) {
+    var product = _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__.product_data.find(function (product) {
       return product.id === productId;
     });
     var fullSizeImages = product.images.full_size;
     var thumbnails = product.images.thumbnails;
-    _this.imageCount = product.images.full_size.length;
-    _this.activeImage = _this.imageCount - _this.imageCount;
-    _this.setInitialImages(fullSizeImages, thumbnails, _this.activeImage);
-    _this.shadowRoot.querySelector('.previous').addEventListener('click', function (e) {
-      return _this.navigateImages(e, fullSizeImages, _this.activeImage, _this.imageCount);
-    });
-    _this.shadowRoot.querySelector('.next').addEventListener('click', function (e) {
-      return _this.navigateImages(e, fullSizeImages, _this.activeImage, _this.imageCount);
-    });
+
+    // this.imageCount = product.images.full_size.length;
+    // this.activeImage = this.imageCount - this.imageCount;
+
+    // this.setInitialImages(fullSizeImages, thumbnails, this.activeImage);
+
+    // this.shadowRoot.querySelector('.previous').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
+    // this.shadowRoot.querySelector('.next').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
 
     // handle product info
     var info = _this.shadowRoot.querySelector('.info');
@@ -287,8 +342,21 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
 
     // handle add to cart
     _this.amountOfItemsToBeAddedToCart = 0;
-    var quantityContainer = _this.shadowRoot.querySelector('.quantity-container');
-    quantityContainer.innerHTML = "\n             <custom-button class=\"less\">\n                <img src=\"".concat(_assets_icon_minus_svg__WEBPACK_IMPORTED_MODULE_1__, "\" alt=\"Less\" />\n            </custom-button>\n\n            <span class=\"quantity\">").concat(_this.amountOfItemsToBeAddedToCart, "</span>\n\n            <custom-button class=\"more\">\n                <img src=\"").concat(_assets_icon_plus_svg__WEBPACK_IMPORTED_MODULE_2__, "\" alt=\"More\" />\n            </custom-button>\n        ");
+    var quantitySpan = _this.shadowRoot.querySelector('.quantity');
+    quantitySpan.innerHTML = _this.amountOfItemsToBeAddedToCart;
+    // const quantityContainer = this.shadowRoot.querySelector('.quantity-container');
+    // quantityContainer.innerHTML = `
+    //      <custom-button class="less">
+    //         <img src="${lessIcon}" alt="Less" />
+    //     </custom-button>
+
+    //     <span class="quantity">${this.amountOfItemsToBeAddedToCart}</span>
+
+    //     <custom-button class="more">
+    //         <img src="${moreIcon}" alt="More" />
+    //     </custom-button>
+    // `;
+
     _this.shadowRoot.querySelector('.less').addEventListener('click', function (e) {
       return _this.handleCartQuantity(e);
     });
@@ -349,7 +417,7 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
     key: "handleCartAdd",
     value: function handleCartAdd(product) {
       if (this.amountOfItemsToBeAddedToCart > 0) {
-        (0,_modules_cart_module_js__WEBPACK_IMPORTED_MODULE_5__.addToCart)(product.id, this.amountOfItemsToBeAddedToCart);
+        (0,_modules_cart_module_js__WEBPACK_IMPORTED_MODULE_4__.addToCart)(product.id, this.amountOfItemsToBeAddedToCart);
         this.amountOfItemsToBeAddedToCart = 0;
         this.updateCartQuantity();
         this.dispatchEvent(new CustomEvent('custom-event', {
@@ -991,6 +1059,41 @@ var code = `<button>
 
 /***/ }),
 
+/***/ "./src/web-components/img-slider/img-slider.html":
+/*!*******************************************************!*\
+  !*** ./src/web-components/img-slider/img-slider.html ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Imports
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-previous.svg */ "./src/assets/icon-previous.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-next.svg */ "./src/assets/icon-next.svg"), __webpack_require__.b);
+// Module
+var code = `<div class="slider">
+  <div class="slides">
+    <slot name="slide"></slot>
+  </div>
+  <div class="thumbnails">
+    <slot name="thumbnail"></slot>
+  </div>
+
+  <custom-button>
+    <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
+  </custom-button>
+  <custom-button>
+    <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
+  </custom-button>
+</div>
+`;
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
+
+/***/ }),
+
 /***/ "./src/web-components/nav-menu/nav-menu.html":
 /*!***************************************************!*\
   !*** ./src/web-components/nav-menu/nav-menu.html ***!
@@ -1032,20 +1135,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Imports
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-previous.svg */ "./src/assets/icon-previous.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-next.svg */ "./src/assets/icon-next.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-cart.svg */ "./src/assets/icon-cart.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-1.jpg */ "./src/assets/image-product-1.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-2.jpg */ "./src/assets/image-product-2.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-3.jpg */ "./src/assets/image-product-3.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-4.jpg */ "./src/assets/image-product-4.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-1-thumbnail.jpg */ "./src/assets/image-product-1-thumbnail.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-2-thumbnail.jpg */ "./src/assets/image-product-2-thumbnail.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-3-thumbnail.jpg */ "./src/assets/image-product-3-thumbnail.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-4-thumbnail.jpg */ "./src/assets/image-product-4-thumbnail.jpg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-minus.svg */ "./src/assets/icon-minus.svg"), __webpack_require__.b);
+var ___HTML_LOADER_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-plus.svg */ "./src/assets/icon-plus.svg"), __webpack_require__.b);
 // Module
 var code = `<div class="card">
-  <div class="images-container">
+  <!-- <div class="images-container">
     <custom-button class="previous">
-      <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
+      <img src="/src/assets/icon-previous.svg" alt="Previous" />
     </custom-button>
     <custom-button class="next">
-      <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
+      <img src="/src/assets/icon-next.svg" alt="Next" />
     </custom-button>
     <div class="full-size-image-container"></div>
     <div class="thumbnails-container"></div>
+  </div> -->
+  <div class="images-container">
+    <img-slider>
+      <img
+        src="${___HTML_LOADER_IMPORT_0___}"
+        slot="slide"
+        class="full-size-image"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_1___}"
+        slot="slide"
+        class="full-size-image"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_2___}"
+        slot="slide"
+        class="full-size-image"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_3___}"
+        slot="slide"
+        class="full-size-image"
+      />
+      <img src="${___HTML_LOADER_IMPORT_4___}" slot="thumbnail" />
+      <img src="${___HTML_LOADER_IMPORT_5___}" slot="thumbnail" />
+      <img src="${___HTML_LOADER_IMPORT_6___}" slot="thumbnail" />
+      <img src="${___HTML_LOADER_IMPORT_7___}" slot="thumbnail" />
+    </img-slider>
   </div>
 
   <div class="product-info">
@@ -1053,11 +1191,33 @@ var code = `<div class="card">
 
     <div class="price"></div>
 
-    <div class="quantity-container"></div>
+    <div class="quantity-container">
+      <custom-button class="less">
+        <img src="${___HTML_LOADER_IMPORT_8___}" alt="Less" />
+      </custom-button>
+
+      <span class="quantity"></span>
+
+      <custom-button class="more">
+        <img src="${___HTML_LOADER_IMPORT_9___}" alt="More" />
+      </custom-button>
+    </div>
 
     <div class="add-to-cart-container">
       <custom-button class="add-to-cart">
-        <img src="${___HTML_LOADER_IMPORT_2___}" class="cart-icon" /> Add to cart
+        <svg
+          width="22"
+          height="20"
+          xmlns="http://www.w3.org/2000/svg"
+          class="cart-icon"
+        >
+          <path
+            d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+            fill="hsl(220, 13%, 13%)"
+            fill-rule="nonzero"
+          />
+        </svg>
+        Add to cart
       </custom-button>
     </div>
   </div>
@@ -1807,8 +1967,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _web_components_custom_button_custom_button_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./web-components/custom-button/custom-button.js */ "./src/web-components/custom-button/custom-button.js");
 /* harmony import */ var _web_components_screen_overlay_screen_overlay_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./web-components/screen-overlay/screen-overlay.js */ "./src/web-components/screen-overlay/screen-overlay.js");
 /* harmony import */ var _web_components_product_card_product_card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./web-components/product-card/product-card.js */ "./src/web-components/product-card/product-card.js");
-/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
-/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
+/* harmony import */ var _web_components_img_slider_img_slider_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./web-components/img-slider/img-slider.js */ "./src/web-components/img-slider/img-slider.js");
+/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
+
 
 
 
@@ -1818,4 +1980,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.9d9ebe7e9d3f16c46907.js.map
+//# sourceMappingURL=bundle.ee9d6844579971f50b68.js.map
