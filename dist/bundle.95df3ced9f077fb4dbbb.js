@@ -149,11 +149,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _img_slider_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./img-slider.html */ "./src/web-components/img-slider/img-slider.html");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -166,7 +166,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 320px;\n            height: 100%;\n            margin: auto;\n\n            @media(min-width: 655px) {\n                width: 655px;\n            }\n\n            @media(min-width: 900px) {\n                margin-top: 80px;\n            }\n\n            @media(min-width: 1024px) {\n                width: 400px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 320px;\n\n            gap: 15px;\n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 1024px) {\n                grid-auto-columns: 400px;\n            }\n        }\n   \n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            height: 300px;\n            object-fit: cover;\n\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 350px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;\n            }\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                height: 400px;\n            }\n        }\n\n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n       @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: block;\n\n                // width: 80px;\n                width: 160px;\n                height: 80px;\n                border-radius: 10px;\n            }\n       }\n\n       .previous-thumbnail {\n            background-color: red;\n       }\n\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   function ImgSlider() {
     var _this;
@@ -176,19 +176,44 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
-    var slides = _this.querySelectorAll('[slot="slide"]');
-    var thumbnails = _this.querySelectorAll('[slot="thumbnail"]');
-    slides.forEach(function (slide) {
-      slide.classList.add('hidden');
-      slide.classList.add('slide');
+    _this.slidesContainer = _this.shadowRoot.querySelector('.slides');
+    _this.slideSlot = _this.shadowRoot.querySelector('slot[name="slide"]');
+    _this.images = _this.slideSlot.assignedElements();
+    _this.previousBtn = _this.shadowRoot.querySelector('.previous');
+    _this.nextBtn = _this.shadowRoot.querySelector('.next');
+    _this.previousBtn.addEventListener('click', function (e) {
+      return _this.navigateImages(e);
     });
-    thumbnails.forEach(function (thumbnail) {
-      thumbnail.classList.add('hidden');
+    _this.nextBtn.addEventListener('click', function (e) {
+      return _this.navigateImages(e);
     });
     return _this;
   }
   _inherits(ImgSlider, _HTMLElement);
-  return _createClass(ImgSlider);
+  return _createClass(ImgSlider, [{
+    key: "navigateImages",
+    value: function navigateImages(e) {
+      var clickedBtn = e.target.closest('custom-button').classList[0];
+      var scrollPosition = this.slidesContainer.scrollLeft;
+      if (clickedBtn === 'next') {
+        this.slidesContainer.scrollTo({
+          left: scrollPosition + 320,
+          behavior: 'smooth'
+        });
+      }
+      if (clickedBtn === 'previous') {
+        this.slidesContainer.scrollTo({
+          left: scrollPosition - 320,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, {
+    key: "thumbnailNavigation",
+    value: function thumbnailNavigation() {
+      var activeImage = this.querySelector();
+    }
+  }]);
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('img-slider', ImgSlider);
 
@@ -281,10 +306,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ProductCard: () => (/* binding */ ProductCard)
 /* harmony export */ });
 /* harmony import */ var _product_card_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product-card.html */ "./src/web-components/product-card/product-card.html");
-/* harmony import */ var _assets_icon_minus_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/icon-minus.svg */ "./src/assets/icon-minus.svg");
-/* harmony import */ var _assets_icon_plus_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/icon-plus.svg */ "./src/assets/icon-plus.svg");
-/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
-/* harmony import */ var _modules_cart_module_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../modules/cart-module.js */ "./src/modules/cart-module.js");
+/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
+/* harmony import */ var _modules_cart_module_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/cart-module.js */ "./src/modules/cart-module.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -304,10 +327,8 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 
-
-
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .images-container {\n            position: relative;\n            height: 300px;\n        }\n\n        .full-size-image {\n            width: 100%;\n            height: 300px;\n            object-fit: cover;\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 35px;\n            height: 35px;\n            border-radius: 35px;\n        }\n\n        .previous {\n            left: 20px;\n        }\n\n        .previous:hover {\n            cursor: pointer;\n        }\n\n        .next {\n            right: 20px;\n        }\n\n        .next:hover {\n            cursor: pointer;\n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n\n        .product-info {\n            padding: 20px;\n        }\n\n        .price {\n            display: flex;\n\n            padding: 20px 0;\n        }\n\n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;    \n        }\n\n        .discount {\n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n            align-content: center;\n        }\n\n        .currency:nth-last-of-type(2) {\n            margin-left: auto;\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n        .less:hover, .more:hover {\n            cursor: pointer;\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n        }\n     \n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .product-info {\n            @media(min-width: 655px) {\n                width: 655px;\n                margin: auto;\n            }\n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n\n        .product-info {\n            padding: 20px;\n        }\n\n        .price {\n            display: flex;\n\n            padding: 20px 0;\n        }\n\n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;    \n        }\n\n        .discount {\n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n            align-content: center;\n        }\n\n        .currency:nth-last-of-type(2) {\n            margin-left: auto;\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n        .less:hover, .more:hover {\n            cursor: pointer;\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n        }\n     \n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   function ProductCard() {
     var _this;
@@ -320,7 +341,7 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
 
     // handle full size images
     var productId = Number(_this.getAttribute('product-id'));
-    var product = _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__.product_data.find(function (product) {
+    var product = _data_product_data_js__WEBPACK_IMPORTED_MODULE_1__.product_data.find(function (product) {
       return product.id === productId;
     });
     var fullSizeImages = product.images.full_size;
@@ -344,19 +365,6 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
     _this.amountOfItemsToBeAddedToCart = 0;
     var quantitySpan = _this.shadowRoot.querySelector('.quantity');
     quantitySpan.innerHTML = _this.amountOfItemsToBeAddedToCart;
-    // const quantityContainer = this.shadowRoot.querySelector('.quantity-container');
-    // quantityContainer.innerHTML = `
-    //      <custom-button class="less">
-    //         <img src="${lessIcon}" alt="Less" />
-    //     </custom-button>
-
-    //     <span class="quantity">${this.amountOfItemsToBeAddedToCart}</span>
-
-    //     <custom-button class="more">
-    //         <img src="${moreIcon}" alt="More" />
-    //     </custom-button>
-    // `;
-
     _this.shadowRoot.querySelector('.less').addEventListener('click', function (e) {
       return _this.handleCartQuantity(e);
     });
@@ -417,7 +425,7 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
     key: "handleCartAdd",
     value: function handleCartAdd(product) {
       if (this.amountOfItemsToBeAddedToCart > 0) {
-        (0,_modules_cart_module_js__WEBPACK_IMPORTED_MODULE_4__.addToCart)(product.id, this.amountOfItemsToBeAddedToCart);
+        (0,_modules_cart_module_js__WEBPACK_IMPORTED_MODULE_2__.addToCart)(product.id, this.amountOfItemsToBeAddedToCart);
         this.amountOfItemsToBeAddedToCart = 0;
         this.updateCartQuantity();
         this.dispatchEvent(new CustomEvent('custom-event', {
@@ -545,7 +553,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n            z-index: 1;\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n\n            @media(min-width: 900px) {\n                transform: none;\n                top: 90%;\n                left: auto;\n                right: 50px;\n            }\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n            z-index: 1;\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n\n            @media(min-width: 900px) {\n                transform: none;\n                top: 90%;\n                left: auto;\n                right: 0;\n            }\n\n            @media(min-width: 1024px) {\n                right: -5%;\n            }\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
   function ShoppingCart() {
     var _this;
@@ -668,7 +676,7 @@ body {
 
 header {
   background-color: hsl(0, 0%, 100%);
-  padding: 20px;
+  margin: 20px;
   position: relative;
   display: flex;
   align-items: center;
@@ -676,13 +684,14 @@ header {
 }
 @media (min-width: 900px) {
   header {
-    padding: 0 20px;
+    margin: 0 20px;
     height: 100px;
+    border-bottom: 1px solid #dcdcdc;
   }
 }
 @media (min-width: 1024px) {
   header {
-    padding: 0 120px;
+    margin: 0 120px;
   }
 }
 
@@ -710,6 +719,7 @@ header {
 @media (min-width: 900px) {
   .logo {
     order: 1;
+    margin: 0;
   }
 }
 
@@ -758,7 +768,7 @@ shopping-cart {
   .profile-img:hover {
     border: 3px solid hsl(26, 100%, 55%);
   }
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,aAAA;EAEA,kBAAA;EAEA,aAAA;EACA,mBAAA;EACA,8BAAA;AACJ;AACI;EAVJ;IAWQ,eAAA;IACA,aAAA;EAEN;AACF;AAFI;EAbJ;IAcQ,gBAAA;EAKN;AACF;;AAJA;EACI,aAAA;EACA,qBAAA;AAOJ;AALI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EAQN;AACF;;AANI;EADJ;IAEQ,QAAA;IACA,YAAA;EAUN;AACF;;AATA;EACI,qBAAA;AAYJ;AAVI;EAHJ;IAIQ,QAAA;EAaN;AACF;;AAZA;EACI,aAAA;EACA,qBAAA;AAeJ;AAbI;EAJJ;IAKQ,mBAAA;EAgBN;AACF;;AAfA;EACI,qBAAA;AAkBJ;AAhBI;EAHJ;IAIQ,qBAAA;EAmBN;AACF;;AAlBA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAmBJ;;AAjBA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAoBJ;AAlBI;EACI,eAAA;EACA,oCAAA;AAoBR;AAlBI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAqBN;EAnBM;IACI,oCAAA;EAqBV;AACF","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,YAAA;EAEA,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,8BAAA;AAEJ;AAAI;EATJ;IAUQ,cAAA;IACA,aAAA;IACA,gCAAA;EAGN;AACF;AAFI;EAdJ;IAeQ,eAAA;EAKN;AACF;;AAJA;EACI,aAAA;EACA,qBAAA;AAOJ;AALI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EAQN;AACF;;AANI;EADJ;IAEQ,QAAA;IACA,YAAA;EAUN;AACF;;AATA;EACI,qBAAA;AAYJ;AAVI;EAHJ;IAIQ,QAAA;IACA,SAAA;EAaN;AACF;;AAZA;EACI,aAAA;EACA,qBAAA;AAeJ;AAbI;EAJJ;IAKQ,mBAAA;EAgBN;AACF;;AAfA;EACI,qBAAA;AAkBJ;AAhBI;EAHJ;IAIQ,qBAAA;EAmBN;AACF;;AAlBA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAmBJ;;AAjBA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAoBJ;AAlBI;EACI,eAAA;EACA,oCAAA;AAoBR;AAlBI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAqBN;EAnBM;IACI,oCAAA;EAqBV;AACF","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1076,17 +1086,24 @@ var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(
 var code = `<div class="slider">
   <div class="slides">
     <slot name="slide"></slot>
+
+    <custom-button class="previous">
+      <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
+    </custom-button>
+    <custom-button class="next">
+      <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
+    </custom-button>
   </div>
   <div class="thumbnails">
     <slot name="thumbnail"></slot>
-  </div>
 
-  <custom-button>
-    <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
-  </custom-button>
-  <custom-button>
-    <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
-  </custom-button>
+    <custom-button class="previous-thumbnail">
+      <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
+    </custom-button>
+    <custom-button class="next-thumbnail">
+      <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
+    </custom-button>
+  </div>
 </div>
 `;
 // Exports
@@ -1157,34 +1174,32 @@ var code = `<div class="card">
     <div class="full-size-image-container"></div>
     <div class="thumbnails-container"></div>
   </div> -->
-  <div class="images-container">
-    <img-slider>
-      <img
-        src="${___HTML_LOADER_IMPORT_0___}"
-        slot="slide"
-        class="full-size-image"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_1___}"
-        slot="slide"
-        class="full-size-image"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_2___}"
-        slot="slide"
-        class="full-size-image"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_3___}"
-        slot="slide"
-        class="full-size-image"
-      />
-      <img src="${___HTML_LOADER_IMPORT_4___}" slot="thumbnail" />
-      <img src="${___HTML_LOADER_IMPORT_5___}" slot="thumbnail" />
-      <img src="${___HTML_LOADER_IMPORT_6___}" slot="thumbnail" />
-      <img src="${___HTML_LOADER_IMPORT_7___}" slot="thumbnail" />
-    </img-slider>
-  </div>
+  <img-slider>
+    <img src="${___HTML_LOADER_IMPORT_0___}" slot="slide" class="slide" />
+    <img src="${___HTML_LOADER_IMPORT_1___}" slot="slide" class="slide" />
+    <img src="${___HTML_LOADER_IMPORT_2___}" slot="slide" class="slide" />
+    <img src="${___HTML_LOADER_IMPORT_3___}" slot="slide" class="slide" />
+    <img
+      src="${___HTML_LOADER_IMPORT_4___}"
+      slot="thumbnail"
+      class="thumbnail"
+    />
+    <img
+      src="${___HTML_LOADER_IMPORT_5___}"
+      slot="thumbnail"
+      class="thumbnail"
+    />
+    <img
+      src="${___HTML_LOADER_IMPORT_6___}"
+      slot="thumbnail"
+      class="thumbnail"
+    />
+    <img
+      src="${___HTML_LOADER_IMPORT_7___}"
+      slot="thumbnail"
+      class="thumbnail"
+    />
+  </img-slider>
 
   <div class="product-info">
     <div class="info"></div>
@@ -1980,4 +1995,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.ee9d6844579971f50b68.js.map
+//# sourceMappingURL=bundle.95df3ced9f077fb4dbbb.js.map

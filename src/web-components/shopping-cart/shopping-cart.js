@@ -47,7 +47,11 @@ template.innerHTML = `
                 transform: none;
                 top: 90%;
                 left: auto;
-                right: 50px;
+                right: 0;
+            }
+
+            @media(min-width: 1024px) {
+                right: -5%;
             }
         }
 

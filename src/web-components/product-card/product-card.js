@@ -1,8 +1,5 @@
 import html from './product-card.html';
 
-import lessIcon from '../../assets/icon-minus.svg';
-import moreIcon from '../../assets/icon-plus.svg';
-
 import { product_data } from '../../data/product-data.js';
 import { addToCart } from '../../modules/cart-module.js'
 
@@ -23,45 +20,11 @@ template.innerHTML = `
         }
         /* component reset */
 
-        .images-container {
-            position: relative;
-            height: 300px;
-        }
-
-        .full-size-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .previous, .next {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            position: absolute;
-            top: 50%;
-
-            background-color: hsl(0, 0%, 100%);
-            width: 35px;
-            height: 35px;
-            border-radius: 35px;
-        }
-
-        .previous {
-            left: 20px;
-        }
-
-        .previous:hover {
-            cursor: pointer;
-        }
-
-        .next {
-            right: 20px;
-        }
-
-        .next:hover {
-            cursor: pointer;
+        .product-info {
+            @media(min-width: 655px) {
+                width: 655px;
+                margin: auto;
+            }
         }
 
         .brand {
@@ -178,6 +141,12 @@ template.innerHTML = `
             display: none;
         }
 
+        .active {
+            border: 3px solid hsl(26, 100%, 55%);
+            opacity: 50%;
+        }
+
+
     </style>
 
     ${html}
@@ -192,16 +161,8 @@ class ProductCard extends HTMLElement {
         // handle full size images
         const productId = Number(this.getAttribute('product-id'));
         const product = product_data.find(product => product.id === productId);
-        const fullSizeImages = product.images.full_size;
-        const thumbnails = product.images.thumbnails;
-
-        this.imageCount = product.images.full_size.length;
-        this.activeImage = this.imageCount - this.imageCount;
-
-        this.setInitialImages(fullSizeImages, thumbnails, this.activeImage);
-
-        this.shadowRoot.querySelector('.previous').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
-        this.shadowRoot.querySelector('.next').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
+        this.fullSizeImages = product.images.full_size;
+        this.thumbnails = product.images.thumbnails;
 
         // handle product info
         const info = this.shadowRoot.querySelector('.info');
@@ -232,62 +193,24 @@ class ProductCard extends HTMLElement {
 
     }
 
-    setInitialImages(fullSizeImages, thumbnails) {
+    setInitialImages() {
         const fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
         const thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails-container');
 
-        const fullSizeImage = fullSizeImages[this.activeImage];
+        const fullSizeImage = this.fullSizeImages[this.activeImage];
 
         const fullSizeImgElement = document.createElement('img');
         fullSizeImgElement.src = fullSizeImage;
         fullSizeImgElement.classList.add('full-size-image');
         fullSizeImageContainer.append(fullSizeImgElement);
 
-        thumbnails.forEach((thumbnail) => {
+        this.thumbnails.forEach((thumbnail) => {
             const img = document.createElement('img');
             img.src = thumbnail;
             img.classList.add('hidden');
 
             thumbnailsContainer.appendChild(img);
         });
-    }
-
-    navigateImages(e, fullSizeImages) {
-        const clickedBtn = e.target.closest('custom-button');
-        const fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
-
-        fullSizeImageContainer.innerHTML = '';
-        const img = document.createElement('img');
-        img.classList.add('full-size-image');
-
-
-        if (clickedBtn.classList.contains('previous') && this.activeImage >= 1) {
-            this.activeImage--;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        } else if (clickedBtn.classList.contains('previous') && this.activeImage === 0) {
-            this.activeImage = this.imageCount - 1;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        }
-
-        if (clickedBtn.classList.contains('next') && this.activeImage <= this.imageCount - 2) {
-            this.activeImage++;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        } else if (clickedBtn.classList.contains('next') && this.activeImage === this.imageCount - 1) {
-            this.activeImage = this.imageCount - this.imageCount;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        }
     }
 
     handleCartAdd(product) {
@@ -301,10 +224,6 @@ class ProductCard extends HTMLElement {
                 composed: true
             }))
         }
-
-
-
-
     }
 
     handleCartQuantity(e) {
