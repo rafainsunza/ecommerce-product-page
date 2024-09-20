@@ -19,7 +19,7 @@ template.innerHTML = `
         .slider {
             position: relative;
             width: 320px;
-            height: 100%;
+            // height: 100%;
             margin: auto;
 
             @media(min-width: 655px) {

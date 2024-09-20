@@ -22,6 +22,7 @@ template.innerHTML = `
         .hidden {
             display: none;
         }
+
     </style>
 
     ${html}

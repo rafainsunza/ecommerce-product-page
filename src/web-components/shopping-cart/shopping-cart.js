@@ -153,6 +153,14 @@ template.innerHTML = `
             position: relative;
         }
 
+        .cart-icon {
+            color: hsl(219, 9%, 45%)
+        }
+
+        .cart-btn:hover .cart-icon {
+            color: hsl(220, 13%, 13%);
+        }
+
         .cart-total {
             position: absolute;
             top: -7.5px;

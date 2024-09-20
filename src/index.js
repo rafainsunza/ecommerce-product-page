@@ -7,10 +7,3 @@ import { ImgSlider } from "./web-components/img-slider/img-slider.js";
 
 import './styles/reset.css';
 import './styles/main.sass';
-
-
-
-
-
-
-

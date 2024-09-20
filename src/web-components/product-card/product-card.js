@@ -20,10 +20,27 @@ template.innerHTML = `
         }
         /* component reset */
 
+        .card {
+            @media(min-width: 1024px) {
+                display: flex;
+                margin: 0 120px;
+            }
+
+            @media(min-width: 1400px) {
+                margin: 0 180px;
+            }
+        }
+
         .product-info {
+            padding: 20px;
+
             @media(min-width: 655px) {
                 width: 655px;
                 margin: auto;
+            }
+
+            @media(min-width: 1024px) {
+                width: 50%;
             }
         }
 
@@ -41,6 +58,11 @@ template.innerHTML = `
             line-height: 30px;
 
             padding: 20px 0;
+
+            @media(min-width: 1024px) {
+                font-size: 36px;
+                line-height: 38px;
+            }
         }
 
         .description {
@@ -48,23 +70,33 @@ template.innerHTML = `
             line-height: 24px;
             margin-bottom: 15px;
         }
-
-        .product-info {
-            padding: 20px;
-        }
-
+      
         .price {
             display: flex;
-
             padding: 20px 0;
+
+            @media(min-width: 1024px) {
+                flex-wrap: wrap;
+            }
         }
 
+        .price-before-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            
+            @media(min-width: 1024px) {
+                justify-content: flex-start;    
+                margin-top: 15px;    
+            }
+        }
+   
         .currency:first-of-type, .price-after {
             font-weight: 700;
-            font-size: 28px;    
+            font-size: 28px;  
         }
 
-        .discount {
+        .discount { 
             align-content: center;
 
             font-weight: 700;
@@ -78,14 +110,17 @@ template.innerHTML = `
 
         .currency:nth-last-of-type(2), .price-before {
             font-weight: 700;
+            font-size: inherit;
             color: hsl(219, 9%, 45%);
             text-decoration: line-through;
             text-decoration-color: hsl(219, 9%, 45%);
-            align-content: center;
         }
 
-        .currency:nth-last-of-type(2) {
-            margin-left: auto;
+        .actions-container {
+            @media(min-width: 1024px) {
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
         .quantity-container {
@@ -97,6 +132,17 @@ template.innerHTML = `
 
             background-color: hsl(223, 64%, 98%);
             border-radius: 7.5px;
+
+            @media(min-width: 1024px) {
+                width: 40%;
+            }
+        }
+
+        .add-to-cart-container {
+            @media(min-width: 1024px) {
+                width: 50%;
+            }
+
         }
 
         .less, .more {
@@ -107,8 +153,17 @@ template.innerHTML = `
             width: 15px;  
         }
 
-        .less:hover, .more:hover {
+       .less:hover, .more:hover{
             cursor: pointer;
+        }
+
+        .less-icon, .more-icon {
+            color: hsl(26, 100%, 55%);
+        }
+
+        .less:hover .less-icon,
+        .more:hover .more-icon {
+            color: hsla(26, 100%, 55%, 0.5);
         }
 
         .quantity {
@@ -130,8 +185,9 @@ template.innerHTML = `
 
         .add-to-cart:hover {
             cursor: pointer;
+            opacity: 80%;
         }
-     
+
         .cart-icon {
             margin-right: 20px;
             font-size: 15px;
@@ -143,7 +199,7 @@ template.innerHTML = `
 
         .active {
             border: 3px solid hsl(26, 100%, 55%);
-            opacity: 50%;
+            opacity: 70%;
         }
 
 
@@ -178,8 +234,12 @@ class ProductCard extends HTMLElement {
             <span class="currency">${product.currency}</span>
             <span class="price-after">${product.price.toFixed(2)}</span>
             <span class="discount">${product.discount_percentage}%</span>
-            <span class="currency">${product.currency}</span>
-            <span class="price-before">${product.price_before.toFixed(2)}</span>
+
+            <div class="price-before-container">
+                <span class="currency">${product.currency}</span>
+                <span class="price-before">${product.price_before.toFixed(2)}</span>
+            </div>
+              
         `;
 
         // handle add to cart
@@ -211,6 +271,7 @@ class ProductCard extends HTMLElement {
 
             thumbnailsContainer.appendChild(img);
         });
+
     }
 
     handleCartAdd(product) {

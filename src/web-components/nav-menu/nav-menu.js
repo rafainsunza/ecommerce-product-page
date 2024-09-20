@@ -98,7 +98,7 @@ template.innerHTML = `
                 display: none;
             }
         }
-       
+
     </style>
 
     ${html}
