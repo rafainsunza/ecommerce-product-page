@@ -23,25 +23,27 @@ template.innerHTML = `
         .card {
             @media(min-width: 1024px) {
                 display: flex;
-                margin: 0 120px;
+                margin: 80px 120px 0 120px;
             }
 
-            @media(min-width: 1400px) {
-                margin: 0 180px;
+            @media(min-width: 1300px) {
+                margin: 80px 180px 0 180px;
             }
+           
         }
 
         .product-info {
-            padding: 20px;
+            padding: 0 20px 20px 20px;
 
-            @media(min-width: 655px) {
-                width: 655px;
+            @media(min-width: 600px) {
+                width: 80%;
                 margin: auto;
             }
 
             @media(min-width: 1024px) {
-                width: 50%;
-            }
+                width: 100%;
+                margin-left: 80px;
+            }       
         }
 
         .brand {

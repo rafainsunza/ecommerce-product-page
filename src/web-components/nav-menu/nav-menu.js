@@ -25,18 +25,16 @@ template.innerHTML = `
             left: 0;    
             z-index: 3;
 
-            height: 100vh;
+            height: 100%;
             width: 70%;
             padding: 30px;
 
             font-weight: 700;
             background-color: hsl(0, 0%, 100%);
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 position: static;
                 display: flex;
-
-                height: 100%;
                 width: auto;
                 padding: 0;
             }
@@ -46,7 +44,7 @@ template.innerHTML = `
             display: flex;
             flex-direction: column;
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 flex-direction: row;
                 margin-left: 40px;
             }
@@ -56,13 +54,10 @@ template.innerHTML = `
             color: hsl(220, 13%, 13%);
             padding: 15px 0;
 
-            @media(min-width: 900px) {
-                display: flex;
-                align-items: center;
-
+            @media(min-width: 1024px) {
+                align-content: center;
                 padding: 0 15px;
 
-                height: 100%;
                 border-bottom: 3px solid hsl(0, 0%, 100%);
 
                 font-weight: 400;
@@ -71,7 +66,7 @@ template.innerHTML = `
         }
 
         .nav-link:hover {
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 color: hsl(220, 13%, 13%);
                 border-bottom: 3px solid hsl(26, 100%, 55%);
             }
@@ -80,7 +75,7 @@ template.innerHTML = `
         .open-nav-btn {
             display: flex;
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 display: none;
             }
         }
@@ -88,12 +83,12 @@ template.innerHTML = `
         .close-nav-btn {
             margin-bottom: 30px;
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 display: none;
             }
         }
     
-        @media(max-width: 900px) {
+        @media(max-width: 1024px) {
             .hidden {
                 display: none;
             }
