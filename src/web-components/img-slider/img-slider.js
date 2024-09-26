@@ -40,11 +40,7 @@ template.innerHTML = `
                 gap: 20px;
                 grid-auto-columns: calc(50% - 10px); 
             }
-
-            @media(min-width: 800px) {
-                grid-auto-columns: calc(33.3% - 5px);
-            }
-
+          
             @media(min-width: 1024px) {
                 grid-auto-columns: 100%;
                 gap: 0;
@@ -126,6 +122,10 @@ template.innerHTML = `
             }
        }
 
+       .hidden {
+            display: none;
+       }
+
     </style>
     ${html}
 `;
@@ -138,81 +138,85 @@ class ImgSlider extends HTMLElement {
 
         this.slidesContainer = this.shadowRoot.querySelector('.slides');
         this.slideSlot = this.shadowRoot.querySelector('slot[name="slide"]');
-
         this.thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails');
-        this.thumbnails = this.shadowRoot.querySelector('slot[name="thumbnail"]').assignedElements();
-
-        this.images = this.slideSlot.assignedElements();
-
-        this.thumbnails[0].classList.add('active');
 
         this.previousBtn = this.shadowRoot.querySelector('.previous');
         this.nextBtn = this.shadowRoot.querySelector('.next');
 
+        this.images = this.slideSlot.assignedElements();
+        this.thumbnails = this.shadowRoot.querySelector('slot[name="thumbnail"]').assignedElements();
+
+        this.activeImageIndex = 0;
+        this.maxImageIndex = this.images.length - 1;
+        this.thumbnails[this.activeImageIndex].classList.add('active');
+        this.hasResizedOnce = false;
+
         this.previousBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.nextBtn.addEventListener('click', (e) => this.navigateImages(e));
-        // this.slidesContainer.addEventListener('scroll', (e) => this.thumbnailNavigation(e));
-        // this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
+        this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
 
-        // this.getFirstVisibleImg();
-
+        window.addEventListener('resize', () => this.correctDesktopImageAfterResize());
     }
 
-    //  keep the index way but rewrite it to scroll to an image index
-    navigateImages(e) {
-        const clickedBtn = e.target.closest('custom-button')
-        const scrollPosition = this.slidesContainer.scrollLeft;
+    // scroll to nearest index position when resized?
 
-        if (clickedBtn === this.nextBtn) {
-            this.slidesContainer.scrollTo({ left: scrollPosition + 320, behavior: 'smooth' });
-        }
+    correctDesktopImageAfterResize() {
+        if (window.innerWidth >= 1024 && !this.hasResizedOnce) {
+            const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+            const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === this.activeImageIndex);
 
-        if (clickedBtn === this.previousBtn) {
-            this.slidesContainer.scrollTo({ left: scrollPosition - 320, behavior: 'smooth' });
+            this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
+            this.hasResizedOnce = true;
+        } else if (window.innerWidth < 1024) {
+            this.hasResizedOnce = false;
         }
     }
 
-    thumbnailNavigation(e) {
-        const currentScrollPosition = this.slidesContainer.scrollLeft;
-        let currentImageIndex = Math.floor(currentScrollPosition / (this.images.length * 100));
-        let activeImage = this.images[currentImageIndex];
-
-        // get the active image and find the corresponding thumbnail
-        let activeThumbnail = this.thumbnails.find((thumbnail) => {
-            return thumbnail.classList.contains(activeImage.classList[1]);
-        });
-        // reset active thumnail
-        this.thumbnails.forEach((thumbnail) => { thumbnail.classList.remove('active') });
-        // set the new active thumbnail
-        activeThumbnail.classList.add('active');
-
-
-        // set the scrollposition of each image and pair it with their index
+    getScrollPositionAndIndex() {
+        const thumbnailIndexes = [];
         const imagePositionsAndIndexes = [];
         let imageScrollPosition = 0;
         this.images.forEach((image, index) => {
             imagePositionsAndIndexes.push({ scroll_position: imageScrollPosition, index: index });
             imageScrollPosition = imageScrollPosition + (this.slidesContainer.scrollWidth / this.images.length);
-        })
+        });
 
-        // get the clicked thumbnail index so the corresponding full size image can be displayed using the image positions
-        if (e.target.classList.contains('thumbnail')) {
-            const clickedThumbnail = e.target.classList[1];
+        return imagePositionsAndIndexes
+    }
 
-            if (clickedThumbnail === activeImage) {
-                return
-            } else {
-                const thumbnailIndex = Number(clickedThumbnail.slice(8)) - 1;
-                const positionToScrollTo = imagePositionsAndIndexes.find(imagePosition => imagePosition.index === thumbnailIndex)?.scroll_position;
-                const imageIndex = imagePositionsAndIndexes.find(imagePosition => imagePosition.index === thumbnailIndex)?.index;
+    navigateImages(e) {
+        const clickedBtn = e.target.closest('custom-button');
+        const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
 
-                // set the new active thumbnail
-                activeThumbnail = this.thumbnails[thumbnailIndex];
-                this.thumbnails.forEach((thumbnail) => { thumbnail.classList.remove('active') });
-                activeThumbnail.classList.add('active');
+        if (clickedBtn === this.nextBtn) {
+            this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
+            const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === this.activeImageIndex);
 
-                // scroll to full size image position
-                this.slidesContainer.scrollTo({ left: positionToScrollTo, behavior: 'smooth' })
+            this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
+        }
+
+        if (clickedBtn === this.previousBtn) {
+            this.activeImageIndex > 0 ? this.activeImageIndex-- : null;
+            const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === this.activeImageIndex);
+
+            this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
+        }
+    }
+
+    thumbnailNavigation(e) {
+        const clickedThumbnail = e.target.closest('.thumbnail');
+
+        if (clickedThumbnail !== null) {
+            const clickedThumbnailIndex = this.thumbnails.indexOf(clickedThumbnail);
+            const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+            const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === clickedThumbnailIndex);
+
+            this.thumbnails.forEach((thumbnail) => thumbnail.classList.remove('active'));
+
+            if (clickedThumbnailIndex !== this.activeImageIndex) {
+                this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
+                this.activeImageIndex = newImageData.index;
+                clickedThumbnail.classList.add('active');
             }
 
         }
