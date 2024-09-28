@@ -117,7 +117,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        button {\n            box-sizing: border-box;\n            border: none;\n            padding: 0;\n            background-color: inherit;\n            font-weight: inherit;\n            font-family: inherit;\n            font-size: inherit;\n            display: inherit;\n        }\n\n        button:hover {\n            cursor: pointer;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_custom_button_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        button {\n            box-sizing: border-box;\n            border: none;\n            padding: 0;\n            background-color: inherit;\n            font-weight: inherit;\n            font-family: inherit;\n            font-size: inherit;\n            display: inherit;\n        }\n\n        button:hover {\n            cursor: pointer;\n        }\n\n        .hidden {\n            display: none;\n        }\n    </style>\n\n    ".concat(_custom_button_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var CustomButton = /*#__PURE__*/function (_HTMLElement) {
   function CustomButton() {
     var _this;
@@ -166,7 +166,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 400px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n\n            @media(min-width: 800px) {\n                grid-auto-columns: calc(33.3% - 5px);\n            }\n\n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n     \n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n       @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: block;\n\n                width: 80px;\n                height: 80px;\n                border-radius: 10px;\n            }\n\n            ::slotted([slot=\"thumbnail\"]:hover) {\n                opacity: 50%;\n                cursor: pointer;\n            }\n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 400px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n          \n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n     \n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n       @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: block;\n\n                width: 80px;\n                height: 80px;\n                border-radius: 10px;\n            }\n\n            ::slotted([slot=\"thumbnail\"]:hover) {\n                opacity: 50%;\n                cursor: pointer;\n            }\n       }\n\n       .hidden {\n            display: none;\n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   function ImgSlider() {
     var _this;
@@ -178,65 +178,63 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
     _this.slidesContainer = _this.shadowRoot.querySelector('.slides');
     _this.slideSlot = _this.shadowRoot.querySelector('slot[name="slide"]');
+    _this.thumbnailSlot = _this.shadowRoot.querySelector('slot[name="thumbnail"]');
     _this.thumbnailsContainer = _this.shadowRoot.querySelector('.thumbnails');
-    _this.thumbnails = _this.shadowRoot.querySelector('slot[name="thumbnail"]').assignedElements();
-    _this.images = _this.slideSlot.assignedElements();
-    _this.thumbnails[0].classList.add('active');
     _this.previousBtn = _this.shadowRoot.querySelector('.previous');
     _this.nextBtn = _this.shadowRoot.querySelector('.next');
+    _this.images = _this.slideSlot.assignedElements();
+    _this.thumbnails = _this.thumbnailSlot.assignedElements();
+    _this.activeImageIndex = 0;
+    _this.maxImageIndex = _this.images.length - 1;
+    _this.thumbnails[_this.activeImageIndex].classList.add('active');
+    _this.hasResizedOnce = false;
     _this.previousBtn.addEventListener('click', function (e) {
       return _this.navigateImages(e);
     });
     _this.nextBtn.addEventListener('click', function (e) {
       return _this.navigateImages(e);
     });
-    // this.slidesContainer.addEventListener('scroll', (e) => this.thumbnailNavigation(e));
-    // this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
+    _this.thumbnailsContainer.addEventListener('click', function (e) {
+      return _this.thumbnailNavigation(e);
+    });
+    window.addEventListener('resize', function () {
+      return _this.correctDesktopImageAfterResize();
+    });
 
-    // this.getFirstVisibleImg();
+    // const lightbox = this.shadowRoot.querySelector('light-box');
+
+    // this.slideSlot.addEventListener('slotchange', () => {
+    //     lightbox.setLightboxImages(this.images);
+    // })
+    // this.thumbnailSlot.addEventListener('slotchange', () => {
+    //     lightbox.setLightBoxThumbnails(this.thumbnails);
+    // })
     return _this;
   }
-
-  //  keep the index way but rewrite it to scroll to an image index
   _inherits(ImgSlider, _HTMLElement);
   return _createClass(ImgSlider, [{
-    key: "navigateImages",
-    value: function navigateImages(e) {
-      var clickedBtn = e.target.closest('custom-button');
-      var scrollPosition = this.slidesContainer.scrollLeft;
-      if (clickedBtn === this.nextBtn) {
+    key: "correctDesktopImageAfterResize",
+    value: function correctDesktopImageAfterResize() {
+      var _this2 = this;
+      if (window.innerWidth >= 1024 && !this.hasResizedOnce) {
+        var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+        var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === _this2.activeImageIndex;
+        });
         this.slidesContainer.scrollTo({
-          left: scrollPosition + 320,
+          left: newImageData.scroll_position,
           behavior: 'smooth'
         });
-      }
-      if (clickedBtn === this.previousBtn) {
-        this.slidesContainer.scrollTo({
-          left: scrollPosition - 320,
-          behavior: 'smooth'
-        });
+        this.hasResizedOnce = true;
+      } else if (window.innerWidth < 1024) {
+        this.hasResizedOnce = false;
       }
     }
   }, {
-    key: "thumbnailNavigation",
-    value: function thumbnailNavigation(e) {
-      var _this2 = this;
-      var currentScrollPosition = this.slidesContainer.scrollLeft;
-      var currentImageIndex = Math.floor(currentScrollPosition / (this.images.length * 100));
-      var activeImage = this.images[currentImageIndex];
-
-      // get the active image and find the corresponding thumbnail
-      var activeThumbnail = this.thumbnails.find(function (thumbnail) {
-        return thumbnail.classList.contains(activeImage.classList[1]);
-      });
-      // reset active thumnail
-      this.thumbnails.forEach(function (thumbnail) {
-        thumbnail.classList.remove('active');
-      });
-      // set the new active thumbnail
-      activeThumbnail.classList.add('active');
-
-      // set the scrollposition of each image and pair it with their index
+    key: "getScrollPositionAndIndex",
+    value: function getScrollPositionAndIndex() {
+      var _this3 = this;
+      var thumbnailIndexes = [];
       var imagePositionsAndIndexes = [];
       var imageScrollPosition = 0;
       this.images.forEach(function (image, index) {
@@ -244,36 +242,57 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
           scroll_position: imageScrollPosition,
           index: index
         });
-        imageScrollPosition = imageScrollPosition + _this2.slidesContainer.scrollWidth / _this2.images.length;
+        imageScrollPosition = imageScrollPosition + _this3.slidesContainer.scrollWidth / _this3.images.length;
       });
-
-      // get the clicked thumbnail index so the corresponding full size image can be displayed using the image positions
-      if (e.target.classList.contains('thumbnail')) {
-        var clickedThumbnail = e.target.classList[1];
-        if (clickedThumbnail === activeImage) {
-          return;
-        } else {
-          var _imagePositionsAndInd, _imagePositionsAndInd2;
-          var thumbnailIndex = Number(clickedThumbnail.slice(8)) - 1;
-          var positionToScrollTo = (_imagePositionsAndInd = imagePositionsAndIndexes.find(function (imagePosition) {
-            return imagePosition.index === thumbnailIndex;
-          })) === null || _imagePositionsAndInd === void 0 ? void 0 : _imagePositionsAndInd.scroll_position;
-          var imageIndex = (_imagePositionsAndInd2 = imagePositionsAndIndexes.find(function (imagePosition) {
-            return imagePosition.index === thumbnailIndex;
-          })) === null || _imagePositionsAndInd2 === void 0 ? void 0 : _imagePositionsAndInd2.index;
-
-          // set the new active thumbnail
-          activeThumbnail = this.thumbnails[thumbnailIndex];
-          this.thumbnails.forEach(function (thumbnail) {
-            thumbnail.classList.remove('active');
-          });
-          activeThumbnail.classList.add('active');
-
-          // scroll to full size image position
+      return imagePositionsAndIndexes;
+    }
+  }, {
+    key: "navigateImages",
+    value: function navigateImages(e) {
+      var _this4 = this;
+      var clickedBtn = e.target.closest('custom-button');
+      var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+      if (clickedBtn === this.nextBtn) {
+        this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
+        var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === _this4.activeImageIndex;
+        });
+        this.slidesContainer.scrollTo({
+          left: newImageData.scroll_position,
+          behavior: 'smooth'
+        });
+      }
+      if (clickedBtn === this.previousBtn) {
+        this.activeImageIndex > 0 ? this.activeImageIndex-- : null;
+        var _newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === _this4.activeImageIndex;
+        });
+        this.slidesContainer.scrollTo({
+          left: _newImageData.scroll_position,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, {
+    key: "thumbnailNavigation",
+    value: function thumbnailNavigation(e) {
+      var clickedThumbnail = e.target.closest('.thumbnail');
+      if (clickedThumbnail !== null) {
+        var clickedThumbnailIndex = this.thumbnails.indexOf(clickedThumbnail);
+        var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+        var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === clickedThumbnailIndex;
+        });
+        this.thumbnails.forEach(function (thumbnail) {
+          return thumbnail.classList.remove('active');
+        });
+        if (clickedThumbnailIndex !== this.activeImageIndex) {
           this.slidesContainer.scrollTo({
-            left: positionToScrollTo,
+            left: newImageData.scroll_position,
             behavior: 'smooth'
           });
+          this.activeImageIndex = newImageData.index;
+          clickedThumbnail.classList.add('active');
         }
       }
     }
@@ -1126,6 +1145,8 @@ var code = `<div class="slider">
     <slot name="thumbnail"></slot>
   </div>
 </div>
+
+<light-box></light-box>
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -2029,8 +2050,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { LightBox } from "./web-components/light-box/light-box.js";
+
 
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.311b96064f447b39e02c.js.map
+//# sourceMappingURL=bundle.38d9da67171ff657a6fe.js.map

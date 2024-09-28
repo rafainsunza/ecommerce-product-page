@@ -138,13 +138,14 @@ class ImgSlider extends HTMLElement {
 
         this.slidesContainer = this.shadowRoot.querySelector('.slides');
         this.slideSlot = this.shadowRoot.querySelector('slot[name="slide"]');
+        this.thumbnailSlot = this.shadowRoot.querySelector('slot[name="thumbnail"]');
         this.thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails');
 
         this.previousBtn = this.shadowRoot.querySelector('.previous');
         this.nextBtn = this.shadowRoot.querySelector('.next');
 
         this.images = this.slideSlot.assignedElements();
-        this.thumbnails = this.shadowRoot.querySelector('slot[name="thumbnail"]').assignedElements();
+        this.thumbnails = this.thumbnailSlot.assignedElements();
 
         this.activeImageIndex = 0;
         this.maxImageIndex = this.images.length - 1;
@@ -154,11 +155,19 @@ class ImgSlider extends HTMLElement {
         this.previousBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.nextBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
-
         window.addEventListener('resize', () => this.correctDesktopImageAfterResize());
-    }
 
-    // scroll to nearest index position when resized?
+        // const lightbox = this.shadowRoot.querySelector('light-box');
+
+
+        // this.slideSlot.addEventListener('slotchange', () => {
+        //     lightbox.setLightboxImages(this.images);
+        // })
+        // this.thumbnailSlot.addEventListener('slotchange', () => {
+        //     lightbox.setLightBoxThumbnails(this.thumbnails);
+        // })
+
+    }
 
     correctDesktopImageAfterResize() {
         if (window.innerWidth >= 1024 && !this.hasResizedOnce) {
