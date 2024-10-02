@@ -1,8 +1,5 @@
 import html from './product-card.html';
 
-import lessIcon from '../../assets/icon-minus.svg';
-import moreIcon from '../../assets/icon-plus.svg';
-
 import { product_data } from '../../data/product-data.js';
 import { addToCart } from '../../modules/cart-module.js'
 
@@ -23,45 +20,35 @@ template.innerHTML = `
         }
         /* component reset */
 
-        .images-container {
-            position: relative;
-            height: 300px;
+        .card-container {
+            @media(min-width: 1024px) {
+                max-width: 85%;
+                margin: 80px auto 0 auto;
+            }
+
+            @media(min-width: 1400px) {
+                max-width: 75%;
+            }
         }
 
-        .full-size-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
+        .card {
+            @media(min-width: 1024px) {
+                display: flex;
+            }
         }
 
-        .previous, .next {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .product-info {
+            padding: 0 20px 20px 20px;
 
-            position: absolute;
-            top: 50%;
+            @media(min-width: 600px) {
+                width: 80%;
+                margin: auto;
+            }
 
-            background-color: hsl(0, 0%, 100%);
-            width: 35px;
-            height: 35px;
-            border-radius: 35px;
-        }
-
-        .previous {
-            left: 20px;
-        }
-
-        .previous:hover {
-            cursor: pointer;
-        }
-
-        .next {
-            right: 20px;
-        }
-
-        .next:hover {
-            cursor: pointer;
+            @media(min-width: 1024px) {
+                width: 100%;
+                margin-left: 80px;
+            }       
         }
 
         .brand {
@@ -78,6 +65,11 @@ template.innerHTML = `
             line-height: 30px;
 
             padding: 20px 0;
+
+            @media(min-width: 1024px) {
+                font-size: 36px;
+                line-height: 38px;
+            }
         }
 
         .description {
@@ -85,23 +77,33 @@ template.innerHTML = `
             line-height: 24px;
             margin-bottom: 15px;
         }
-
-        .product-info {
-            padding: 20px;
-        }
-
+      
         .price {
             display: flex;
-
             padding: 20px 0;
+
+            @media(min-width: 1024px) {
+                flex-wrap: wrap;
+            }
         }
 
+        .price-before-container {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            
+            @media(min-width: 1024px) {
+                justify-content: flex-start;    
+                margin-top: 15px;    
+            }
+        }
+   
         .currency:first-of-type, .price-after {
             font-weight: 700;
-            font-size: 28px;    
+            font-size: 28px;  
         }
 
-        .discount {
+        .discount { 
             align-content: center;
 
             font-weight: 700;
@@ -115,14 +117,17 @@ template.innerHTML = `
 
         .currency:nth-last-of-type(2), .price-before {
             font-weight: 700;
+            font-size: inherit;
             color: hsl(219, 9%, 45%);
             text-decoration: line-through;
             text-decoration-color: hsl(219, 9%, 45%);
-            align-content: center;
         }
 
-        .currency:nth-last-of-type(2) {
-            margin-left: auto;
+        .actions-container {
+            @media(min-width: 1024px) {
+                display: flex;
+                justify-content: space-between;
+            }
         }
 
         .quantity-container {
@@ -134,6 +139,17 @@ template.innerHTML = `
 
             background-color: hsl(223, 64%, 98%);
             border-radius: 7.5px;
+
+            @media(min-width: 1024px) {
+                width: 40%;
+            }
+        }
+
+        .add-to-cart-container {
+            @media(min-width: 1024px) {
+                width: 50%;
+            }
+
         }
 
         .less, .more {
@@ -144,8 +160,17 @@ template.innerHTML = `
             width: 15px;  
         }
 
-        .less:hover, .more:hover {
+       .less:hover, .more:hover{
             cursor: pointer;
+        }
+
+        .less-icon, .more-icon {
+            color: hsl(26, 100%, 55%);
+        }
+
+        .less:hover .less-icon,
+        .more:hover .more-icon {
+            color: hsla(26, 100%, 55%, 0.5);
         }
 
         .quantity {
@@ -167,8 +192,9 @@ template.innerHTML = `
 
         .add-to-cart:hover {
             cursor: pointer;
+            opacity: 80%;
         }
-     
+
         .cart-icon {
             margin-right: 20px;
             font-size: 15px;
@@ -177,6 +203,12 @@ template.innerHTML = `
         .hidden {
             display: none;
         }
+
+        .active {
+            border: 3px solid hsl(26, 100%, 55%);
+            opacity: 70%;
+        }
+
 
     </style>
 
@@ -192,16 +224,8 @@ class ProductCard extends HTMLElement {
         // handle full size images
         const productId = Number(this.getAttribute('product-id'));
         const product = product_data.find(product => product.id === productId);
-        const fullSizeImages = product.images.full_size;
-        const thumbnails = product.images.thumbnails;
-
-        this.imageCount = product.images.full_size.length;
-        this.activeImage = this.imageCount - this.imageCount;
-
-        this.setInitialImages(fullSizeImages, thumbnails, this.activeImage);
-
-        this.shadowRoot.querySelector('.previous').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
-        this.shadowRoot.querySelector('.next').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
+        this.fullSizeImages = product.images.full_size;
+        this.thumbnails = product.images.thumbnails;
 
         // handle product info
         const info = this.shadowRoot.querySelector('.info');
@@ -217,8 +241,12 @@ class ProductCard extends HTMLElement {
             <span class="currency">${product.currency}</span>
             <span class="price-after">${product.price.toFixed(2)}</span>
             <span class="discount">${product.discount_percentage}%</span>
-            <span class="currency">${product.currency}</span>
-            <span class="price-before">${product.price_before.toFixed(2)}</span>
+
+            <div class="price-before-container">
+                <span class="currency">${product.currency}</span>
+                <span class="price-before">${product.price_before.toFixed(2)}</span>
+            </div>
+              
         `;
 
         // handle add to cart
@@ -232,62 +260,25 @@ class ProductCard extends HTMLElement {
 
     }
 
-    setInitialImages(fullSizeImages, thumbnails) {
+    setInitialImages() {
         const fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
         const thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails-container');
 
-        const fullSizeImage = fullSizeImages[this.activeImage];
+        const fullSizeImage = this.fullSizeImages[this.activeImage];
 
         const fullSizeImgElement = document.createElement('img');
         fullSizeImgElement.src = fullSizeImage;
         fullSizeImgElement.classList.add('full-size-image');
         fullSizeImageContainer.append(fullSizeImgElement);
 
-        thumbnails.forEach((thumbnail) => {
+        this.thumbnails.forEach((thumbnail) => {
             const img = document.createElement('img');
             img.src = thumbnail;
             img.classList.add('hidden');
 
             thumbnailsContainer.appendChild(img);
         });
-    }
 
-    navigateImages(e, fullSizeImages) {
-        const clickedBtn = e.target.closest('custom-button');
-        const fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
-
-        fullSizeImageContainer.innerHTML = '';
-        const img = document.createElement('img');
-        img.classList.add('full-size-image');
-
-
-        if (clickedBtn.classList.contains('previous') && this.activeImage >= 1) {
-            this.activeImage--;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        } else if (clickedBtn.classList.contains('previous') && this.activeImage === 0) {
-            this.activeImage = this.imageCount - 1;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        }
-
-        if (clickedBtn.classList.contains('next') && this.activeImage <= this.imageCount - 2) {
-            this.activeImage++;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        } else if (clickedBtn.classList.contains('next') && this.activeImage === this.imageCount - 1) {
-            this.activeImage = this.imageCount - this.imageCount;
-
-            img.src = fullSizeImages[this.activeImage];
-            fullSizeImageContainer.append(img);
-
-        }
     }
 
     handleCartAdd(product) {
@@ -301,10 +292,6 @@ class ProductCard extends HTMLElement {
                 composed: true
             }))
         }
-
-
-
-
     }
 
     handleCartQuantity(e) {

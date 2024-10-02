@@ -21,7 +21,7 @@ const product_data = [
                 image_product_1_thumbnail,
                 image_product_2_thumbnail,
                 image_product_3_thumbnail,
-                image_product_4_thumbnail
+                image_product_4_thumbnail,
             ],
             full_size: [
                 image_product_1,
@@ -44,7 +44,7 @@ const product_data = [
                 image_product_1_thumbnail,
                 image_product_2_thumbnail,
                 image_product_3_thumbnail,
-                image_product_4_thumbnail
+                image_product_4_thumbnail,
             ],
             full_size: [
                 image_product_1,

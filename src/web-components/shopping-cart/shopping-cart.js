@@ -43,11 +43,11 @@ template.innerHTML = `
             background-color: hsl(0, 0%, 100%);
             color: hsl(220, 13%, 13%);
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 transform: none;
                 top: 90%;
                 left: auto;
-                right: 50px;
+                right: -5%;
             }
         }
 
@@ -147,6 +147,14 @@ template.innerHTML = `
 
         .cart-btn {
             position: relative;
+        }
+
+        .cart-icon {
+            color: hsl(219, 9%, 45%)
+        }
+
+        .cart-btn:hover .cart-icon {
+            color: hsl(220, 13%, 13%);
         }
 
         .cart-total {

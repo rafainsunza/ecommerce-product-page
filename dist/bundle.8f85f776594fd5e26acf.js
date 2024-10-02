@@ -149,11 +149,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _img_slider_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./img-slider.html */ "./src/web-components/img-slider/img-slider.html");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -166,7 +166,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 400px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n          \n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n     \n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n       @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: block;\n\n                width: 80px;\n                height: 80px;\n                border-radius: 10px;\n            }\n\n            ::slotted([slot=\"thumbnail\"]:hover) {\n                opacity: 50%;\n                cursor: pointer;\n            }\n       }\n\n       .hidden {\n            display: none;\n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   function ImgSlider() {
     var _this;
@@ -176,19 +176,165 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
-    var slides = _this.querySelectorAll('[slot="slide"]');
-    var thumbnails = _this.querySelectorAll('[slot="thumbnail"]');
-    slides.forEach(function (slide) {
-      slide.classList.add('hidden');
-      slide.classList.add('slide');
+    _this.slidesContainer = _this.shadowRoot.querySelector('.slides');
+    _this.slideSlot = _this.shadowRoot.querySelector('slot[name="slide"]');
+    _this.thumbnailSlot = _this.shadowRoot.querySelector('slot[name="thumbnail"]');
+    _this.thumbnailsContainer = _this.shadowRoot.querySelector('.thumbnails');
+    _this.previousBtn = _this.shadowRoot.querySelector('.previous');
+    _this.nextBtn = _this.shadowRoot.querySelector('.next');
+    _this.images = _this.slideSlot.assignedElements();
+    _this.thumbnails = _this.thumbnailSlot.assignedElements();
+    _this.imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
+    _this.activeImageIndex = 0;
+    _this.maxImageIndex = _this.images.length - 1;
+    _this.thumbnails[_this.activeImageIndex].classList.add('active');
+    _this.hasResizedOnce = false;
+    _this.toggleNavigationButtons(_this.imagesInView);
+    var scrollStartTime = 0;
+    var scrollEndTime = 0;
+    var scrollingTimeout;
+    _this.previousBtn.addEventListener('click', function (e) {
+      return _this.navigateImages(e);
     });
-    thumbnails.forEach(function (thumbnail) {
-      thumbnail.classList.add('hidden');
+    _this.nextBtn.addEventListener('click', function (e) {
+      return _this.navigateImages(e);
     });
+    _this.slidesContainer.addEventListener('scroll', function () {
+      clearTimeout(_this.scrollTimeout);
+      _this.scrollTimeout = setTimeout(function () {
+        var imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
+        _this.toggleNavigationButtons(imagesInView);
+      }, 100);
+    });
+    _this.thumbnailsContainer.addEventListener('click', function (e) {
+      return _this.thumbnailNavigation(e);
+    });
+    window.addEventListener('resize', function () {
+      return _this.correctDesktopImageAfterResize();
+    });
+
+    // const lightbox = this.shadowRoot.querySelector('light-box');
+
+    // this.slideSlot.addEventListener('slotchange', () => {
+    //     lightbox.setLightboxImages(this.images);
+    // })
+    // this.thumbnailSlot.addEventListener('slotchange', () => {
+    //     lightbox.setLightBoxThumbnails(this.thumbnails);
+    // })
     return _this;
   }
   _inherits(ImgSlider, _HTMLElement);
-  return _createClass(ImgSlider);
+  return _createClass(ImgSlider, [{
+    key: "toggleNavigationButtons",
+    value: function toggleNavigationButtons(imagesInView) {
+      var lastImage = this.images[this.images.length - 1];
+      var firstImage = this.images[0];
+      var lastImageInView = imagesInView[imagesInView.length - 1];
+      var firstImageInView = imagesInView[0];
+      lastImage === lastImageInView ? this.nextBtn.classList.add('hidden') : this.nextBtn.classList.remove('hidden');
+      firstImage === firstImageInView ? this.previousBtn.classList.add('hidden') : this.previousBtn.classList.remove('hidden');
+    }
+  }, {
+    key: "checkElementsInView",
+    value: function checkElementsInView(elements, container) {
+      var elementsInView = [];
+      var containerBounds = container.getBoundingClientRect();
+      elements.forEach(function (element) {
+        var elementBounds = element.getBoundingClientRect();
+        elementBounds.left >= containerBounds.left - 1 && elementBounds.right <= containerBounds.right + 1 ? elementsInView.push(element) : null;
+      });
+      return elementsInView;
+    }
+  }, {
+    key: "correctDesktopImageAfterResize",
+    value: function correctDesktopImageAfterResize() {
+      var _this2 = this;
+      if (window.innerWidth >= 1024 && !this.hasResizedOnce) {
+        var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+        var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === _this2.activeImageIndex;
+        });
+        this.slidesContainer.scrollTo({
+          left: newImageData.scroll_position,
+          behavior: 'smooth'
+        });
+        this.thumbnails.forEach(function (thumbnail) {
+          return thumbnail.classList.remove('active');
+        });
+        this.thumbnails[newImageData.index].classList.add('active');
+        this.hasResizedOnce = true;
+      } else if (window.innerWidth < 1024) {
+        this.hasResizedOnce = false;
+      }
+    }
+  }, {
+    key: "getScrollPositionAndIndex",
+    value: function getScrollPositionAndIndex() {
+      var _this3 = this;
+      var thumbnailIndexes = [];
+      var imagePositionsAndIndexes = [];
+      var imageScrollPosition = 0;
+      this.images.forEach(function (image, index) {
+        imagePositionsAndIndexes.push({
+          scroll_position: imageScrollPosition,
+          index: index
+        });
+        imageScrollPosition = imageScrollPosition + _this3.slidesContainer.scrollWidth / _this3.images.length;
+      });
+      return imagePositionsAndIndexes;
+    }
+  }, {
+    key: "navigateImages",
+    value: function navigateImages(e) {
+      var _this4 = this;
+      var clickedBtn = e.target.closest('custom-button');
+      var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+      var imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
+      if (clickedBtn === this.nextBtn) {
+        this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
+        var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === _this4.activeImageIndex;
+        });
+        this.slidesContainer.scrollTo({
+          left: newImageData.scroll_position,
+          behavior: 'smooth'
+        });
+      }
+      if (clickedBtn === this.previousBtn) {
+        this.activeImageIndex > 0 ? this.activeImageIndex-- : null;
+        var _newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === _this4.activeImageIndex;
+        });
+        this.slidesContainer.scrollTo({
+          left: _newImageData.scroll_position,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, {
+    key: "thumbnailNavigation",
+    value: function thumbnailNavigation(e) {
+      var clickedThumbnail = e.target.closest('.thumbnail');
+      if (clickedThumbnail !== null) {
+        var clickedThumbnailIndex = this.thumbnails.indexOf(clickedThumbnail);
+        var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+        var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
+          return imageData.index === clickedThumbnailIndex;
+        });
+        this.thumbnails.forEach(function (thumbnail) {
+          return thumbnail.classList.remove('active');
+        });
+        if (clickedThumbnailIndex !== this.activeImageIndex) {
+          this.slidesContainer.scrollTo({
+            left: newImageData.scroll_position,
+            behavior: 'smooth'
+          });
+          this.activeImageIndex = newImageData.index;
+          clickedThumbnail.classList.add('active');
+        }
+      }
+    }
+  }]);
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('img-slider', ImgSlider);
 
@@ -208,11 +354,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nav_menu_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nav-menu.html */ "./src/web-components/nav-menu/nav-menu.html");
 /* harmony import */ var _menu_items_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu-items.json */ "./src/web-components/nav-menu/menu-items.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -226,7 +372,7 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n     \n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n        }\n        /* component reset */\n\n\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 3;\n\n            height: 100vh;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n\n            @media(min-width: 900px) {\n                position: static;\n                display: flex;\n\n                height: 100%;\n                width: auto;\n                padding: 0;\n            }\n        }          \n\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n\n            @media(min-width: 900px) {\n                flex-direction: row;\n                margin-left: 40px;\n            }\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n            padding: 15px 0;\n\n            @media(min-width: 900px) {\n                display: flex;\n                align-items: center;\n\n                padding: 0 15px;\n\n                height: 100%;\n                border-bottom: 3px solid hsl(0, 0%, 100%);\n\n                font-weight: 400;\n                color: hsl(219, 9%, 45%);\n            }\n        }\n\n        .nav-link:hover {\n            @media(min-width: 900px) {\n                color: hsl(220, 13%, 13%);\n                border-bottom: 3px solid hsl(26, 100%, 55%);\n            }\n        }\n\n        .open-nav-btn {\n            display: flex;\n\n            @media(min-width: 900px) {\n                display: none;\n            }\n        }\n\n        .close-nav-btn {\n            margin-bottom: 30px;\n\n            @media(min-width: 900px) {\n                display: none;\n            }\n        }\n    \n        @media(max-width: 900px) {\n            .hidden {\n                display: none;\n            }\n        }\n       \n    </style>\n\n    ".concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n     \n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n        }\n        /* component reset */\n\n\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 3;\n\n            height: 100%;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n          \n            @media(min-width: 1024px) {\n                position: static;\n                display: flex;\n                width: auto;\n                padding: 0;   \n            }\n        }          \n\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n\n            @media(min-width: 1024px) {\n                flex-direction: row;\n                margin-left: 40px;\n            }\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n            padding: 15px 0;\n\n            @media(min-width: 1024px) {\n                align-content: center;\n                padding: 0 15px;\n                border-bottom: 3px solid hsl(0, 0%, 100%);\n                font-weight: 400;\n                color: hsl(219, 9%, 45%);\n            }\n        }\n\n        .nav-link:hover {\n            @media(min-width: 1024px) {\n                color: hsl(220, 13%, 13%);\n                border-bottom: 3px solid hsl(26, 100%, 55%);\n            }\n        }\n\n        .open-nav-btn {\n            display: flex;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n\n        }\n\n        .close-nav-btn {\n            margin-bottom: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .hidden {\n            display: none;\n        }\n     \n    </style>\n\n    ".concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
     var _this;
@@ -243,27 +389,40 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
       link.classList.add('nav-link');
       _this.shadowRoot.querySelector('.nav-items').append(link);
     });
-    var openNavBtn = _this.shadowRoot.querySelector('.open-nav-btn');
-    var closeNavBtn = _this.shadowRoot.querySelector('.close-nav-btn');
-    var navMenuContainer = _this.shadowRoot.querySelector('.nav-menu-container');
-    var overlay = document.querySelector('screen-overlay');
-    function openCloseNavMenu(e) {
-      var clickedBtn = e.target.closest('custom-button');
-      clickedBtn.classList.contains('open-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
-      clickedBtn.classList.contains('close-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
-    }
-    closeNavBtn.addEventListener('click', openCloseNavMenu);
-    openNavBtn.addEventListener('click', openCloseNavMenu);
+    _this.openNavBtn = _this.shadowRoot.querySelector('.open-nav-btn');
+    _this.closeNavBtn = _this.shadowRoot.querySelector('.close-nav-btn');
+    _this.navMenuContainer = _this.shadowRoot.querySelector('.nav-menu-container');
+    _this.overlay = document.querySelector('screen-overlay');
+    _this.menuNeedsHiding = window.innerWidth < 1024;
+    !_this.menuNeedsHiding ? _this.navMenuContainer.classList.remove('hidden') : null;
+    _this.closeNavBtn.addEventListener('click', function (e) {
+      return _this.openCloseNavMenu(e);
+    });
+    _this.openNavBtn.addEventListener('click', function (e) {
+      return _this.openCloseNavMenu(e);
+    });
     window.addEventListener('resize', function () {
-      if (window.innerWidth >= 900) {
-        overlay.hideOverlay();
-        navMenuContainer.classList.add('hidden');
+      if (window.innerWidth >= 1024) {
+        _this.overlay.hideOverlay();
+        _this.navMenuContainer.classList.remove('hidden');
+        _this.menuNeedsHiding = true;
+      }
+      if (window.innerWidth < 1024 && _this.menuNeedsHiding) {
+        _this.navMenuContainer.classList.add('hidden');
+        _this.menuNeedsHiding = false;
       }
     });
     return _this;
   }
   _inherits(NavMenu, _HTMLElement);
-  return _createClass(NavMenu);
+  return _createClass(NavMenu, [{
+    key: "openCloseNavMenu",
+    value: function openCloseNavMenu(e) {
+      var clickedBtn = e.target.closest('custom-button');
+      clickedBtn === this.openNavBtn ? this.navMenuContainer.classList.toggle('hidden') : this.overlay.toggleVisibility();
+      clickedBtn === this.closeNavBtn ? this.navMenuContainer.classList.toggle('hidden') : this.overlay.toggleVisibility();
+    }
+  }]);
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('nav-menu', NavMenu);
 
@@ -281,10 +440,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ProductCard: () => (/* binding */ ProductCard)
 /* harmony export */ });
 /* harmony import */ var _product_card_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./product-card.html */ "./src/web-components/product-card/product-card.html");
-/* harmony import */ var _assets_icon_minus_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/icon-minus.svg */ "./src/assets/icon-minus.svg");
-/* harmony import */ var _assets_icon_plus_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../assets/icon-plus.svg */ "./src/assets/icon-plus.svg");
-/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
-/* harmony import */ var _modules_cart_module_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../modules/cart-module.js */ "./src/modules/cart-module.js");
+/* harmony import */ var _data_product_data_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../data/product-data.js */ "./src/data/product-data.js");
+/* harmony import */ var _modules_cart_module_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../modules/cart-module.js */ "./src/modules/cart-module.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -304,10 +461,8 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 
-
-
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .images-container {\n            position: relative;\n            height: 300px;\n        }\n\n        .full-size-image {\n            width: 100%;\n            height: 300px;\n            object-fit: cover;\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 35px;\n            height: 35px;\n            border-radius: 35px;\n        }\n\n        .previous {\n            left: 20px;\n        }\n\n        .previous:hover {\n            cursor: pointer;\n        }\n\n        .next {\n            right: 20px;\n        }\n\n        .next:hover {\n            cursor: pointer;\n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n\n        .product-info {\n            padding: 20px;\n        }\n\n        .price {\n            display: flex;\n\n            padding: 20px 0;\n        }\n\n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;    \n        }\n\n        .discount {\n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n            align-content: center;\n        }\n\n        .currency:nth-last-of-type(2) {\n            margin-left: auto;\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n        .less:hover, .more:hover {\n            cursor: pointer;\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n        }\n     \n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .card-container {\n            @media(min-width: 1024px) {\n                max-width: 85%;\n                margin: 80px auto 0 auto;\n            }\n\n            @media(min-width: 1400px) {\n                max-width: 75%;\n            }\n        }\n\n        .card {\n            @media(min-width: 1024px) {\n                display: flex;\n            }\n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n        .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n        .active {\n            border: 3px solid hsl(26, 100%, 55%);\n            opacity: 70%;\n        }\n\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   function ProductCard() {
     var _this;
@@ -320,43 +475,22 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
 
     // handle full size images
     var productId = Number(_this.getAttribute('product-id'));
-    var product = _data_product_data_js__WEBPACK_IMPORTED_MODULE_3__.product_data.find(function (product) {
+    var product = _data_product_data_js__WEBPACK_IMPORTED_MODULE_1__.product_data.find(function (product) {
       return product.id === productId;
     });
-    var fullSizeImages = product.images.full_size;
-    var thumbnails = product.images.thumbnails;
-
-    // this.imageCount = product.images.full_size.length;
-    // this.activeImage = this.imageCount - this.imageCount;
-
-    // this.setInitialImages(fullSizeImages, thumbnails, this.activeImage);
-
-    // this.shadowRoot.querySelector('.previous').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
-    // this.shadowRoot.querySelector('.next').addEventListener('click', (e) => this.navigateImages(e, fullSizeImages, this.activeImage, this.imageCount));
+    _this.fullSizeImages = product.images.full_size;
+    _this.thumbnails = product.images.thumbnails;
 
     // handle product info
     var info = _this.shadowRoot.querySelector('.info');
     var price = _this.shadowRoot.querySelector('.price');
     info.innerHTML = "\n            <p class=\"brand\">".concat(product.brand, "</p>\n            <p class=\"product-title\">").concat(product.title, "</p>\n            <p class=\"description\">").concat(product.description, "</p>\n        ");
-    price.innerHTML = "\n            <span class=\"currency\">".concat(product.currency, "</span>\n            <span class=\"price-after\">").concat(product.price.toFixed(2), "</span>\n            <span class=\"discount\">").concat(product.discount_percentage, "%</span>\n            <span class=\"currency\">").concat(product.currency, "</span>\n            <span class=\"price-before\">").concat(product.price_before.toFixed(2), "</span>\n        ");
+    price.innerHTML = "\n            <span class=\"currency\">".concat(product.currency, "</span>\n            <span class=\"price-after\">").concat(product.price.toFixed(2), "</span>\n            <span class=\"discount\">").concat(product.discount_percentage, "%</span>\n\n            <div class=\"price-before-container\">\n                <span class=\"currency\">").concat(product.currency, "</span>\n                <span class=\"price-before\">").concat(product.price_before.toFixed(2), "</span>\n            </div>\n              \n        ");
 
     // handle add to cart
     _this.amountOfItemsToBeAddedToCart = 0;
     var quantitySpan = _this.shadowRoot.querySelector('.quantity');
     quantitySpan.innerHTML = _this.amountOfItemsToBeAddedToCart;
-    // const quantityContainer = this.shadowRoot.querySelector('.quantity-container');
-    // quantityContainer.innerHTML = `
-    //      <custom-button class="less">
-    //         <img src="${lessIcon}" alt="Less" />
-    //     </custom-button>
-
-    //     <span class="quantity">${this.amountOfItemsToBeAddedToCart}</span>
-
-    //     <custom-button class="more">
-    //         <img src="${moreIcon}" alt="More" />
-    //     </custom-button>
-    // `;
-
     _this.shadowRoot.querySelector('.less').addEventListener('click', function (e) {
       return _this.handleCartQuantity(e);
     });
@@ -371,15 +505,15 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   _inherits(ProductCard, _HTMLElement);
   return _createClass(ProductCard, [{
     key: "setInitialImages",
-    value: function setInitialImages(fullSizeImages, thumbnails) {
+    value: function setInitialImages() {
       var fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
       var thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails-container');
-      var fullSizeImage = fullSizeImages[this.activeImage];
+      var fullSizeImage = this.fullSizeImages[this.activeImage];
       var fullSizeImgElement = document.createElement('img');
       fullSizeImgElement.src = fullSizeImage;
       fullSizeImgElement.classList.add('full-size-image');
       fullSizeImageContainer.append(fullSizeImgElement);
-      thumbnails.forEach(function (thumbnail) {
+      this.thumbnails.forEach(function (thumbnail) {
         var img = document.createElement('img');
         img.src = thumbnail;
         img.classList.add('hidden');
@@ -387,37 +521,10 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
       });
     }
   }, {
-    key: "navigateImages",
-    value: function navigateImages(e, fullSizeImages) {
-      var clickedBtn = e.target.closest('custom-button');
-      var fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
-      fullSizeImageContainer.innerHTML = '';
-      var img = document.createElement('img');
-      img.classList.add('full-size-image');
-      if (clickedBtn.classList.contains('previous') && this.activeImage >= 1) {
-        this.activeImage--;
-        img.src = fullSizeImages[this.activeImage];
-        fullSizeImageContainer.append(img);
-      } else if (clickedBtn.classList.contains('previous') && this.activeImage === 0) {
-        this.activeImage = this.imageCount - 1;
-        img.src = fullSizeImages[this.activeImage];
-        fullSizeImageContainer.append(img);
-      }
-      if (clickedBtn.classList.contains('next') && this.activeImage <= this.imageCount - 2) {
-        this.activeImage++;
-        img.src = fullSizeImages[this.activeImage];
-        fullSizeImageContainer.append(img);
-      } else if (clickedBtn.classList.contains('next') && this.activeImage === this.imageCount - 1) {
-        this.activeImage = this.imageCount - this.imageCount;
-        img.src = fullSizeImages[this.activeImage];
-        fullSizeImageContainer.append(img);
-      }
-    }
-  }, {
     key: "handleCartAdd",
     value: function handleCartAdd(product) {
       if (this.amountOfItemsToBeAddedToCart > 0) {
-        (0,_modules_cart_module_js__WEBPACK_IMPORTED_MODULE_4__.addToCart)(product.id, this.amountOfItemsToBeAddedToCart);
+        (0,_modules_cart_module_js__WEBPACK_IMPORTED_MODULE_2__.addToCart)(product.id, this.amountOfItemsToBeAddedToCart);
         this.amountOfItemsToBeAddedToCart = 0;
         this.updateCartQuantity();
         this.dispatchEvent(new CustomEvent('custom-event', {
@@ -545,7 +652,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n            z-index: 1;\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n\n            @media(min-width: 900px) {\n                transform: none;\n                top: 90%;\n                left: auto;\n                right: 50px;\n            }\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n            z-index: 1;\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n\n            @media(min-width: 1024px) {\n                transform: none;\n                top: 90%;\n                left: auto;\n                right: -5%;\n            }\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-icon {\n            color: hsl(219, 9%, 45%)\n        }\n\n        .cart-btn:hover .cart-icon {\n            color: hsl(220, 13%, 13%);\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
   function ShoppingCart() {
     var _this;
@@ -659,30 +766,22 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `html {
   font-family: "Kumbh Sans";
-  height: 100%;
-}
-
-body {
-  height: 100%;
 }
 
 header {
   background-color: hsl(0, 0%, 100%);
-  padding: 20px;
+  margin: 20px auto;
+  max-width: 90%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-@media (min-width: 900px) {
-  header {
-    padding: 0 20px;
-    height: 100px;
-  }
-}
 @media (min-width: 1024px) {
   header {
-    padding: 0 120px;
+    max-width: 85%;
+    border-bottom: 1px solid #dcdcdc;
+    height: 100px;
   }
 }
 
@@ -690,14 +789,14 @@ header {
   display: flex;
   align-items: flex-end;
 }
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .menu-section {
     height: 100%;
     align-items: center;
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   nav-menu {
     order: 2;
     height: 100%;
@@ -707,9 +806,10 @@ header {
 .logo {
   margin: 0 10px 0 10px;
 }
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .logo {
     order: 1;
+    margin: 0;
   }
 }
 
@@ -717,7 +817,7 @@ header {
   display: flex;
   align-items: flex-end;
 }
-@media (min-width: 900px) {
+@media (min-width: 600px) {
   .cart-section {
     align-items: center;
   }
@@ -726,7 +826,7 @@ header {
 shopping-cart {
   margin: 0 20px 0 20px;
 }
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   shopping-cart {
     margin: 0 40px 0 40px;
   }
@@ -749,7 +849,7 @@ shopping-cart {
   cursor: pointer;
   border: 1px solid hsl(26, 100%, 55%);
 }
-@media (min-width: 900px) {
+@media (min-width: 600px) {
   .profile-img {
     height: 50px;
     width: 50px;
@@ -758,7 +858,7 @@ shopping-cart {
   .profile-img:hover {
     border: 3px solid hsl(26, 100%, 55%);
   }
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,aAAA;EAEA,kBAAA;EAEA,aAAA;EACA,mBAAA;EACA,8BAAA;AACJ;AACI;EAVJ;IAWQ,eAAA;IACA,aAAA;EAEN;AACF;AAFI;EAbJ;IAcQ,gBAAA;EAKN;AACF;;AAJA;EACI,aAAA;EACA,qBAAA;AAOJ;AALI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EAQN;AACF;;AANI;EADJ;IAEQ,QAAA;IACA,YAAA;EAUN;AACF;;AATA;EACI,qBAAA;AAYJ;AAVI;EAHJ;IAIQ,QAAA;EAaN;AACF;;AAZA;EACI,aAAA;EACA,qBAAA;AAeJ;AAbI;EAJJ;IAKQ,mBAAA;EAgBN;AACF;;AAfA;EACI,qBAAA;AAkBJ;AAhBI;EAHJ;IAIQ,qBAAA;EAmBN;AACF;;AAlBA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAmBJ;;AAjBA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAoBJ;AAlBI;EACI,eAAA;EACA,oCAAA;AAoBR;AAlBI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAqBN;EAnBM;IACI,oCAAA;EAqBV;AACF","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;AACJ;;AAKA;EACI,kCAAA;EACA,iBAAA;EACA,cAAA;EAEA,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,8BAAA;AAHJ;AAKI;EAVJ;IAWQ,cAAA;IACA,gCAAA;IACA,aAAA;EAFN;AACF;;AAGA;EACI,aAAA;EACA,qBAAA;AAAJ;AAEI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EACN;AACF;;AACI;EADJ;IAEQ,QAAA;IACA,YAAA;EAGN;AACF;;AAFA;EACI,qBAAA;AAKJ;AAHI;EAHJ;IAIQ,QAAA;IACA,SAAA;EAMN;AACF;;AALA;EACI,aAAA;EACA,qBAAA;AAQJ;AANI;EAJJ;IAKQ,mBAAA;EASN;AACF;;AARA;EACI,qBAAA;AAWJ;AATI;EAHJ;IAIQ,qBAAA;EAYN;AACF;;AAXA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAYJ;;AAVA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAaJ;AAXI;EACI,eAAA;EACA,oCAAA;AAaR;AAXI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAcN;EAZM;IACI,oCAAA;EAcV;AACF","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1076,18 +1176,20 @@ var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(
 var code = `<div class="slider">
   <div class="slides">
     <slot name="slide"></slot>
+
+    <custom-button class="previous">
+      <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
+    </custom-button>
+    <custom-button class="next">
+      <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
+    </custom-button>
   </div>
   <div class="thumbnails">
     <slot name="thumbnail"></slot>
   </div>
-
-  <custom-button>
-    <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
-  </custom-button>
-  <custom-button>
-    <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
-  </custom-button>
 </div>
+
+<!-- <light-box></light-box> -->
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1143,82 +1245,119 @@ var ___HTML_LOADER_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(
 var ___HTML_LOADER_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-2-thumbnail.jpg */ "./src/assets/image-product-2-thumbnail.jpg"), __webpack_require__.b);
 var ___HTML_LOADER_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-3-thumbnail.jpg */ "./src/assets/image-product-3-thumbnail.jpg"), __webpack_require__.b);
 var ___HTML_LOADER_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-4-thumbnail.jpg */ "./src/assets/image-product-4-thumbnail.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_8___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-minus.svg */ "./src/assets/icon-minus.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_9___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-plus.svg */ "./src/assets/icon-plus.svg"), __webpack_require__.b);
 // Module
-var code = `<div class="card">
-  <!-- <div class="images-container">
-    <custom-button class="previous">
-      <img src="/src/assets/icon-previous.svg" alt="Previous" />
-    </custom-button>
-    <custom-button class="next">
-      <img src="/src/assets/icon-next.svg" alt="Next" />
-    </custom-button>
-    <div class="full-size-image-container"></div>
-    <div class="thumbnails-container"></div>
-  </div> -->
-  <div class="images-container">
+var code = `<div class="card-container">
+  <div class="card">
     <img-slider>
       <img
         src="${___HTML_LOADER_IMPORT_0___}"
         slot="slide"
-        class="full-size-image"
+        class="slide product-1"
       />
       <img
         src="${___HTML_LOADER_IMPORT_1___}"
         slot="slide"
-        class="full-size-image"
+        class="slide product-2"
       />
       <img
         src="${___HTML_LOADER_IMPORT_2___}"
         slot="slide"
-        class="full-size-image"
+        class="slide product-3"
       />
       <img
         src="${___HTML_LOADER_IMPORT_3___}"
         slot="slide"
-        class="full-size-image"
+        class="slide product-4"
       />
-      <img src="${___HTML_LOADER_IMPORT_4___}" slot="thumbnail" />
-      <img src="${___HTML_LOADER_IMPORT_5___}" slot="thumbnail" />
-      <img src="${___HTML_LOADER_IMPORT_6___}" slot="thumbnail" />
-      <img src="${___HTML_LOADER_IMPORT_7___}" slot="thumbnail" />
+      <img
+        src="${___HTML_LOADER_IMPORT_4___}"
+        slot="thumbnail"
+        class="thumbnail product-1"
+      />
+
+      <img
+        src="${___HTML_LOADER_IMPORT_5___}"
+        slot="thumbnail"
+        class="thumbnail product-2"
+      />
+
+      <img
+        src="${___HTML_LOADER_IMPORT_6___}"
+        slot="thumbnail"
+        class="thumbnail product-3"
+      />
+
+      <img
+        src="${___HTML_LOADER_IMPORT_7___}"
+        slot="thumbnail"
+        class="thumbnail product-4"
+      />
     </img-slider>
-  </div>
 
-  <div class="product-info">
-    <div class="info"></div>
+    <div class="product-info">
+      <div class="info"></div>
 
-    <div class="price"></div>
+      <div class="price"></div>
 
-    <div class="quantity-container">
-      <custom-button class="less">
-        <img src="${___HTML_LOADER_IMPORT_8___}" alt="Less" />
-      </custom-button>
+      <div class="actions-container">
+        <div class="quantity-container">
+          <custom-button class="less">
+            <svg
+              width="12"
+              height="4"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="less-icon"
+            >
+              <defs>
+                <path
+                  d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
+                  id="a"
+                />
+              </defs>
+              <use fill="currentColor" fill-rule="nonzero" xlink:href="#a" />
+            </svg>
+          </custom-button>
 
-      <span class="quantity"></span>
+          <span class="quantity"></span>
 
-      <custom-button class="more">
-        <img src="${___HTML_LOADER_IMPORT_9___}" alt="More" />
-      </custom-button>
-    </div>
+          <custom-button class="more">
+            <svg
+              width="12"
+              height="12"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="more-icon"
+            >
+              <defs>
+                <path
+                  d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z"
+                  id="b"
+                />
+              </defs>
+              <use fill="currentColor" fill-rule="nonzero" xlink:href="#b" />
+            </svg>
+          </custom-button>
+        </div>
 
-    <div class="add-to-cart-container">
-      <custom-button class="add-to-cart">
-        <svg
-          width="22"
-          height="20"
-          xmlns="http://www.w3.org/2000/svg"
-          class="cart-icon"
-        >
-          <path
-            d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
-            fill="hsl(220, 13%, 13%)"
-            fill-rule="nonzero"
-          />
-        </svg>
-        Add to cart
-      </custom-button>
+        <div class="add-to-cart-container">
+          <custom-button class="add-to-cart">
+            <svg
+              width="22"
+              height="20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="cart-icon"
+            >
+              <path
+                d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                fill="currentColor"
+                fill-rule="nonzero"
+              />
+            </svg>
+            Add to cart
+          </custom-button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1256,11 +1395,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// Imports
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../../../../../../src/assets/icon-cart.svg */ "./src/assets/icon-cart.svg"), __webpack_require__.b);
 // Module
 var code = `<custom-button class="cart-btn">
-  <img src="${___HTML_LOADER_IMPORT_0___}" alt="Cart Icon" />
+  <svg
+    width="22"
+    height="20"
+    xmlns="http://www.w3.org/2000/svg"
+    class="cart-icon"
+  >
+    <path
+      d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+      fill="currentColor"
+      fill-rule="nonzero"
+    />
+  </svg>
+
   <div class="cart-total hidden"></div>
 </custom-button>
 
@@ -1650,16 +1799,6 @@ module.exports = styleTagTransform;
 
 /***/ }),
 
-/***/ "./src/assets/icon-cart.svg":
-/*!**********************************!*\
-  !*** ./src/assets/icon-cart.svg ***!
-  \**********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/icon-cart.svg";
-
-/***/ }),
-
 /***/ "./src/assets/icon-close.svg":
 /*!***********************************!*\
   !*** ./src/assets/icon-close.svg ***!
@@ -1690,16 +1829,6 @@ module.exports = __webpack_require__.p + "assets/icon-menu.svg";
 
 /***/ }),
 
-/***/ "./src/assets/icon-minus.svg":
-/*!***********************************!*\
-  !*** ./src/assets/icon-minus.svg ***!
-  \***********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/icon-minus.svg";
-
-/***/ }),
-
 /***/ "./src/assets/icon-next.svg":
 /*!**********************************!*\
   !*** ./src/assets/icon-next.svg ***!
@@ -1707,16 +1836,6 @@ module.exports = __webpack_require__.p + "assets/icon-minus.svg";
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 module.exports = __webpack_require__.p + "assets/icon-next.svg";
-
-/***/ }),
-
-/***/ "./src/assets/icon-plus.svg":
-/*!**********************************!*\
-  !*** ./src/assets/icon-plus.svg ***!
-  \**********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/icon-plus.svg";
 
 /***/ }),
 
@@ -1976,8 +2095,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { LightBox } from "./web-components/light-box/light-box.js";
+
 
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.ee9d6844579971f50b68.js.map
+//# sourceMappingURL=bundle.8f85f776594fd5e26acf.js.map

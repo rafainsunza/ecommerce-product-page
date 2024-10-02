@@ -1,56 +1,52 @@
 html
     font-family: 'Kumbh Sans'
-    height: 100%
-
-body
-    height: 100%
 
 header
     background-color: hsl(0, 0%, 100%)
-    padding: 20px
+    margin: 20px auto
+    max-width: 90%
 
     position: relative
-
     display: flex
     align-items: center
     justify-content: space-between
 
-    @media (min-width: 900px)
-        padding: 0 20px
-        height: 100px
     @media (min-width: 1024px)
-        padding: 0 120px
+        max-width: 85%
+        border-bottom: 1px solid #dcdcdc
+        height: 100px
 
 .menu-section
     display: flex
     align-items: flex-end
 
-    @media (min-width: 900px)
+    @media (min-width: 1024px)
         height: 100%
         align-items: center
 
 nav-menu
-    @media (min-width: 900px)
+    @media (min-width: 1024px)
         order: 2
         height: 100%
 
 .logo
     margin: 0 10px 0 10px
 
-    @media (min-width: 900px)
+    @media (min-width: 1024px)
         order: 1
+        margin: 0
 
 .cart-section
     display: flex
     align-items: flex-end
 
-    @media (min-width: 900px)
+    @media (min-width: 600px)
         align-items: center
 
 shopping-cart
     margin: 0 20px 0 20px
 
-    @media (min-width: 900px)
+    @media (min-width: 1024px)
         margin: 0 40px 0 40px
 
 .profile-btn
@@ -71,7 +67,7 @@ shopping-cart
         cursor: pointer
         border: 1px solid hsl(26, 100%, 55%)
 
-    @media (min-width: 900px)
+    @media (min-width: 600px)
         height: 50px
         width: 50px
         border: 3px solid hsl(0, 0%, 100%)

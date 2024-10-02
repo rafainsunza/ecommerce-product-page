@@ -25,20 +25,18 @@ template.innerHTML = `
             left: 0;    
             z-index: 3;
 
-            height: 100vh;
+            height: 100%;
             width: 70%;
             padding: 30px;
 
             font-weight: 700;
             background-color: hsl(0, 0%, 100%);
-
-            @media(min-width: 900px) {
+          
+            @media(min-width: 1024px) {
                 position: static;
                 display: flex;
-
-                height: 100%;
                 width: auto;
-                padding: 0;
+                padding: 0;   
             }
         }          
 
@@ -46,7 +44,7 @@ template.innerHTML = `
             display: flex;
             flex-direction: column;
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 flex-direction: row;
                 margin-left: 40px;
             }
@@ -56,22 +54,17 @@ template.innerHTML = `
             color: hsl(220, 13%, 13%);
             padding: 15px 0;
 
-            @media(min-width: 900px) {
-                display: flex;
-                align-items: center;
-
+            @media(min-width: 1024px) {
+                align-content: center;
                 padding: 0 15px;
-
-                height: 100%;
                 border-bottom: 3px solid hsl(0, 0%, 100%);
-
                 font-weight: 400;
                 color: hsl(219, 9%, 45%);
             }
         }
 
         .nav-link:hover {
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 color: hsl(220, 13%, 13%);
                 border-bottom: 3px solid hsl(26, 100%, 55%);
             }
@@ -80,25 +73,24 @@ template.innerHTML = `
         .open-nav-btn {
             display: flex;
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 display: none;
             }
+
         }
 
         .close-nav-btn {
             margin-bottom: 30px;
 
-            @media(min-width: 900px) {
+            @media(min-width: 1024px) {
                 display: none;
             }
         }
-    
-        @media(max-width: 900px) {
-            .hidden {
-                display: none;
-            }
+
+        .hidden {
+            display: none;
         }
-       
+     
     </style>
 
     ${html}
@@ -119,31 +111,42 @@ class NavMenu extends HTMLElement {
             this.shadowRoot.querySelector('.nav-items').append(link);
         })
 
-        const openNavBtn = this.shadowRoot.querySelector('.open-nav-btn');
-        const closeNavBtn = this.shadowRoot.querySelector('.close-nav-btn');
-        const navMenuContainer = this.shadowRoot.querySelector('.nav-menu-container');
-        const overlay = document.querySelector('screen-overlay');
+        this.openNavBtn = this.shadowRoot.querySelector('.open-nav-btn');
+        this.closeNavBtn = this.shadowRoot.querySelector('.close-nav-btn');
+        this.navMenuContainer = this.shadowRoot.querySelector('.nav-menu-container');
+        this.overlay = document.querySelector('screen-overlay');
 
-        function openCloseNavMenu(e) {
-            const clickedBtn = e.target.closest('custom-button');
+        this.menuNeedsHiding = window.innerWidth < 1024;
+        !this.menuNeedsHiding ? this.navMenuContainer.classList.remove('hidden') : null;
 
-            clickedBtn.classList.contains('open-nav-btn') ?
-                navMenuContainer.classList.toggle('hidden') :
-                overlay.toggleVisibility();
-            clickedBtn.classList.contains('close-nav-btn') ?
-                navMenuContainer.classList.toggle('hidden') :
-                overlay.toggleVisibility();
-        }
-
-        closeNavBtn.addEventListener('click', openCloseNavMenu);
-        openNavBtn.addEventListener('click', openCloseNavMenu);
+        this.closeNavBtn.addEventListener('click', (e) => this.openCloseNavMenu(e));
+        this.openNavBtn.addEventListener('click', (e) => this.openCloseNavMenu(e));
 
         window.addEventListener('resize', () => {
-            if (window.innerWidth >= 900) {
-                overlay.hideOverlay();
-                navMenuContainer.classList.add('hidden');
+            if (window.innerWidth >= 1024) {
+                this.overlay.hideOverlay();
+
+                this.navMenuContainer.classList.remove('hidden');
+                this.menuNeedsHiding = true;
             }
-        })
+
+            if (window.innerWidth < 1024 && this.menuNeedsHiding) {
+                this.navMenuContainer.classList.add('hidden');
+                this.menuNeedsHiding = false;
+            }
+        });
+
+    }
+
+    openCloseNavMenu(e) {
+        const clickedBtn = e.target.closest('custom-button');
+
+        clickedBtn === this.openNavBtn ?
+            this.navMenuContainer.classList.toggle('hidden') :
+            this.overlay.toggleVisibility();
+        clickedBtn === this.closeNavBtn ?
+            this.navMenuContainer.classList.toggle('hidden') :
+            this.overlay.toggleVisibility();
     }
 
 }
