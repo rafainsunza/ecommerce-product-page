@@ -147,13 +147,27 @@ class ImgSlider extends HTMLElement {
         this.images = this.slideSlot.assignedElements();
         this.thumbnails = this.thumbnailSlot.assignedElements();
 
+        this.imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
         this.activeImageIndex = 0;
         this.maxImageIndex = this.images.length - 1;
         this.thumbnails[this.activeImageIndex].classList.add('active');
         this.hasResizedOnce = false;
 
+        this.toggleNavigationButtons(this.imagesInView);
+
+        let scrollStartTime = 0;
+        let scrollEndTime = 0;
+        let scrollingTimeout;
+
         this.previousBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.nextBtn.addEventListener('click', (e) => this.navigateImages(e));
+        this.slidesContainer.addEventListener('scroll', () => {
+            clearTimeout(this.scrollTimeout);
+            this.scrollTimeout = setTimeout(() => {
+                const imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
+                this.toggleNavigationButtons(imagesInView);
+            }, 100);
+        });
         this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
         window.addEventListener('resize', () => this.correctDesktopImageAfterResize());
 
@@ -169,13 +183,43 @@ class ImgSlider extends HTMLElement {
 
     }
 
+    toggleNavigationButtons(imagesInView) {
+        const lastImage = this.images[this.images.length - 1];
+        const firstImage = this.images[0];
+        const lastImageInView = imagesInView[imagesInView.length - 1];
+        const firstImageInView = imagesInView[0];
+
+        lastImage === lastImageInView ? this.nextBtn.classList.add('hidden') : this.nextBtn.classList.remove('hidden');
+        firstImage === firstImageInView ? this.previousBtn.classList.add('hidden') : this.previousBtn.classList.remove('hidden');
+
+    }
+
+    checkElementsInView(elements, container) {
+        const elementsInView = [];
+        const containerBounds = container.getBoundingClientRect();
+
+        elements.forEach((element) => {
+            const elementBounds = element.getBoundingClientRect();
+
+            elementBounds.left >= containerBounds.left - 1 && elementBounds.right <= containerBounds.right + 1 ?
+                elementsInView.push(element) : null;
+        });
+
+        return elementsInView
+    }
+
     correctDesktopImageAfterResize() {
         if (window.innerWidth >= 1024 && !this.hasResizedOnce) {
             const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
             const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === this.activeImageIndex);
 
             this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
+
+            this.thumbnails.forEach(thumbnail => thumbnail.classList.remove('active'));
+            this.thumbnails[newImageData.index].classList.add('active');
+
             this.hasResizedOnce = true;
+
         } else if (window.innerWidth < 1024) {
             this.hasResizedOnce = false;
         }
@@ -188,6 +232,7 @@ class ImgSlider extends HTMLElement {
         this.images.forEach((image, index) => {
             imagePositionsAndIndexes.push({ scroll_position: imageScrollPosition, index: index });
             imageScrollPosition = imageScrollPosition + (this.slidesContainer.scrollWidth / this.images.length);
+
         });
 
         return imagePositionsAndIndexes
@@ -196,6 +241,7 @@ class ImgSlider extends HTMLElement {
     navigateImages(e) {
         const clickedBtn = e.target.closest('custom-button');
         const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+        const imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
 
         if (clickedBtn === this.nextBtn) {
             this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
@@ -210,6 +256,8 @@ class ImgSlider extends HTMLElement {
 
             this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
         }
+
+
     }
 
     thumbnailNavigation(e) {

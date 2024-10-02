@@ -48,7 +48,6 @@ template.innerHTML = `
                 top: 90%;
                 left: auto;
                 right: -5%;
-
             }
         }
 

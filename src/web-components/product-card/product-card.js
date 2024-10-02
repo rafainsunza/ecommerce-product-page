@@ -20,16 +20,21 @@ template.innerHTML = `
         }
         /* component reset */
 
+        .card-container {
+            @media(min-width: 1024px) {
+                max-width: 85%;
+                margin: 80px auto 0 auto;
+            }
+
+            @media(min-width: 1400px) {
+                max-width: 75%;
+            }
+        }
+
         .card {
             @media(min-width: 1024px) {
                 display: flex;
-                margin: 80px 120px 0 120px;
             }
-
-            @media(min-width: 1300px) {
-                margin: 80px 180px 0 180px;
-            }
-           
         }
 
         .product-info {

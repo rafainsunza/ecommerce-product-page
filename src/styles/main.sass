@@ -1,13 +1,10 @@
 html
     font-family: 'Kumbh Sans'
-    height: 100%
-
-body
-    height: 100%
 
 header
     background-color: hsl(0, 0%, 100%)
-    margin: 20px
+    margin: 20px auto
+    max-width: 90%
 
     position: relative
     display: flex
@@ -15,7 +12,7 @@ header
     justify-content: space-between
 
     @media (min-width: 1024px)
-        margin: 0 120px
+        max-width: 85%
         border-bottom: 1px solid #dcdcdc
         height: 100px
 
@@ -77,5 +74,3 @@ shopping-cart
 
         &:hover
             border: 3px solid hsl(26, 100%, 55%)
-product-card
-    border-bottom: 1px solid red

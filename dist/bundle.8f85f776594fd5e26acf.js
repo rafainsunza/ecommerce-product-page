@@ -184,15 +184,27 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
     _this.nextBtn = _this.shadowRoot.querySelector('.next');
     _this.images = _this.slideSlot.assignedElements();
     _this.thumbnails = _this.thumbnailSlot.assignedElements();
+    _this.imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
     _this.activeImageIndex = 0;
     _this.maxImageIndex = _this.images.length - 1;
     _this.thumbnails[_this.activeImageIndex].classList.add('active');
     _this.hasResizedOnce = false;
+    _this.toggleNavigationButtons(_this.imagesInView);
+    var scrollStartTime = 0;
+    var scrollEndTime = 0;
+    var scrollingTimeout;
     _this.previousBtn.addEventListener('click', function (e) {
       return _this.navigateImages(e);
     });
     _this.nextBtn.addEventListener('click', function (e) {
       return _this.navigateImages(e);
+    });
+    _this.slidesContainer.addEventListener('scroll', function () {
+      clearTimeout(_this.scrollTimeout);
+      _this.scrollTimeout = setTimeout(function () {
+        var imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
+        _this.toggleNavigationButtons(imagesInView);
+      }, 100);
     });
     _this.thumbnailsContainer.addEventListener('click', function (e) {
       return _this.thumbnailNavigation(e);
@@ -213,6 +225,27 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   }
   _inherits(ImgSlider, _HTMLElement);
   return _createClass(ImgSlider, [{
+    key: "toggleNavigationButtons",
+    value: function toggleNavigationButtons(imagesInView) {
+      var lastImage = this.images[this.images.length - 1];
+      var firstImage = this.images[0];
+      var lastImageInView = imagesInView[imagesInView.length - 1];
+      var firstImageInView = imagesInView[0];
+      lastImage === lastImageInView ? this.nextBtn.classList.add('hidden') : this.nextBtn.classList.remove('hidden');
+      firstImage === firstImageInView ? this.previousBtn.classList.add('hidden') : this.previousBtn.classList.remove('hidden');
+    }
+  }, {
+    key: "checkElementsInView",
+    value: function checkElementsInView(elements, container) {
+      var elementsInView = [];
+      var containerBounds = container.getBoundingClientRect();
+      elements.forEach(function (element) {
+        var elementBounds = element.getBoundingClientRect();
+        elementBounds.left >= containerBounds.left - 1 && elementBounds.right <= containerBounds.right + 1 ? elementsInView.push(element) : null;
+      });
+      return elementsInView;
+    }
+  }, {
     key: "correctDesktopImageAfterResize",
     value: function correctDesktopImageAfterResize() {
       var _this2 = this;
@@ -225,6 +258,10 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
           left: newImageData.scroll_position,
           behavior: 'smooth'
         });
+        this.thumbnails.forEach(function (thumbnail) {
+          return thumbnail.classList.remove('active');
+        });
+        this.thumbnails[newImageData.index].classList.add('active');
         this.hasResizedOnce = true;
       } else if (window.innerWidth < 1024) {
         this.hasResizedOnce = false;
@@ -252,6 +289,7 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
       var _this4 = this;
       var clickedBtn = e.target.closest('custom-button');
       var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
+      var imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
       if (clickedBtn === this.nextBtn) {
         this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
         var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
@@ -316,11 +354,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _nav_menu_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./nav-menu.html */ "./src/web-components/nav-menu/nav-menu.html");
 /* harmony import */ var _menu_items_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu-items.json */ "./src/web-components/nav-menu/menu-items.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -334,7 +372,7 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n     \n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n        }\n        /* component reset */\n\n\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 3;\n\n            height: 100%;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n\n            @media(min-width: 1024px) {\n                position: static;\n                display: flex;\n                width: auto;\n                padding: 0;\n            }\n        }          \n\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n\n            @media(min-width: 1024px) {\n                flex-direction: row;\n                margin-left: 40px;\n            }\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n            padding: 15px 0;\n\n            @media(min-width: 1024px) {\n                align-content: center;\n                padding: 0 15px;\n\n                border-bottom: 3px solid hsl(0, 0%, 100%);\n\n                font-weight: 400;\n                color: hsl(219, 9%, 45%);\n            }\n        }\n\n        .nav-link:hover {\n            @media(min-width: 1024px) {\n                color: hsl(220, 13%, 13%);\n                border-bottom: 3px solid hsl(26, 100%, 55%);\n            }\n        }\n\n        .open-nav-btn {\n            display: flex;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .close-nav-btn {\n            margin-bottom: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n    \n        @media(max-width: 1024px) {\n            .hidden {\n                display: none;\n            }\n        }\n\n    </style>\n\n    ".concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n     \n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n        }\n        /* component reset */\n\n\n        .nav-menu-container {\n            position: fixed;\n            top: 0;\n            left: 0;    \n            z-index: 3;\n\n            height: 100%;\n            width: 70%;\n            padding: 30px;\n\n            font-weight: 700;\n            background-color: hsl(0, 0%, 100%);\n          \n            @media(min-width: 1024px) {\n                position: static;\n                display: flex;\n                width: auto;\n                padding: 0;   \n            }\n        }          \n\n        .nav-items {\n            display: flex;\n            flex-direction: column;\n\n            @media(min-width: 1024px) {\n                flex-direction: row;\n                margin-left: 40px;\n            }\n        }\n\n        .nav-link {\n            color: hsl(220, 13%, 13%);\n            padding: 15px 0;\n\n            @media(min-width: 1024px) {\n                align-content: center;\n                padding: 0 15px;\n                border-bottom: 3px solid hsl(0, 0%, 100%);\n                font-weight: 400;\n                color: hsl(219, 9%, 45%);\n            }\n        }\n\n        .nav-link:hover {\n            @media(min-width: 1024px) {\n                color: hsl(220, 13%, 13%);\n                border-bottom: 3px solid hsl(26, 100%, 55%);\n            }\n        }\n\n        .open-nav-btn {\n            display: flex;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n\n        }\n\n        .close-nav-btn {\n            margin-bottom: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .hidden {\n            display: none;\n        }\n     \n    </style>\n\n    ".concat(_nav_menu_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var NavMenu = /*#__PURE__*/function (_HTMLElement) {
   function NavMenu() {
     var _this;
@@ -351,27 +389,40 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
       link.classList.add('nav-link');
       _this.shadowRoot.querySelector('.nav-items').append(link);
     });
-    var openNavBtn = _this.shadowRoot.querySelector('.open-nav-btn');
-    var closeNavBtn = _this.shadowRoot.querySelector('.close-nav-btn');
-    var navMenuContainer = _this.shadowRoot.querySelector('.nav-menu-container');
-    var overlay = document.querySelector('screen-overlay');
-    function openCloseNavMenu(e) {
-      var clickedBtn = e.target.closest('custom-button');
-      clickedBtn.classList.contains('open-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
-      clickedBtn.classList.contains('close-nav-btn') ? navMenuContainer.classList.toggle('hidden') : overlay.toggleVisibility();
-    }
-    closeNavBtn.addEventListener('click', openCloseNavMenu);
-    openNavBtn.addEventListener('click', openCloseNavMenu);
+    _this.openNavBtn = _this.shadowRoot.querySelector('.open-nav-btn');
+    _this.closeNavBtn = _this.shadowRoot.querySelector('.close-nav-btn');
+    _this.navMenuContainer = _this.shadowRoot.querySelector('.nav-menu-container');
+    _this.overlay = document.querySelector('screen-overlay');
+    _this.menuNeedsHiding = window.innerWidth < 1024;
+    !_this.menuNeedsHiding ? _this.navMenuContainer.classList.remove('hidden') : null;
+    _this.closeNavBtn.addEventListener('click', function (e) {
+      return _this.openCloseNavMenu(e);
+    });
+    _this.openNavBtn.addEventListener('click', function (e) {
+      return _this.openCloseNavMenu(e);
+    });
     window.addEventListener('resize', function () {
-      if (window.innerWidth >= 900) {
-        overlay.hideOverlay();
-        navMenuContainer.classList.add('hidden');
+      if (window.innerWidth >= 1024) {
+        _this.overlay.hideOverlay();
+        _this.navMenuContainer.classList.remove('hidden');
+        _this.menuNeedsHiding = true;
+      }
+      if (window.innerWidth < 1024 && _this.menuNeedsHiding) {
+        _this.navMenuContainer.classList.add('hidden');
+        _this.menuNeedsHiding = false;
       }
     });
     return _this;
   }
   _inherits(NavMenu, _HTMLElement);
-  return _createClass(NavMenu);
+  return _createClass(NavMenu, [{
+    key: "openCloseNavMenu",
+    value: function openCloseNavMenu(e) {
+      var clickedBtn = e.target.closest('custom-button');
+      clickedBtn === this.openNavBtn ? this.navMenuContainer.classList.toggle('hidden') : this.overlay.toggleVisibility();
+      clickedBtn === this.closeNavBtn ? this.navMenuContainer.classList.toggle('hidden') : this.overlay.toggleVisibility();
+    }
+  }]);
 }( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('nav-menu', NavMenu);
 
@@ -411,7 +462,7 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .card {\n            @media(min-width: 1024px) {\n                display: flex;\n                margin: 80px 120px 0 120px;\n            }\n\n            @media(min-width: 1300px) {\n                margin: 80px 180px 0 180px;\n            }\n           \n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n        .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n        .active {\n            border: 3px solid hsl(26, 100%, 55%);\n            opacity: 70%;\n        }\n\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .card-container {\n            @media(min-width: 1024px) {\n                max-width: 85%;\n                margin: 80px auto 0 auto;\n            }\n\n            @media(min-width: 1400px) {\n                max-width: 75%;\n            }\n        }\n\n        .card {\n            @media(min-width: 1024px) {\n                display: flex;\n            }\n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n        .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n        .active {\n            border: 3px solid hsl(26, 100%, 55%);\n            opacity: 70%;\n        }\n\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   function ProductCard() {
     var _this;
@@ -601,7 +652,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n            z-index: 1;\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n\n            @media(min-width: 1024px) {\n                transform: none;\n                top: 90%;\n                left: auto;\n                right: -5%;\n\n            }\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-icon {\n            color: hsl(219, 9%, 45%)\n        }\n\n        .cart-btn:hover .cart-icon {\n            color: hsl(220, 13%, 13%);\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .cart-container {\n            display: flex;\n            flex-direction: column;\n            justify-content: space-between;\n            position: absolute;\n\n            top: calc(100% + 15px); \n            left: 50%;\n            transform: translateX(-50%);\n            z-index: 1;\n\n            min-height: 250px;\n            max-width: 350px;\n            min-width: 300px;\n            width: 100%;\n\n            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);\n            border-radius: 5px;\n            background-color: hsl(0, 0%, 100%);\n            color: hsl(220, 13%, 13%);\n\n            @media(min-width: 1024px) {\n                transform: none;\n                top: 90%;\n                left: auto;\n                right: -5%;\n            }\n        }\n\n        .cart-header {\n            border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n            font-weight: 700;\n\n            padding: 25px 15px;\n        }\n\n        .cart-body {\n            padding: 20px 20px 0 20px;\n        }\n\n        .cart-footer {\n            padding: 0 20px 20px 20px;\n            height: 70px;\n        }\n\n        .product-data {\n            display: flex;\n            margin-bottom: 20px;\n        }\n\n        .cart-thumbnail {\n            width: 50px;\n            border-radius: 5px;\n        }\n\n        .product-title-and-price {\n            display: flex;\n            flex-direction: column;\n\n            padding: 5px 15px;\n        }\n\n        .product-title {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0;\n        }   \n        \n        .price {\n            display: flex;\n\n            margin-top: auto;\n\n            font-weight: 500;\n        }\n\n        .product-price {\n            display: flex;\n\n            color: hsl(219, 9%, 45%);\n        }\n\n        .product-quantity {\n            color: hsl(219, 9%, 45%);\n\n            margin: 0 5px;\n        }\n    \n        .total-price {\n            display: flex;\n\n            font-weight: 700;\n        }\n\n        .remove-cart-item-btn {\n            display: flex;\n            align-items: center;\n        }\n\n        .checkout-btn {\n            display: flex;\n            justify-content: center;\n\n            font-weight: 700;\n            font-size: 16px;\n\n            padding: 15px;\n\n            border-radius: 7.5px;\n            background-color: hsl(26, 100%, 55%);\n        }\n\n        .checkout-btn:hover {\n            cursor: pointer;\n        }   \n  \n        .empty-cart {\n            text-align: center;\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n\n        }\n\n        .cart-btn {\n            position: relative;\n        }\n\n        .cart-icon {\n            color: hsl(219, 9%, 45%)\n        }\n\n        .cart-btn:hover .cart-icon {\n            color: hsl(220, 13%, 13%);\n        }\n\n        .cart-total {\n            position: absolute;\n            top: -7.5px;\n            right: -7.5px;\n\n            padding: 1px 8px;\n            border-radius: 15px;\n\n            background-color: hsl(26, 100%, 55%);\n\n            color: hsl(0, 0%, 100%);\n            font-weight: 700;\n            font-size: 10px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n    </style>\n\n    ".concat(_shopping_cart_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
   function ShoppingCart() {
     var _this;
@@ -715,16 +766,12 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `html {
   font-family: "Kumbh Sans";
-  height: 100%;
-}
-
-body {
-  height: 100%;
 }
 
 header {
   background-color: hsl(0, 0%, 100%);
-  margin: 20px;
+  margin: 20px auto;
+  max-width: 90%;
   position: relative;
   display: flex;
   align-items: center;
@@ -732,7 +779,7 @@ header {
 }
 @media (min-width: 1024px) {
   header {
-    margin: 0 120px;
+    max-width: 85%;
     border-bottom: 1px solid #dcdcdc;
     height: 100px;
   }
@@ -811,11 +858,7 @@ shopping-cart {
   .profile-img:hover {
     border: 3px solid hsl(26, 100%, 55%);
   }
-}
-
-product-card {
-  border-bottom: 1px solid red;
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;EACA,YAAA;AACJ;;AACA;EACI,YAAA;AAEJ;;AAAA;EACI,kCAAA;EACA,YAAA;EAEA,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,8BAAA;AAEJ;AAAI;EATJ;IAUQ,eAAA;IACA,gCAAA;IACA,aAAA;EAGN;AACF;;AAFA;EACI,aAAA;EACA,qBAAA;AAKJ;AAHI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EAMN;AACF;;AAJI;EADJ;IAEQ,QAAA;IACA,YAAA;EAQN;AACF;;AAPA;EACI,qBAAA;AAUJ;AARI;EAHJ;IAIQ,QAAA;IACA,SAAA;EAWN;AACF;;AAVA;EACI,aAAA;EACA,qBAAA;AAaJ;AAXI;EAJJ;IAKQ,mBAAA;EAcN;AACF;;AAbA;EACI,qBAAA;AAgBJ;AAdI;EAHJ;IAIQ,qBAAA;EAiBN;AACF;;AAhBA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAiBJ;;AAfA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAkBJ;AAhBI;EACI,eAAA;EACA,oCAAA;AAkBR;AAhBI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAmBN;EAjBM;IACI,oCAAA;EAmBV;AACF;;AAnBA;EACI,4BAAA;AAsBJ","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;AACJ;;AAKA;EACI,kCAAA;EACA,iBAAA;EACA,cAAA;EAEA,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,8BAAA;AAHJ;AAKI;EAVJ;IAWQ,cAAA;IACA,gCAAA;IACA,aAAA;EAFN;AACF;;AAGA;EACI,aAAA;EACA,qBAAA;AAAJ;AAEI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EACN;AACF;;AACI;EADJ;IAEQ,QAAA;IACA,YAAA;EAGN;AACF;;AAFA;EACI,qBAAA;AAKJ;AAHI;EAHJ;IAIQ,QAAA;IACA,SAAA;EAMN;AACF;;AALA;EACI,aAAA;EACA,qBAAA;AAQJ;AANI;EAJJ;IAKQ,mBAAA;EASN;AACF;;AARA;EACI,qBAAA;AAWJ;AATI;EAHJ;IAIQ,qBAAA;EAYN;AACF;;AAXA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAYJ;;AAVA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAaJ;AAXI;EACI,eAAA;EACA,oCAAA;AAaR;AAXI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAcN;EAZM;IACI,oCAAA;EAcV;AACF","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1146,7 +1189,7 @@ var code = `<div class="slider">
   </div>
 </div>
 
-<light-box></light-box>
+<!-- <light-box></light-box> -->
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1203,115 +1246,117 @@ var ___HTML_LOADER_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(
 var ___HTML_LOADER_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-3-thumbnail.jpg */ "./src/assets/image-product-3-thumbnail.jpg"), __webpack_require__.b);
 var ___HTML_LOADER_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-4-thumbnail.jpg */ "./src/assets/image-product-4-thumbnail.jpg"), __webpack_require__.b);
 // Module
-var code = `<div class="card">
-  <img-slider>
-    <img
-      src="${___HTML_LOADER_IMPORT_0___}"
-      slot="slide"
-      class="slide product-1"
-    />
-    <img
-      src="${___HTML_LOADER_IMPORT_1___}"
-      slot="slide"
-      class="slide product-2"
-    />
-    <img
-      src="${___HTML_LOADER_IMPORT_2___}"
-      slot="slide"
-      class="slide product-3"
-    />
-    <img
-      src="${___HTML_LOADER_IMPORT_3___}"
-      slot="slide"
-      class="slide product-4"
-    />
-    <img
-      src="${___HTML_LOADER_IMPORT_4___}"
-      slot="thumbnail"
-      class="thumbnail product-1"
-    />
+var code = `<div class="card-container">
+  <div class="card">
+    <img-slider>
+      <img
+        src="${___HTML_LOADER_IMPORT_0___}"
+        slot="slide"
+        class="slide product-1"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_1___}"
+        slot="slide"
+        class="slide product-2"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_2___}"
+        slot="slide"
+        class="slide product-3"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_3___}"
+        slot="slide"
+        class="slide product-4"
+      />
+      <img
+        src="${___HTML_LOADER_IMPORT_4___}"
+        slot="thumbnail"
+        class="thumbnail product-1"
+      />
 
-    <img
-      src="${___HTML_LOADER_IMPORT_5___}"
-      slot="thumbnail"
-      class="thumbnail product-2"
-    />
+      <img
+        src="${___HTML_LOADER_IMPORT_5___}"
+        slot="thumbnail"
+        class="thumbnail product-2"
+      />
 
-    <img
-      src="${___HTML_LOADER_IMPORT_6___}"
-      slot="thumbnail"
-      class="thumbnail product-3"
-    />
+      <img
+        src="${___HTML_LOADER_IMPORT_6___}"
+        slot="thumbnail"
+        class="thumbnail product-3"
+      />
 
-    <img
-      src="${___HTML_LOADER_IMPORT_7___}"
-      slot="thumbnail"
-      class="thumbnail product-4"
-    />
-  </img-slider>
+      <img
+        src="${___HTML_LOADER_IMPORT_7___}"
+        slot="thumbnail"
+        class="thumbnail product-4"
+      />
+    </img-slider>
 
-  <div class="product-info">
-    <div class="info"></div>
+    <div class="product-info">
+      <div class="info"></div>
 
-    <div class="price"></div>
+      <div class="price"></div>
 
-    <div class="actions-container">
-      <div class="quantity-container">
-        <custom-button class="less">
-          <svg
-            width="12"
-            height="4"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            class="less-icon"
-          >
-            <defs>
+      <div class="actions-container">
+        <div class="quantity-container">
+          <custom-button class="less">
+            <svg
+              width="12"
+              height="4"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="less-icon"
+            >
+              <defs>
+                <path
+                  d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
+                  id="a"
+                />
+              </defs>
+              <use fill="currentColor" fill-rule="nonzero" xlink:href="#a" />
+            </svg>
+          </custom-button>
+
+          <span class="quantity"></span>
+
+          <custom-button class="more">
+            <svg
+              width="12"
+              height="12"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              class="more-icon"
+            >
+              <defs>
+                <path
+                  d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z"
+                  id="b"
+                />
+              </defs>
+              <use fill="currentColor" fill-rule="nonzero" xlink:href="#b" />
+            </svg>
+          </custom-button>
+        </div>
+
+        <div class="add-to-cart-container">
+          <custom-button class="add-to-cart">
+            <svg
+              width="22"
+              height="20"
+              xmlns="http://www.w3.org/2000/svg"
+              class="cart-icon"
+            >
               <path
-                d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z"
-                id="a"
+                d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
+                fill="currentColor"
+                fill-rule="nonzero"
               />
-            </defs>
-            <use fill="currentColor" fill-rule="nonzero" xlink:href="#a" />
-          </svg>
-        </custom-button>
-
-        <span class="quantity"></span>
-
-        <custom-button class="more">
-          <svg
-            width="12"
-            height="12"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            class="more-icon"
-          >
-            <defs>
-              <path
-                d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z"
-                id="b"
-              />
-            </defs>
-            <use fill="currentColor" fill-rule="nonzero" xlink:href="#b" />
-          </svg>
-        </custom-button>
-      </div>
-
-      <div class="add-to-cart-container">
-        <custom-button class="add-to-cart">
-          <svg
-            width="22"
-            height="20"
-            xmlns="http://www.w3.org/2000/svg"
-            class="cart-icon"
-          >
-            <path
-              d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"
-              fill="currentColor"
-              fill-rule="nonzero"
-            />
-          </svg>
-          Add to cart
-        </custom-button>
+            </svg>
+            Add to cart
+          </custom-button>
+        </div>
       </div>
     </div>
   </div>
@@ -2056,4 +2101,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.38d9da67171ff657a6fe.js.map
+//# sourceMappingURL=bundle.8f85f776594fd5e26acf.js.map
