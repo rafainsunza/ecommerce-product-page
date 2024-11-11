@@ -20,19 +20,19 @@ template.innerHTML = `
         }
         /* component reset */
 
-        .card-container {
-            @media(min-width: 1024px) {
-                max-width: 85%;
-                margin: 80px auto 0 auto;
-            }
+         .card-container {
+             @media(min-width: 1024px) {
+                 max-width: 85%;
+                 margin: 80px auto 0 auto;
+             }
 
-            @media(min-width: 1400px) {
+             @media(min-width: 1400px) {
                 max-width: 75%;
-            }
-        }
+             }
+         }
 
-        .card {
-            @media(min-width: 1024px) {
+         .card {
+             @media(min-width: 1024px) {
                 display: flex;
             }
         }
@@ -41,7 +41,7 @@ template.innerHTML = `
             padding: 0 20px 20px 20px;
 
             @media(min-width: 600px) {
-                width: 80%;
+                 width: 80%;
                 margin: auto;
             }
 
@@ -103,7 +103,7 @@ template.innerHTML = `
             font-size: 28px;  
         }
 
-        .discount { 
+         .discount { 
             align-content: center;
 
             font-weight: 700;
@@ -204,11 +204,26 @@ template.innerHTML = `
             display: none;
         }
 
-        .active {
-            border: 3px solid hsl(26, 100%, 55%);
-            opacity: 70%;
-        }
 
+        @media(min-width: 1024px) {
+            .thumbnail-wrapper {
+                border-radius: 10px;
+                border: 3px solid transparent;
+                background-color: hsl(0, 0%, 100%);
+            }
+                
+            .thumbnail:hover {
+                opacity: 50%;
+            }
+
+            .wrapper-active {
+                border: 3px solid hsl(26, 100%, 55%);
+            }
+
+            .thumbnail-active {
+                opacity: 50%;
+            }
+        }
 
     </style>
 
@@ -220,6 +235,8 @@ class ProductCard extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+        this.imgSlider = this.shadowRoot.querySelector('img-slider');
 
         // handle full size images
         const productId = Number(this.getAttribute('product-id'));
@@ -258,25 +275,35 @@ class ProductCard extends HTMLElement {
         this.shadowRoot.querySelector('.more').addEventListener('click', (e) => this.handleCartQuantity(e));
         this.shadowRoot.querySelector('.add-to-cart').addEventListener('click', () => this.handleCartAdd(product));
 
+        this.setImages();
+
     }
 
-    setInitialImages() {
-        const fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
-        const thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails-container');
+    setImages() {
+        this.fullSizeImages.forEach((image) => {
+            // create the image element and set attributes etc
+            const imageElement = document.createElement('img');
+            imageElement.src = image;
+            imageElement.classList.add('slide');
+            imageElement.setAttribute('slot', 'slide');
 
-        const fullSizeImage = this.fullSizeImages[this.activeImage];
-
-        const fullSizeImgElement = document.createElement('img');
-        fullSizeImgElement.src = fullSizeImage;
-        fullSizeImgElement.classList.add('full-size-image');
-        fullSizeImageContainer.append(fullSizeImgElement);
+            this.imgSlider.appendChild(imageElement);
+        });
 
         this.thumbnails.forEach((thumbnail) => {
-            const img = document.createElement('img');
-            img.src = thumbnail;
-            img.classList.add('hidden');
+            // create the image element and set attributes etc
+            const imageElement = document.createElement('img');
+            imageElement.src = thumbnail;
+            imageElement.classList.add('thumbnail');
 
-            thumbnailsContainer.appendChild(img);
+            // create wrapper for each thumbnail
+            const wrapper = document.createElement('div');
+            wrapper.classList.add('thumbnail-wrapper');
+            wrapper.setAttribute('slot', 'thumbnail');
+
+            wrapper.appendChild(imageElement);
+
+            this.imgSlider.appendChild(wrapper);
         });
 
     }

@@ -22,7 +22,7 @@ template.innerHTML = `
             margin: auto;
 
             @media(min-width: 1024px) {
-                width: 400px;
+                width: 350px;
             }
         }
 
@@ -47,6 +47,17 @@ template.innerHTML = `
             }
         }
 
+        .thumbnails {
+            display: grid;
+            grid-auto-flow: column;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-bottom: 10px;
+            overflow-x: auto;
+            scroll-snap-type: inline mandatory;
+            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);
+        }
+
         ::slotted([slot="slide"]) {
             width: 100%;
             scroll-snap-align: start;
@@ -57,7 +68,20 @@ template.innerHTML = `
                 border-radius: 15px;                
             }
         }
-     
+
+        ::slotted([slot="thumbnail"]) {
+            display: none;
+        }
+
+        @media(min-width: 1024px) {
+            ::slotted([slot="thumbnail"]) {
+                display: flex;
+                height: 80px;
+                width: 80px;
+                border-radius: 10px;
+            }
+        }
+
         .previous:hover, .next:hover {
             cursor: pointer;
 
@@ -91,37 +115,6 @@ template.innerHTML = `
             right: 0;
         }
 
-
-        .thumbnails {
-            display: grid;
-            grid-auto-flow: column;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-bottom: 10px;
-            overflow-x: auto;
-            scroll-snap-type: inline mandatory;
-            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);
-        }
-
-        ::slotted([slot="thumbnail"]) {
-            display: none;
-        }
-
-       @media(min-width: 1024px) {
-            ::slotted([slot="thumbnail"]) {
-                display: block;
-
-                width: 80px;
-                height: 80px;
-                border-radius: 10px;
-            }
-
-            ::slotted([slot="thumbnail"]:hover) {
-                opacity: 50%;
-                cursor: pointer;
-            }
-       }
-
        .hidden {
             display: none;
        }
@@ -145,19 +138,26 @@ class ImgSlider extends HTMLElement {
         this.nextBtn = this.shadowRoot.querySelector('.next');
 
         this.images = this.slideSlot.assignedElements();
-        this.thumbnails = this.thumbnailSlot.assignedElements();
+        this.wrappers = this.thumbnailSlot.assignedElements();
+        this.thumbnails = this.wrappers.map(wrapper => wrapper.querySelector('img'));
+
+        this.thumbnails.forEach((thumbnail) => {
+            thumbnail.style.borderRadius = "10px";
+
+            thumbnail.addEventListener('mouseenter', () => {
+                thumbnail.style.cursor = "pointer";
+            });
+
+        })
 
         this.imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
         this.activeImageIndex = 0;
         this.maxImageIndex = this.images.length - 1;
-        this.thumbnails[this.activeImageIndex].classList.add('active');
+        this.thumbnails[this.activeImageIndex].classList.add('thumbnail-active');
+        this.wrappers[this.activeImageIndex].classList.add('wrapper-active');
         this.hasResizedOnce = false;
 
         this.toggleNavigationButtons(this.imagesInView);
-
-        let scrollStartTime = 0;
-        let scrollEndTime = 0;
-        let scrollingTimeout;
 
         this.previousBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.nextBtn.addEventListener('click', (e) => this.navigateImages(e));
@@ -170,16 +170,6 @@ class ImgSlider extends HTMLElement {
         });
         this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
         window.addEventListener('resize', () => this.correctDesktopImageAfterResize());
-
-        // const lightbox = this.shadowRoot.querySelector('light-box');
-
-
-        // this.slideSlot.addEventListener('slotchange', () => {
-        //     lightbox.setLightboxImages(this.images);
-        // })
-        // this.thumbnailSlot.addEventListener('slotchange', () => {
-        //     lightbox.setLightBoxThumbnails(this.thumbnails);
-        // })
 
     }
 
@@ -215,8 +205,10 @@ class ImgSlider extends HTMLElement {
 
             this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
 
-            this.thumbnails.forEach(thumbnail => thumbnail.classList.remove('active'));
-            this.thumbnails[newImageData.index].classList.add('active');
+            this.thumbnails.forEach(thumbnail => thumbnail.classList.remove('thumbnail-active'));
+            this.wrappers.forEach(wrapper => wrapper.classList.remove('wrapper-active'));
+            this.thumbnails[newImageData.index].classList.add('thumbnail-active');
+            this.wrappers[newImageData.index].classList.add('wrapper-active');
 
             this.hasResizedOnce = true;
 
@@ -226,7 +218,6 @@ class ImgSlider extends HTMLElement {
     }
 
     getScrollPositionAndIndex() {
-        const thumbnailIndexes = [];
         const imagePositionsAndIndexes = [];
         let imageScrollPosition = 0;
         this.images.forEach((image, index) => {
@@ -268,12 +259,14 @@ class ImgSlider extends HTMLElement {
             const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
             const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === clickedThumbnailIndex);
 
-            this.thumbnails.forEach((thumbnail) => thumbnail.classList.remove('active'));
+            this.thumbnails.forEach((thumbnail) => thumbnail.classList.remove('thumbnail-active'));
+            this.wrappers.forEach(wrapper => wrapper.classList.remove('wrapper-active'));
 
             if (clickedThumbnailIndex !== this.activeImageIndex) {
                 this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
                 this.activeImageIndex = newImageData.index;
-                clickedThumbnail.classList.add('active');
+                clickedThumbnail.classList.add('thumbnail-active');
+                this.wrappers[clickedThumbnailIndex].classList.add('wrapper-active');
             }
 
         }

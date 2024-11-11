@@ -131,7 +131,7 @@ var CustomButton = /*#__PURE__*/function (_HTMLElement) {
   }
   _inherits(CustomButton, _HTMLElement);
   return _createClass(CustomButton);
-}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('custom-button', CustomButton);
 
 
@@ -166,7 +166,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 400px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n          \n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n     \n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n       @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: block;\n\n                width: 80px;\n                height: 80px;\n                border-radius: 10px;\n            }\n\n            ::slotted([slot=\"thumbnail\"]:hover) {\n                opacity: 50%;\n                cursor: pointer;\n            }\n       }\n\n       .hidden {\n            display: none;\n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 350px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n          \n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: flex;\n                height: 80px;\n                width: 80px;\n                border-radius: 10px;\n            }\n        }\n\n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n       .hidden {\n            display: none;\n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   function ImgSlider() {
     var _this;
@@ -183,16 +183,23 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
     _this.previousBtn = _this.shadowRoot.querySelector('.previous');
     _this.nextBtn = _this.shadowRoot.querySelector('.next');
     _this.images = _this.slideSlot.assignedElements();
-    _this.thumbnails = _this.thumbnailSlot.assignedElements();
+    _this.wrappers = _this.thumbnailSlot.assignedElements();
+    _this.thumbnails = _this.wrappers.map(function (wrapper) {
+      return wrapper.querySelector('img');
+    });
+    _this.thumbnails.forEach(function (thumbnail) {
+      thumbnail.style.borderRadius = "10px";
+      thumbnail.addEventListener('mouseenter', function () {
+        thumbnail.style.cursor = "pointer";
+      });
+    });
     _this.imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
     _this.activeImageIndex = 0;
     _this.maxImageIndex = _this.images.length - 1;
-    _this.thumbnails[_this.activeImageIndex].classList.add('active');
+    _this.thumbnails[_this.activeImageIndex].classList.add('thumbnail-active');
+    _this.wrappers[_this.activeImageIndex].classList.add('wrapper-active');
     _this.hasResizedOnce = false;
     _this.toggleNavigationButtons(_this.imagesInView);
-    var scrollStartTime = 0;
-    var scrollEndTime = 0;
-    var scrollingTimeout;
     _this.previousBtn.addEventListener('click', function (e) {
       return _this.navigateImages(e);
     });
@@ -212,15 +219,6 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
     window.addEventListener('resize', function () {
       return _this.correctDesktopImageAfterResize();
     });
-
-    // const lightbox = this.shadowRoot.querySelector('light-box');
-
-    // this.slideSlot.addEventListener('slotchange', () => {
-    //     lightbox.setLightboxImages(this.images);
-    // })
-    // this.thumbnailSlot.addEventListener('slotchange', () => {
-    //     lightbox.setLightBoxThumbnails(this.thumbnails);
-    // })
     return _this;
   }
   _inherits(ImgSlider, _HTMLElement);
@@ -259,9 +257,13 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
           behavior: 'smooth'
         });
         this.thumbnails.forEach(function (thumbnail) {
-          return thumbnail.classList.remove('active');
+          return thumbnail.classList.remove('thumbnail-active');
         });
-        this.thumbnails[newImageData.index].classList.add('active');
+        this.wrappers.forEach(function (wrapper) {
+          return wrapper.classList.remove('wrapper-active');
+        });
+        this.thumbnails[newImageData.index].classList.add('thumbnail-active');
+        this.wrappers[newImageData.index].classList.add('wrapper-active');
         this.hasResizedOnce = true;
       } else if (window.innerWidth < 1024) {
         this.hasResizedOnce = false;
@@ -271,7 +273,6 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
     key: "getScrollPositionAndIndex",
     value: function getScrollPositionAndIndex() {
       var _this3 = this;
-      var thumbnailIndexes = [];
       var imagePositionsAndIndexes = [];
       var imageScrollPosition = 0;
       this.images.forEach(function (image, index) {
@@ -322,7 +323,10 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
           return imageData.index === clickedThumbnailIndex;
         });
         this.thumbnails.forEach(function (thumbnail) {
-          return thumbnail.classList.remove('active');
+          return thumbnail.classList.remove('thumbnail-active');
+        });
+        this.wrappers.forEach(function (wrapper) {
+          return wrapper.classList.remove('wrapper-active');
         });
         if (clickedThumbnailIndex !== this.activeImageIndex) {
           this.slidesContainer.scrollTo({
@@ -330,13 +334,63 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
             behavior: 'smooth'
           });
           this.activeImageIndex = newImageData.index;
-          clickedThumbnail.classList.add('active');
+          clickedThumbnail.classList.add('thumbnail-active');
+          this.wrappers[clickedThumbnailIndex].classList.add('wrapper-active');
         }
       }
     }
   }]);
-}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('img-slider', ImgSlider);
+
+
+/***/ }),
+
+/***/ "./src/web-components/light-box/light-box.js":
+/*!***************************************************!*\
+  !*** ./src/web-components/light-box/light-box.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LightBox: () => (/* binding */ LightBox)
+/* harmony export */ });
+/* harmony import */ var _light_box_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./light-box.html */ "./src/web-components/light-box/light-box.html");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _wrapNativeSuper(t) { var r = "function" == typeof Map ? new Map() : void 0; return _wrapNativeSuper = function _wrapNativeSuper(t) { if (null === t || !_isNativeFunction(t)) return t; if ("function" != typeof t) throw new TypeError("Super expression must either be null or a function"); if (void 0 !== r) { if (r.has(t)) return r.get(t); r.set(t, Wrapper); } function Wrapper() { return _construct(t, arguments, _getPrototypeOf(this).constructor); } return Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } }), _setPrototypeOf(Wrapper, t); }, _wrapNativeSuper(t); }
+function _construct(t, e, r) { if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments); var o = [null]; o.push.apply(o, e); var p = new (t.bind.apply(t, o))(); return r && _setPrototypeOf(p, r.prototype), p; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).indexOf("[native code]"); } catch (n) { return "function" == typeof t; } }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+
+var template = document.createElement('template');
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n    </style>\n\n    ".concat(_light_box_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var LightBox = /*#__PURE__*/function (_HTMLElement) {
+  function LightBox() {
+    var _this;
+    _classCallCheck(this, LightBox);
+    _this = _callSuper(this, LightBox);
+    _this.attachShadow({
+      mode: 'open'
+    });
+    _this.shadowRoot.appendChild(template.content.cloneNode(true));
+    return _this;
+  }
+  _inherits(LightBox, _HTMLElement);
+  return _createClass(LightBox);
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
+customElements.define('light-box', LightBox);
 
 
 /***/ }),
@@ -423,7 +477,7 @@ var NavMenu = /*#__PURE__*/function (_HTMLElement) {
       clickedBtn === this.closeNavBtn ? this.navMenuContainer.classList.toggle('hidden') : this.overlay.toggleVisibility();
     }
   }]);
-}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('nav-menu', NavMenu);
 
 
@@ -462,7 +516,7 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .card-container {\n            @media(min-width: 1024px) {\n                max-width: 85%;\n                margin: 80px auto 0 auto;\n            }\n\n            @media(min-width: 1400px) {\n                max-width: 75%;\n            }\n        }\n\n        .card {\n            @media(min-width: 1024px) {\n                display: flex;\n            }\n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n        .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n        .active {\n            border: 3px solid hsl(26, 100%, 55%);\n            opacity: 70%;\n        }\n\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n         .card-container {\n             @media(min-width: 1024px) {\n                 max-width: 85%;\n                 margin: 80px auto 0 auto;\n             }\n\n             @media(min-width: 1400px) {\n                max-width: 75%;\n             }\n         }\n\n         .card {\n             @media(min-width: 1024px) {\n                display: flex;\n            }\n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                 width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n         .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n\n        @media(min-width: 1024px) {\n            .thumbnail-wrapper {\n                border-radius: 10px;\n                border: 3px solid transparent;\n                background-color: hsl(0, 0%, 100%);\n            }\n                \n            .thumbnail:hover {\n                opacity: 50%;\n            }\n\n            .wrapper-active {\n                border: 3px solid hsl(26, 100%, 55%);\n            }\n\n            .thumbnail-active {\n                opacity: 50%;\n            }\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   function ProductCard() {
     var _this;
@@ -472,6 +526,7 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
+    _this.imgSlider = _this.shadowRoot.querySelector('img-slider');
 
     // handle full size images
     var productId = Number(_this.getAttribute('product-id'));
@@ -500,24 +555,34 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
     _this.shadowRoot.querySelector('.add-to-cart').addEventListener('click', function () {
       return _this.handleCartAdd(product);
     });
+    _this.setImages();
     return _this;
   }
   _inherits(ProductCard, _HTMLElement);
   return _createClass(ProductCard, [{
-    key: "setInitialImages",
-    value: function setInitialImages() {
-      var fullSizeImageContainer = this.shadowRoot.querySelector('.full-size-image-container');
-      var thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails-container');
-      var fullSizeImage = this.fullSizeImages[this.activeImage];
-      var fullSizeImgElement = document.createElement('img');
-      fullSizeImgElement.src = fullSizeImage;
-      fullSizeImgElement.classList.add('full-size-image');
-      fullSizeImageContainer.append(fullSizeImgElement);
+    key: "setImages",
+    value: function setImages() {
+      var _this2 = this;
+      this.fullSizeImages.forEach(function (image) {
+        // create the image element and set attributes etc
+        var imageElement = document.createElement('img');
+        imageElement.src = image;
+        imageElement.classList.add('slide');
+        imageElement.setAttribute('slot', 'slide');
+        _this2.imgSlider.appendChild(imageElement);
+      });
       this.thumbnails.forEach(function (thumbnail) {
-        var img = document.createElement('img');
-        img.src = thumbnail;
-        img.classList.add('hidden');
-        thumbnailsContainer.appendChild(img);
+        // create the image element and set attributes etc
+        var imageElement = document.createElement('img');
+        imageElement.src = thumbnail;
+        imageElement.classList.add('thumbnail');
+
+        // create wrapper for each thumbnail
+        var wrapper = document.createElement('div');
+        wrapper.classList.add('thumbnail-wrapper');
+        wrapper.setAttribute('slot', 'thumbnail');
+        wrapper.appendChild(imageElement);
+        _this2.imgSlider.appendChild(wrapper);
       });
     }
   }, {
@@ -551,7 +616,7 @@ var ProductCard = /*#__PURE__*/function (_HTMLElement) {
       this.shadowRoot.querySelector('.quantity').textContent = this.amountOfItemsToBeAddedToCart;
     }
   }]);
-}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('product-card', ProductCard);
 
 
@@ -610,7 +675,7 @@ var ScreenOverlay = /*#__PURE__*/function (_HTMLElement) {
       this.shadowRoot.querySelector('.overlay').classList.add('hidden');
     }
   }]);
-}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('screen-overlay', ScreenOverlay);
 
 
@@ -739,7 +804,7 @@ var ShoppingCart = /*#__PURE__*/function (_HTMLElement) {
       }
     }
   }]);
-}( /*#__PURE__*/_wrapNativeSuper(HTMLElement));
+}(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
 customElements.define('shopping-cart', ShoppingCart);
 
 
@@ -858,7 +923,7 @@ shopping-cart {
   .profile-img:hover {
     border: 3px solid hsl(26, 100%, 55%);
   }
-}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;AACJ;;AAKA;EACI,kCAAA;EACA,iBAAA;EACA,cAAA;EAEA,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,8BAAA;AAHJ;AAKI;EAVJ;IAWQ,cAAA;IACA,gCAAA;IACA,aAAA;EAFN;AACF;;AAGA;EACI,aAAA;EACA,qBAAA;AAAJ;AAEI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EACN;AACF;;AACI;EADJ;IAEQ,QAAA;IACA,YAAA;EAGN;AACF;;AAFA;EACI,qBAAA;AAKJ;AAHI;EAHJ;IAIQ,QAAA;IACA,SAAA;EAMN;AACF;;AALA;EACI,aAAA;EACA,qBAAA;AAQJ;AANI;EAJJ;IAKQ,mBAAA;EASN;AACF;;AARA;EACI,qBAAA;AAWJ;AATI;EAHJ;IAIQ,qBAAA;EAYN;AACF;;AAXA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAYJ;;AAVA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAaJ;AAXI;EACI,eAAA;EACA,oCAAA;AAaR;AAXI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAcN;EAZM;IACI,oCAAA;EAcV;AACF","sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/styles/main.sass"],"names":[],"mappings":"AAAA;EACI,yBAAA;AACJ;;AACA;EACI,kCAAA;EACA,iBAAA;EACA,cAAA;EAEA,kBAAA;EACA,aAAA;EACA,mBAAA;EACA,8BAAA;AACJ;AACI;EAVJ;IAWQ,cAAA;IACA,gCAAA;IACA,aAAA;EAEN;AACF;;AADA;EACI,aAAA;EACA,qBAAA;AAIJ;AAFI;EAJJ;IAKQ,YAAA;IACA,mBAAA;EAKN;AACF;;AAHI;EADJ;IAEQ,QAAA;IACA,YAAA;EAON;AACF;;AANA;EACI,qBAAA;AASJ;AAPI;EAHJ;IAIQ,QAAA;IACA,SAAA;EAUN;AACF;;AATA;EACI,aAAA;EACA,qBAAA;AAYJ;AAVI;EAJJ;IAKQ,mBAAA;EAaN;AACF;;AAZA;EACI,qBAAA;AAeJ;AAbI;EAHJ;IAIQ,qBAAA;EAgBN;AACF;;AAfA;EACI,kCAAA;EAEA,SAAA;EAEA,UAAA;EACA,mBAAA;AAgBJ;;AAdA;EACI,YAAA;EACA,WAAA;EACA,mBAAA;EACA,kCAAA;AAiBJ;AAfI;EACI,eAAA;EACA,oCAAA;AAiBR;AAfI;EAVJ;IAWQ,YAAA;IACA,WAAA;IACA,kCAAA;EAkBN;EAhBM;IACI,oCAAA;EAkBV;AACF","sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1188,8 +1253,35 @@ var code = `<div class="slider">
     <slot name="thumbnail"></slot>
   </div>
 </div>
+`;
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
 
-<!-- <light-box></light-box> -->
+/***/ }),
+
+/***/ "./src/web-components/light-box/light-box.html":
+/*!*****************************************************!*\
+  !*** ./src/web-components/light-box/light-box.html ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// Module
+var code = `<!-- <div class="slider">
+  <custom-button class="previous">
+    <img src="../../assets/icon-previous.svg" alt="Previous" />
+  </custom-button>
+  <custom-button class="next">
+    <img src="../../assets/icon-next.svg" alt="Next" />
+  </custom-button>
+  <div class="slides"></div>
+  <div class="thumbnails"></div>
+</div> -->
+
+<img-slider></img-slider>
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1236,63 +1328,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// Imports
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-1.jpg */ "./src/assets/image-product-1.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-2.jpg */ "./src/assets/image-product-2.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_2___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-3.jpg */ "./src/assets/image-product-3.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_3___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-4.jpg */ "./src/assets/image-product-4.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_4___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-1-thumbnail.jpg */ "./src/assets/image-product-1-thumbnail.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_5___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-2-thumbnail.jpg */ "./src/assets/image-product-2-thumbnail.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_6___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-3-thumbnail.jpg */ "./src/assets/image-product-3-thumbnail.jpg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_7___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/image-product-4-thumbnail.jpg */ "./src/assets/image-product-4-thumbnail.jpg"), __webpack_require__.b);
 // Module
 var code = `<div class="card-container">
   <div class="card">
-    <img-slider>
-      <img
-        src="${___HTML_LOADER_IMPORT_0___}"
-        slot="slide"
-        class="slide product-1"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_1___}"
-        slot="slide"
-        class="slide product-2"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_2___}"
-        slot="slide"
-        class="slide product-3"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_3___}"
-        slot="slide"
-        class="slide product-4"
-      />
-      <img
-        src="${___HTML_LOADER_IMPORT_4___}"
-        slot="thumbnail"
-        class="thumbnail product-1"
-      />
-
-      <img
-        src="${___HTML_LOADER_IMPORT_5___}"
-        slot="thumbnail"
-        class="thumbnail product-2"
-      />
-
-      <img
-        src="${___HTML_LOADER_IMPORT_6___}"
-        slot="thumbnail"
-        class="thumbnail product-3"
-      />
-
-      <img
-        src="${___HTML_LOADER_IMPORT_7___}"
-        slot="thumbnail"
-        class="thumbnail product-4"
-      />
-    </img-slider>
+    <img-slider> </img-slider>
 
     <div class="product-info">
       <div class="info"></div>
@@ -2027,7 +2066,7 @@ module.exports = /*#__PURE__*/JSON.parse('[{"id":1,"title":"Home","url":"/"},{"i
 /******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
 /******/ 		var document = __webpack_require__.g.document;
 /******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
 /******/ 				scriptUrl = document.currentScript.src;
 /******/ 			if (!scriptUrl) {
 /******/ 				var scripts = document.getElementsByTagName("script");
@@ -2077,6 +2116,8 @@ module.exports = /*#__PURE__*/JSON.parse('[{"id":1,"title":"Home","url":"/"},{"i
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
@@ -2087,18 +2128,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _web_components_screen_overlay_screen_overlay_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./web-components/screen-overlay/screen-overlay.js */ "./src/web-components/screen-overlay/screen-overlay.js");
 /* harmony import */ var _web_components_product_card_product_card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./web-components/product-card/product-card.js */ "./src/web-components/product-card/product-card.js");
 /* harmony import */ var _web_components_img_slider_img_slider_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./web-components/img-slider/img-slider.js */ "./src/web-components/img-slider/img-slider.js");
-/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
-/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
+/* harmony import */ var _web_components_light_box_light_box_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./web-components/light-box/light-box.js */ "./src/web-components/light-box/light-box.js");
+/* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
+/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
 
 
 
 
 
 
-// import { LightBox } from "./web-components/light-box/light-box.js";
 
 
+
+})();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.8f85f776594fd5e26acf.js.map
+//# sourceMappingURL=bundle.64b9cdce1c9cfe9a0a2d.js.map
