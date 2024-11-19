@@ -224,7 +224,6 @@ template.innerHTML = `
                 opacity: 50%;
             }
         }
-
     </style>
 
     ${html}
@@ -276,7 +275,6 @@ class ProductCard extends HTMLElement {
         this.shadowRoot.querySelector('.add-to-cart').addEventListener('click', () => this.handleCartAdd(product));
 
         this.setImages();
-
     }
 
     setImages() {

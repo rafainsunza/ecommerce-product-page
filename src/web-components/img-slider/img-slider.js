@@ -1,4 +1,5 @@
 import html from './img-slider.html';
+import { cloneElement, clonedElements } from '../../modules/lightbox-module';
 
 const template = document.createElement('template');
 
@@ -26,6 +27,11 @@ template.innerHTML = `
             }
         }
 
+        .lightbox-slider {
+            width: 500px;
+        }
+
+
         .slides {
             display: grid;
             grid-auto-flow: column;
@@ -47,6 +53,12 @@ template.innerHTML = `
             }
         }
 
+        .slides:hover {
+            @media(min-width: 1024px) {
+                cursor: pointer;
+            }
+        }
+
         .thumbnails {
             display: grid;
             grid-auto-flow: column;
@@ -56,6 +68,11 @@ template.innerHTML = `
             overflow-x: auto;
             scroll-snap-type: inline mandatory;
             scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);
+        }
+
+        .lightbox-thumbnails {
+            justify-content: center;
+            gap: 20px;
         }
 
         ::slotted([slot="slide"]) {
@@ -84,7 +101,7 @@ template.innerHTML = `
 
         .previous:hover, .next:hover {
             cursor: pointer;
-
+            color: hsl(26, 100%, 55%);
         }
 
         .previous, .next {
@@ -96,27 +113,38 @@ template.innerHTML = `
             top: 50%;
             margin: 0 15px;
 
+            color: black;
             background-color: hsl(0, 0%, 100%);
-            width: 30px;
-            height: 30px;
-            border-radius: 30px;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
 
             @media(min-width: 1024px) {
                 display: none;
             }
         }
 
-        .previous > img, .next > img {
-            height: 15px;
-            width: 10px;
-        }
-
         .next {
             right: 0;
         }
 
+        .lightbox-previous, .lightbox-next {
+            display: flex;
+            width: 55px;
+            height: 55px;
+            top: 35%;
+        }
+
+        .lightbox-previous {
+            left: -45px;
+        }
+
+        .lightbox-next {
+            right: -45px;
+        }
+
        .hidden {
-            display: none;
+            display: none; 
        }
 
     </style>
@@ -124,6 +152,10 @@ template.innerHTML = `
 `;
 
 class ImgSlider extends HTMLElement {
+    static get observedAttributes() {
+        return ['styling'];
+    }
+
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -133,22 +165,29 @@ class ImgSlider extends HTMLElement {
         this.slideSlot = this.shadowRoot.querySelector('slot[name="slide"]');
         this.thumbnailSlot = this.shadowRoot.querySelector('slot[name="thumbnail"]');
         this.thumbnailsContainer = this.shadowRoot.querySelector('.thumbnails');
-
         this.previousBtn = this.shadowRoot.querySelector('.previous');
         this.nextBtn = this.shadowRoot.querySelector('.next');
 
-        this.images = this.slideSlot.assignedElements();
-        this.wrappers = this.thumbnailSlot.assignedElements();
-        this.thumbnails = this.wrappers.map(wrapper => wrapper.querySelector('img'));
+        // if the first slots are filled 
+        // set the variables and clone them if necessary for use in other elements (lightbox)
+        if (this.thumbnailSlot.assignedElements().length > 0) {
+            this.images = this.slideSlot.assignedElements();
+            this.wrappers = this.thumbnailSlot.assignedElements();
+            this.thumbnails = this.wrappers.map(wrapper => wrapper.querySelector('img'));
 
-        this.thumbnails.forEach((thumbnail) => {
-            thumbnail.style.borderRadius = "10px";
+            // notify that the image has been clicked and return its index
+            this.slidesContainer.addEventListener('click', (e) => this.handleImageClick(e));
 
-            thumbnail.addEventListener('mouseenter', () => {
-                thumbnail.style.cursor = "pointer";
-            });
+            cloneElement(this.images, 'cloned_images');
+            cloneElement(this.wrappers, 'cloned_wrappers');
+            cloneElement(this.thumbnails, 'cloned_thumbnails');
 
-        })
+        } else {
+            this.images = clonedElements.cloned_images;
+            this.wrappers = clonedElements.cloned_wrappers;
+            this.thumbnails = clonedElements.cloned_thumbnails;
+        }
+
 
         this.imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
         this.activeImageIndex = 0;
@@ -157,8 +196,23 @@ class ImgSlider extends HTMLElement {
         this.wrappers[this.activeImageIndex].classList.add('wrapper-active');
         this.hasResizedOnce = false;
 
+        this.applyDefaultThumbnailStyling();
         this.toggleNavigationButtons(this.imagesInView);
+        this.setEventListeners();
+    }
 
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'styling' && newValue === 'lightbox') {
+            const slider = this.shadowRoot.querySelector('.slider');
+
+            slider.classList.add('lightbox-slider');
+            this.thumbnailsContainer.classList.add('lightbox-thumbnails');
+            this.nextBtn.classList.add('lightbox-next');
+            this.previousBtn.classList.add('lightbox-previous');
+        }
+    }
+
+    setEventListeners() {
         this.previousBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.nextBtn.addEventListener('click', (e) => this.navigateImages(e));
         this.slidesContainer.addEventListener('scroll', () => {
@@ -171,6 +225,28 @@ class ImgSlider extends HTMLElement {
         this.thumbnailsContainer.addEventListener('click', (e) => this.thumbnailNavigation(e));
         window.addEventListener('resize', () => this.correctDesktopImageAfterResize());
 
+    }
+
+    handleImageClick(event) {
+        if (window.innerWidth >= 1024) {
+            event = new CustomEvent('image-clicked', {
+                bubbles: true,
+                composed: true,
+                detail: { image_index: this.activeImageIndex }
+            });
+            this.dispatchEvent(event);
+        }
+    }
+
+    applyDefaultThumbnailStyling() {
+        this.thumbnails.forEach((thumbnail) => {
+            thumbnail.style.borderRadius = "10px";
+
+            thumbnail.addEventListener('mouseenter', () => {
+                thumbnail.style.cursor = "pointer";
+            });
+
+        })
     }
 
     toggleNavigationButtons(imagesInView) {
@@ -232,7 +308,6 @@ class ImgSlider extends HTMLElement {
     navigateImages(e) {
         const clickedBtn = e.target.closest('custom-button');
         const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
-        const imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
 
         if (clickedBtn === this.nextBtn) {
             this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
@@ -248,7 +323,11 @@ class ImgSlider extends HTMLElement {
             this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
         }
 
-
+        this.thumbnails.forEach((thumbnail, index) => {
+            const isActive = index === this.activeImageIndex;
+            thumbnail.classList.toggle('thumbnail-active', isActive);
+            this.wrappers[index].classList.toggle('wrapper-active', isActive);
+        });
     }
 
     thumbnailNavigation(e) {
@@ -259,16 +338,16 @@ class ImgSlider extends HTMLElement {
             const scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
             const newImageData = scrollPositionsAndIndexes.find(imageData => imageData.index === clickedThumbnailIndex);
 
-            this.thumbnails.forEach((thumbnail) => thumbnail.classList.remove('thumbnail-active'));
-            this.wrappers.forEach(wrapper => wrapper.classList.remove('wrapper-active'));
+            this.thumbnails.forEach((thumbnail, index) => {
+                const isActive = index === clickedThumbnailIndex;
+                thumbnail.classList.toggle('thumbnail-active', isActive);
+                this.wrappers[index].classList.toggle('wrapper-active', isActive);
+            });
 
             if (clickedThumbnailIndex !== this.activeImageIndex) {
                 this.slidesContainer.scrollTo({ left: newImageData.scroll_position, behavior: 'smooth' });
-                this.activeImageIndex = newImageData.index;
-                clickedThumbnail.classList.add('thumbnail-active');
-                this.wrappers[clickedThumbnailIndex].classList.add('wrapper-active');
+                this.activeImageIndex = clickedThumbnailIndex;
             }
-
         }
     }
 }

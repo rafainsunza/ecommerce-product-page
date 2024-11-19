@@ -9,6 +9,7 @@ template.innerHTML = `
             border: none;
             padding: 0;
             background-color: inherit;
+            color: inherit;
             font-weight: inherit;
             font-family: inherit;
             font-size: inherit;

@@ -88,6 +88,34 @@ function removeFromCart(productId) {
 
 /***/ }),
 
+/***/ "./src/modules/lightbox-module.js":
+/*!****************************************!*\
+  !*** ./src/modules/lightbox-module.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   cloneElement: () => (/* binding */ cloneElement),
+/* harmony export */   clonedElements: () => (/* binding */ clonedElements)
+/* harmony export */ });
+var clonedElements = {};
+function cloneElement(elements, arrayName) {
+  clonedElements[arrayName] = [];
+  if (Array.isArray(elements)) {
+    elements.forEach(function (element) {
+      var clonedElement = element.cloneNode(true);
+      clonedElements[arrayName].push(clonedElement);
+    });
+  } else {
+    var clonedElement = elements.cloneNode(true);
+    clonedElements[arrayName].push(clonedElement);
+  }
+}
+
+
+/***/ }),
+
 /***/ "./src/web-components/custom-button/custom-button.js":
 /*!***********************************************************!*\
   !*** ./src/web-components/custom-button/custom-button.js ***!
@@ -117,7 +145,7 @@ function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf 
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        button {\n            box-sizing: border-box;\n            border: none;\n            padding: 0;\n            background-color: inherit;\n            font-weight: inherit;\n            font-family: inherit;\n            font-size: inherit;\n            display: inherit;\n        }\n\n        button:hover {\n            cursor: pointer;\n        }\n\n        .hidden {\n            display: none;\n        }\n    </style>\n\n    ".concat(_custom_button_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        button {\n            box-sizing: border-box;\n            border: none;\n            padding: 0;\n            background-color: inherit;\n            color: inherit;\n            font-weight: inherit;\n            font-family: inherit;\n            font-size: inherit;\n            display: inherit;\n        }\n\n        button:hover {\n            cursor: pointer;\n        }\n\n        .hidden {\n            display: none;\n        }\n    </style>\n\n    ".concat(_custom_button_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var CustomButton = /*#__PURE__*/function (_HTMLElement) {
   function CustomButton() {
     var _this;
@@ -148,6 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ImgSlider: () => (/* binding */ ImgSlider)
 /* harmony export */ });
 /* harmony import */ var _img_slider_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./img-slider.html */ "./src/web-components/img-slider/img-slider.html");
+/* harmony import */ var _modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/lightbox-module */ "./src/modules/lightbox-module.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -165,8 +194,9 @@ function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).in
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
+
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 350px;\n            }\n        }\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n          \n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: flex;\n                height: 80px;\n                width: 80px;\n                border-radius: 10px;\n            }\n        }\n\n        .previous:hover, .next:hover {\n            cursor: pointer;\n\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            background-color: hsl(0, 0%, 100%);\n            width: 30px;\n            height: 30px;\n            border-radius: 30px;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .previous > img, .next > img {\n            height: 15px;\n            width: 10px;\n        }\n\n        .next {\n            right: 0;\n        }\n\n       .hidden {\n            display: none;\n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n        .slider {\n            position: relative;\n            width: 100%;   \n            margin: auto;\n\n            @media(min-width: 1024px) {\n                width: 350px;\n            }\n        }\n\n        .lightbox-slider {\n            width: 500px;\n        }\n\n\n        .slides {\n            display: grid;\n            grid-auto-flow: column;\n            grid-auto-columns: 100%;\n            \n\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-width: none;\n\n            @media(min-width: 500px) {\n                gap: 20px;\n                grid-auto-columns: calc(50% - 10px); \n            }\n          \n            @media(min-width: 1024px) {\n                grid-auto-columns: 100%;\n                gap: 0;\n            }\n        }\n\n        .slides:hover {\n            @media(min-width: 1024px) {\n                cursor: pointer;\n            }\n        }\n\n        .thumbnails {\n            display: grid;\n            grid-auto-flow: column;\n            justify-content: space-between;\n            margin-top: 30px;\n            padding-bottom: 10px;\n            overflow-x: auto;\n            scroll-snap-type: inline mandatory;\n            scrollbar-color: hsl(26, 100%, 55%) hsl(25, 100%, 94%);\n        }\n\n        .lightbox-thumbnails {\n            justify-content: center;\n            gap: 20px;\n        }\n\n        ::slotted([slot=\"slide\"]) {\n            width: 100%;\n            scroll-snap-align: start;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"slide\"]) {\n                border-radius: 15px;                \n            }\n        }\n\n        ::slotted([slot=\"thumbnail\"]) {\n            display: none;\n        }\n\n        @media(min-width: 1024px) {\n            ::slotted([slot=\"thumbnail\"]) {\n                display: flex;\n                height: 80px;\n                width: 80px;\n                border-radius: 10px;\n            }\n        }\n\n        .previous:hover, .next:hover {\n            cursor: pointer;\n            color: hsl(26, 100%, 55%);\n        }\n\n        .previous, .next {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            position: absolute;\n            top: 50%;\n            margin: 0 15px;\n\n            color: black;\n            background-color: hsl(0, 0%, 100%);\n            width: 40px;\n            height: 40px;\n            border-radius: 100%;\n\n            @media(min-width: 1024px) {\n                display: none;\n            }\n        }\n\n        .next {\n            right: 0;\n        }\n\n        .lightbox-previous, .lightbox-next {\n            display: flex;\n            width: 55px;\n            height: 55px;\n            top: 35%;\n        }\n\n        .lightbox-previous {\n            left: -45px;\n        }\n\n        .lightbox-next {\n            right: -45px;\n        }\n\n       .hidden {\n            display: none; \n       }\n\n    </style>\n    ".concat(_img_slider_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   function ImgSlider() {
     var _this;
@@ -182,47 +212,100 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
     _this.thumbnailsContainer = _this.shadowRoot.querySelector('.thumbnails');
     _this.previousBtn = _this.shadowRoot.querySelector('.previous');
     _this.nextBtn = _this.shadowRoot.querySelector('.next');
-    _this.images = _this.slideSlot.assignedElements();
-    _this.wrappers = _this.thumbnailSlot.assignedElements();
-    _this.thumbnails = _this.wrappers.map(function (wrapper) {
-      return wrapper.querySelector('img');
-    });
-    _this.thumbnails.forEach(function (thumbnail) {
-      thumbnail.style.borderRadius = "10px";
-      thumbnail.addEventListener('mouseenter', function () {
-        thumbnail.style.cursor = "pointer";
+
+    // if the first slots are filled 
+    // set the variables and clone them if necessary for use in other elements (lightbox)
+    if (_this.thumbnailSlot.assignedElements().length > 0) {
+      _this.images = _this.slideSlot.assignedElements();
+      _this.wrappers = _this.thumbnailSlot.assignedElements();
+      _this.thumbnails = _this.wrappers.map(function (wrapper) {
+        return wrapper.querySelector('img');
       });
-    });
+
+      // notify that the image has been clicked and return its index
+      _this.slidesContainer.addEventListener('click', function (e) {
+        return _this.handleImageClick(e);
+      });
+      (0,_modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(_this.images, 'cloned_images');
+      (0,_modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(_this.wrappers, 'cloned_wrappers');
+      (0,_modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__.cloneElement)(_this.thumbnails, 'cloned_thumbnails');
+    } else {
+      _this.images = _modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__.clonedElements.cloned_images;
+      _this.wrappers = _modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__.clonedElements.cloned_wrappers;
+      _this.thumbnails = _modules_lightbox_module__WEBPACK_IMPORTED_MODULE_1__.clonedElements.cloned_thumbnails;
+    }
     _this.imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
     _this.activeImageIndex = 0;
     _this.maxImageIndex = _this.images.length - 1;
     _this.thumbnails[_this.activeImageIndex].classList.add('thumbnail-active');
     _this.wrappers[_this.activeImageIndex].classList.add('wrapper-active');
     _this.hasResizedOnce = false;
+    _this.applyDefaultThumbnailStyling();
     _this.toggleNavigationButtons(_this.imagesInView);
-    _this.previousBtn.addEventListener('click', function (e) {
-      return _this.navigateImages(e);
-    });
-    _this.nextBtn.addEventListener('click', function (e) {
-      return _this.navigateImages(e);
-    });
-    _this.slidesContainer.addEventListener('scroll', function () {
-      clearTimeout(_this.scrollTimeout);
-      _this.scrollTimeout = setTimeout(function () {
-        var imagesInView = _this.checkElementsInView(_this.images, _this.slidesContainer);
-        _this.toggleNavigationButtons(imagesInView);
-      }, 100);
-    });
-    _this.thumbnailsContainer.addEventListener('click', function (e) {
-      return _this.thumbnailNavigation(e);
-    });
-    window.addEventListener('resize', function () {
-      return _this.correctDesktopImageAfterResize();
-    });
+    _this.setEventListeners();
     return _this;
   }
   _inherits(ImgSlider, _HTMLElement);
   return _createClass(ImgSlider, [{
+    key: "attributeChangedCallback",
+    value: function attributeChangedCallback(name, oldValue, newValue) {
+      if (name === 'styling' && newValue === 'lightbox') {
+        var slider = this.shadowRoot.querySelector('.slider');
+        slider.classList.add('lightbox-slider');
+        this.thumbnailsContainer.classList.add('lightbox-thumbnails');
+        this.nextBtn.classList.add('lightbox-next');
+        this.previousBtn.classList.add('lightbox-previous');
+      }
+    }
+  }, {
+    key: "setEventListeners",
+    value: function setEventListeners() {
+      var _this2 = this;
+      this.previousBtn.addEventListener('click', function (e) {
+        return _this2.navigateImages(e);
+      });
+      this.nextBtn.addEventListener('click', function (e) {
+        return _this2.navigateImages(e);
+      });
+      this.slidesContainer.addEventListener('scroll', function () {
+        clearTimeout(_this2.scrollTimeout);
+        _this2.scrollTimeout = setTimeout(function () {
+          var imagesInView = _this2.checkElementsInView(_this2.images, _this2.slidesContainer);
+          _this2.toggleNavigationButtons(imagesInView);
+        }, 100);
+      });
+      this.thumbnailsContainer.addEventListener('click', function (e) {
+        return _this2.thumbnailNavigation(e);
+      });
+      window.addEventListener('resize', function () {
+        return _this2.correctDesktopImageAfterResize();
+      });
+    }
+  }, {
+    key: "handleImageClick",
+    value: function handleImageClick(event) {
+      if (window.innerWidth >= 1024) {
+        event = new CustomEvent('image-clicked', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            image_index: this.activeImageIndex
+          }
+        });
+        this.dispatchEvent(event);
+      }
+    }
+  }, {
+    key: "applyDefaultThumbnailStyling",
+    value: function applyDefaultThumbnailStyling() {
+      this.thumbnails.forEach(function (thumbnail) {
+        thumbnail.style.borderRadius = "10px";
+        thumbnail.addEventListener('mouseenter', function () {
+          thumbnail.style.cursor = "pointer";
+        });
+      });
+    }
+  }, {
     key: "toggleNavigationButtons",
     value: function toggleNavigationButtons(imagesInView) {
       var lastImage = this.images[this.images.length - 1];
@@ -246,11 +329,11 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   }, {
     key: "correctDesktopImageAfterResize",
     value: function correctDesktopImageAfterResize() {
-      var _this2 = this;
+      var _this3 = this;
       if (window.innerWidth >= 1024 && !this.hasResizedOnce) {
         var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
         var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
-          return imageData.index === _this2.activeImageIndex;
+          return imageData.index === _this3.activeImageIndex;
         });
         this.slidesContainer.scrollTo({
           left: newImageData.scroll_position,
@@ -272,7 +355,7 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
   }, {
     key: "getScrollPositionAndIndex",
     value: function getScrollPositionAndIndex() {
-      var _this3 = this;
+      var _this4 = this;
       var imagePositionsAndIndexes = [];
       var imageScrollPosition = 0;
       this.images.forEach(function (image, index) {
@@ -280,21 +363,20 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
           scroll_position: imageScrollPosition,
           index: index
         });
-        imageScrollPosition = imageScrollPosition + _this3.slidesContainer.scrollWidth / _this3.images.length;
+        imageScrollPosition = imageScrollPosition + _this4.slidesContainer.scrollWidth / _this4.images.length;
       });
       return imagePositionsAndIndexes;
     }
   }, {
     key: "navigateImages",
     value: function navigateImages(e) {
-      var _this4 = this;
+      var _this5 = this;
       var clickedBtn = e.target.closest('custom-button');
       var scrollPositionsAndIndexes = this.getScrollPositionAndIndex();
-      var imagesInView = this.checkElementsInView(this.images, this.slidesContainer);
       if (clickedBtn === this.nextBtn) {
         this.activeImageIndex < this.maxImageIndex ? this.activeImageIndex++ : null;
         var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
-          return imageData.index === _this4.activeImageIndex;
+          return imageData.index === _this5.activeImageIndex;
         });
         this.slidesContainer.scrollTo({
           left: newImageData.scroll_position,
@@ -304,17 +386,23 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
       if (clickedBtn === this.previousBtn) {
         this.activeImageIndex > 0 ? this.activeImageIndex-- : null;
         var _newImageData = scrollPositionsAndIndexes.find(function (imageData) {
-          return imageData.index === _this4.activeImageIndex;
+          return imageData.index === _this5.activeImageIndex;
         });
         this.slidesContainer.scrollTo({
           left: _newImageData.scroll_position,
           behavior: 'smooth'
         });
       }
+      this.thumbnails.forEach(function (thumbnail, index) {
+        var isActive = index === _this5.activeImageIndex;
+        thumbnail.classList.toggle('thumbnail-active', isActive);
+        _this5.wrappers[index].classList.toggle('wrapper-active', isActive);
+      });
     }
   }, {
     key: "thumbnailNavigation",
     value: function thumbnailNavigation(e) {
+      var _this6 = this;
       var clickedThumbnail = e.target.closest('.thumbnail');
       if (clickedThumbnail !== null) {
         var clickedThumbnailIndex = this.thumbnails.indexOf(clickedThumbnail);
@@ -322,22 +410,24 @@ var ImgSlider = /*#__PURE__*/function (_HTMLElement) {
         var newImageData = scrollPositionsAndIndexes.find(function (imageData) {
           return imageData.index === clickedThumbnailIndex;
         });
-        this.thumbnails.forEach(function (thumbnail) {
-          return thumbnail.classList.remove('thumbnail-active');
-        });
-        this.wrappers.forEach(function (wrapper) {
-          return wrapper.classList.remove('wrapper-active');
+        this.thumbnails.forEach(function (thumbnail, index) {
+          var isActive = index === clickedThumbnailIndex;
+          thumbnail.classList.toggle('thumbnail-active', isActive);
+          _this6.wrappers[index].classList.toggle('wrapper-active', isActive);
         });
         if (clickedThumbnailIndex !== this.activeImageIndex) {
           this.slidesContainer.scrollTo({
             left: newImageData.scroll_position,
             behavior: 'smooth'
           });
-          this.activeImageIndex = newImageData.index;
-          clickedThumbnail.classList.add('thumbnail-active');
-          this.wrappers[clickedThumbnailIndex].classList.add('wrapper-active');
+          this.activeImageIndex = clickedThumbnailIndex;
         }
       }
+    }
+  }], [{
+    key: "observedAttributes",
+    get: function get() {
+      return ['styling'];
     }
   }]);
 }(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
@@ -346,23 +436,24 @@ customElements.define('img-slider', ImgSlider);
 
 /***/ }),
 
-/***/ "./src/web-components/light-box/light-box.js":
-/*!***************************************************!*\
-  !*** ./src/web-components/light-box/light-box.js ***!
-  \***************************************************/
+/***/ "./src/web-components/light-box/lightbox-modal.js":
+/*!********************************************************!*\
+  !*** ./src/web-components/light-box/lightbox-modal.js ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   LightBox: () => (/* binding */ LightBox)
+/* harmony export */   LightboxModal: () => (/* binding */ LightboxModal)
 /* harmony export */ });
-/* harmony import */ var _light_box_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./light-box.html */ "./src/web-components/light-box/light-box.html");
+/* harmony import */ var _lightbox_modal_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./lightbox-modal.html */ "./src/web-components/light-box/lightbox-modal.html");
+/* harmony import */ var _modules_lightbox_module_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../modules/lightbox-module.js */ "./src/modules/lightbox-module.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
 function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
 function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
@@ -374,23 +465,84 @@ function _isNativeFunction(t) { try { return -1 !== Function.toString.call(t).in
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
 function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
 
+
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n    </style>\n\n    ".concat(_light_box_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
-var LightBox = /*#__PURE__*/function (_HTMLElement) {
-  function LightBox() {
+template.innerHTML = "\n    <style>\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            padding: 0;\n            margin: 0;\n        }\n        /* component reset */\n\n        .modal {\n            border: none;\n            padding: 50px 50px 0 50px;\n\n            outline: none;\n            background-color: transparent;\n            color: hsl(0, 0%, 100%);\n\n            position: relative;\n            top: 50%;\n            left: 50%;\n            transform: translate(-50%, -50%);\n\n        }\n\n        .modal::backdrop {\n            background: hsla(0, 0%, 0%, 0.75);\n        }\n\n        .thumbnail-wrapper {\n            border-radius: 10px;\n            border: 3px solid transparent;\n            background-color: hsl(0, 0%, 100%);\n        }\n                \n        .thumbnail:hover {\n            opacity: 50%;\n        }\n\n        .wrapper-active {\n            border: 3px solid hsl(26, 100%, 55%);\n        }\n\n        .thumbnail-active {\n            opacity: 50%;\n        }\n\n        .close-btn {\n            position: absolute;\n            top: 0;\n            right: 50px;\n        }\n\n        .close-btn:hover {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .hidden {\n            display: none;\n        }\n    </style>\n\n    ".concat(_lightbox_modal_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+var LightboxModal = /*#__PURE__*/function (_HTMLElement) {
+  function LightboxModal() {
     var _this;
-    _classCallCheck(this, LightBox);
-    _this = _callSuper(this, LightBox);
+    _classCallCheck(this, LightboxModal);
+    _this = _callSuper(this, LightboxModal);
     _this.attachShadow({
       mode: 'open'
     });
     _this.shadowRoot.appendChild(template.content.cloneNode(true));
+    document.addEventListener('image-clicked', function (e) {
+      return _this.handleImageClick(e);
+    });
     return _this;
   }
-  _inherits(LightBox, _HTMLElement);
-  return _createClass(LightBox);
+  _inherits(LightboxModal, _HTMLElement);
+  return _createClass(LightboxModal, [{
+    key: "handleImageClick",
+    value: function handleImageClick() {
+      this.setVariables();
+      this.appendImagesToImgSlider();
+      this.addEventListeners();
+      this.modal.showModal();
+      this.imgSlider.nextBtn.classList.remove('hidden');
+    }
+  }, {
+    key: "setVariables",
+    value: function setVariables() {
+      this.modal = this.shadowRoot.querySelector('.modal');
+      this.imgSlider = this.shadowRoot.querySelector('img-slider');
+      this.slidesContainer = this.imgSlider.slidesContainer;
+      this.closeBtn = this.shadowRoot.querySelector('.close-btn');
+    }
+  }, {
+    key: "addEventListeners",
+    value: function addEventListeners() {
+      var _this2 = this;
+      this.closeBtn.addEventListener('click', function (e) {
+        return _this2.closeModal(e);
+      });
+      window.addEventListener('resize', function () {
+        if (window.innerWidth < 1024) {
+          _this2.modal.close();
+        }
+      });
+    }
+  }, {
+    key: "closeModal",
+    value: function closeModal(e) {
+      var closeBtnClicked = e.target.closest('custom-button') === this.closeBtn;
+      if (closeBtnClicked) {
+        this.modal.close();
+      }
+    }
+  }, {
+    key: "appendImagesToImgSlider",
+    value: function appendImagesToImgSlider() {
+      var _this3 = this;
+      _modules_lightbox_module_js__WEBPACK_IMPORTED_MODULE_1__.clonedElements.cloned_wrappers.forEach(function (wrapper) {
+        var thumbnail = wrapper.querySelector('img');
+        wrapper.removeChild(thumbnail);
+      });
+      this.imgSlider.images.forEach(function (image) {
+        _this3.imgSlider.appendChild(image);
+      });
+      this.imgSlider.wrappers.forEach(function (wrapper) {
+        _this3.imgSlider.appendChild(wrapper);
+      });
+      this.imgSlider.wrappers.forEach(function (wrapper, index) {
+        var thumbnail = _this3.imgSlider.thumbnails[index];
+        wrapper.appendChild(thumbnail);
+      });
+    }
+  }]);
 }(/*#__PURE__*/_wrapNativeSuper(HTMLElement));
-customElements.define('light-box', LightBox);
+customElements.define('lightbox-modal', LightboxModal);
 
 
 /***/ }),
@@ -516,7 +668,7 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 
 
 var template = document.createElement('template');
-template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n         .card-container {\n             @media(min-width: 1024px) {\n                 max-width: 85%;\n                 margin: 80px auto 0 auto;\n             }\n\n             @media(min-width: 1400px) {\n                max-width: 75%;\n             }\n         }\n\n         .card {\n             @media(min-width: 1024px) {\n                display: flex;\n            }\n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                 width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n         .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n\n        @media(min-width: 1024px) {\n            .thumbnail-wrapper {\n                border-radius: 10px;\n                border: 3px solid transparent;\n                background-color: hsl(0, 0%, 100%);\n            }\n                \n            .thumbnail:hover {\n                opacity: 50%;\n            }\n\n            .wrapper-active {\n                border: 3px solid hsl(26, 100%, 55%);\n            }\n\n            .thumbnail-active {\n                opacity: 50%;\n            }\n        }\n\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
+template.innerHTML = "\n    <style>\n\n        /* component reset */\n        a {\n            text-decoration: none;\n        }\n\n        * {\n            box-sizing: border-box;\n            font-family: 'Kumbh Sans';\n            margin: 0;\n        }\n        /* component reset */\n\n         .card-container {\n             @media(min-width: 1024px) {\n                 max-width: 85%;\n                 margin: 80px auto 0 auto;\n             }\n\n             @media(min-width: 1400px) {\n                max-width: 75%;\n             }\n         }\n\n         .card {\n             @media(min-width: 1024px) {\n                display: flex;\n            }\n        }\n\n        .product-info {\n            padding: 0 20px 20px 20px;\n\n            @media(min-width: 600px) {\n                 width: 80%;\n                margin: auto;\n            }\n\n            @media(min-width: 1024px) {\n                width: 100%;\n                margin-left: 80px;\n            }       \n        }\n\n        .brand {\n            color: hsl(219, 9%, 45%);\n            font-weight: 700;\n            font-size: 12px;\n            text-transform: uppercase;\n            letter-spacing: 1px;\n        }\n\n        .product-title {\n            font-weight: 700;\n            font-size: 28px;\n            line-height: 30px;\n\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                font-size: 36px;\n                line-height: 38px;\n            }\n        }\n\n        .description {\n            color: hsl(219, 9%, 45%);\n            line-height: 24px;\n            margin-bottom: 15px;\n        }\n      \n        .price {\n            display: flex;\n            padding: 20px 0;\n\n            @media(min-width: 1024px) {\n                flex-wrap: wrap;\n            }\n        }\n\n        .price-before-container {\n            display: flex;\n            justify-content: flex-end;\n            width: 100%;\n            \n            @media(min-width: 1024px) {\n                justify-content: flex-start;    \n                margin-top: 15px;    \n            }\n        }\n   \n        .currency:first-of-type, .price-after {\n            font-weight: 700;\n            font-size: 28px;  \n        }\n\n         .discount { \n            align-content: center;\n\n            font-weight: 700;\n            color: hsl(0, 0%, 100%);\n\n            background-color: hsl(220, 13%, 13%);\n            border-radius: 5px;\n            padding: 0 10px;\n            margin-left: 20px;\n        }\n\n        .currency:nth-last-of-type(2), .price-before {\n            font-weight: 700;\n            font-size: inherit;\n            color: hsl(219, 9%, 45%);\n            text-decoration: line-through;\n            text-decoration-color: hsl(219, 9%, 45%);\n        }\n\n        .actions-container {\n            @media(min-width: 1024px) {\n                display: flex;\n                justify-content: space-between;\n            }\n        }\n\n        .quantity-container {\n            display: flex;\n            justify-content: space-between;\n\n            padding: 0 20px;\n            margin-bottom: 15px;\n\n            background-color: hsl(223, 64%, 98%);\n            border-radius: 7.5px;\n\n            @media(min-width: 1024px) {\n                width: 40%;\n            }\n        }\n\n        .add-to-cart-container {\n            @media(min-width: 1024px) {\n                width: 50%;\n            }\n\n        }\n\n        .less, .more {\n            display: flex;\n            align-items: center;\n\n            height: 55px; \n            width: 15px;  \n        }\n\n       .less:hover, .more:hover{\n            cursor: pointer;\n        }\n\n        .less-icon, .more-icon {\n            color: hsl(26, 100%, 55%);\n        }\n\n        .less:hover .less-icon,\n        .more:hover .more-icon {\n            color: hsla(26, 100%, 55%, 0.5);\n        }\n\n        .quantity {\n            align-content: center;\n            font-weight: 700;\n        }\n\n        .add-to-cart {\n            display: flex;\n            justify-content: center;\n            align-items: center;\n\n            background-color: hsl(26, 100%, 55%);\n            font-weight: 700;\n            border-radius: 7.5px;\n\n            height: 55px;\n        }\n\n        .add-to-cart:hover {\n            cursor: pointer;\n            opacity: 80%;\n        }\n\n        .cart-icon {\n            margin-right: 20px;\n            font-size: 15px;\n        }\n\n        .hidden {\n            display: none;\n        }\n\n\n        @media(min-width: 1024px) {\n            .thumbnail-wrapper {\n                border-radius: 10px;\n                border: 3px solid transparent;\n                background-color: hsl(0, 0%, 100%);\n            }\n                \n            .thumbnail:hover {\n                opacity: 50%;\n            }\n\n            .wrapper-active {\n                border: 3px solid hsl(26, 100%, 55%);\n            }\n\n            .thumbnail-active {\n                opacity: 50%;\n            }\n        }\n    </style>\n\n    ".concat(_product_card_html__WEBPACK_IMPORTED_MODULE_0__["default"], "\n");
 var ProductCard = /*#__PURE__*/function (_HTMLElement) {
   function ProductCard() {
     var _this;
@@ -1234,19 +1386,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-// Imports
-var ___HTML_LOADER_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-previous.svg */ "./src/assets/icon-previous.svg"), __webpack_require__.b);
-var ___HTML_LOADER_IMPORT_1___ = new URL(/* asset import */ __webpack_require__(/*! ../../assets/icon-next.svg */ "./src/assets/icon-next.svg"), __webpack_require__.b);
 // Module
 var code = `<div class="slider">
   <div class="slides">
     <slot name="slide"></slot>
 
     <custom-button class="previous">
-      <img src="${___HTML_LOADER_IMPORT_0___}" alt="Previous" />
+      <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M11 1 3 9l8 8"
+          stroke="currentColor"
+          stroke-width="3"
+          fill="none"
+          fill-rule="evenodd"
+        />
+      </svg>
     </custom-button>
     <custom-button class="next">
-      <img src="${___HTML_LOADER_IMPORT_1___}" alt="Next" />
+      <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m2 1 8 8-8 8"
+          stroke="currentColor"
+          stroke-width="3"
+          fill="none"
+          fill-rule="evenodd"
+        />
+      </svg>
     </custom-button>
   </div>
   <div class="thumbnails">
@@ -1259,10 +1424,10 @@ var code = `<div class="slider">
 
 /***/ }),
 
-/***/ "./src/web-components/light-box/light-box.html":
-/*!*****************************************************!*\
-  !*** ./src/web-components/light-box/light-box.html ***!
-  \*****************************************************/
+/***/ "./src/web-components/light-box/lightbox-modal.html":
+/*!**********************************************************!*\
+  !*** ./src/web-components/light-box/lightbox-modal.html ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1270,18 +1435,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 // Module
-var code = `<!-- <div class="slider">
-  <custom-button class="previous">
-    <img src="../../assets/icon-previous.svg" alt="Previous" />
+var code = `<dialog class="modal">
+  <img-slider styling="lightbox"></img-slider>
+  <custom-button class="close-btn">
+    <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+        fill="currentColor"
+        fill-rule="evenodd"
+      />
+    </svg>
   </custom-button>
-  <custom-button class="next">
-    <img src="../../assets/icon-next.svg" alt="Next" />
-  </custom-button>
-  <div class="slides"></div>
-  <div class="thumbnails"></div>
-</div> -->
-
-<img-slider></img-slider>
+</dialog>
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1400,6 +1565,8 @@ var code = `<div class="card-container">
     </div>
   </div>
 </div>
+
+<!-- <lightbox-modal></lightbox-modal> -->
 `;
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (code);
@@ -1868,26 +2035,6 @@ module.exports = __webpack_require__.p + "assets/icon-menu.svg";
 
 /***/ }),
 
-/***/ "./src/assets/icon-next.svg":
-/*!**********************************!*\
-  !*** ./src/assets/icon-next.svg ***!
-  \**********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/icon-next.svg";
-
-/***/ }),
-
-/***/ "./src/assets/icon-previous.svg":
-/*!**************************************!*\
-  !*** ./src/assets/icon-previous.svg ***!
-  \**************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__.p + "assets/icon-previous.svg";
-
-/***/ }),
-
 /***/ "./src/assets/image-product-1-thumbnail.jpg":
 /*!**************************************************!*\
   !*** ./src/assets/image-product-1-thumbnail.jpg ***!
@@ -2128,7 +2275,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _web_components_screen_overlay_screen_overlay_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./web-components/screen-overlay/screen-overlay.js */ "./src/web-components/screen-overlay/screen-overlay.js");
 /* harmony import */ var _web_components_product_card_product_card_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./web-components/product-card/product-card.js */ "./src/web-components/product-card/product-card.js");
 /* harmony import */ var _web_components_img_slider_img_slider_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./web-components/img-slider/img-slider.js */ "./src/web-components/img-slider/img-slider.js");
-/* harmony import */ var _web_components_light_box_light_box_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./web-components/light-box/light-box.js */ "./src/web-components/light-box/light-box.js");
+/* harmony import */ var _web_components_light_box_lightbox_modal_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./web-components/light-box/lightbox-modal.js */ "./src/web-components/light-box/lightbox-modal.js");
 /* harmony import */ var _styles_reset_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/reset.css */ "./src/styles/reset.css");
 /* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/main.sass */ "./src/styles/main.sass");
 
@@ -2144,4 +2291,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.64b9cdce1c9cfe9a0a2d.js.map
+//# sourceMappingURL=bundle.1221bbac389725db379f.js.map
