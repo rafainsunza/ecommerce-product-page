@@ -41,14 +41,15 @@ template.innerHTML = `
             border-radius: 10px;
             border: 3px solid transparent;
             background-color: hsl(0, 0%, 100%);
+            background-clip: padding-box;
         }
                 
-        .thumbnail:hover {
-            opacity: 50%;
-        }
-
         .wrapper-active {
             border: 3px solid hsl(26, 100%, 55%);
+        }
+
+        .thumbnail:hover {
+            opacity: 50%;
         }
 
         .thumbnail-active {

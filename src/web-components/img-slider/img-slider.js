@@ -31,7 +31,6 @@ template.innerHTML = `
             width: 500px;
         }
 
-
         .slides {
             display: grid;
             grid-auto-flow: column;
@@ -240,7 +239,7 @@ class ImgSlider extends HTMLElement {
 
     applyDefaultThumbnailStyling() {
         this.thumbnails.forEach((thumbnail) => {
-            thumbnail.style.borderRadius = "10px";
+            thumbnail.style.borderRadius = "7px";
 
             thumbnail.addEventListener('mouseenter', () => {
                 thumbnail.style.cursor = "pointer";

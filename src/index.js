@@ -8,3 +8,5 @@ import { LightboxModal } from "./web-components/light-box/lightbox-modal.js";
 
 import './styles/reset.css';
 import './styles/main.sass';
+
+console.log(NavMenu, ShoppingCart, CustomButton, ScreenOverlay, ProductCard, ImgSlider, LightboxModal);
