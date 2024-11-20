@@ -22,9 +22,22 @@ module.exports = {
         historyApiFallback: true,
     },
     module: {
+
         rules: [
             {
+                test: /\.component\.sass$/i,
+                use: [
+                    {
+                        loader: 'css-loader',
+                        options: { exportType: 'string' }
+                    },
+                    'sass-loader'
+                ]
+            },
+
+            {
                 test: /\.sass$/i,
+                exclude: /\.component\.sass$/i,
                 use: [
                     'style-loader',
                     'css-loader',
