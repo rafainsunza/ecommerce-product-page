@@ -1,4 +1,5 @@
 import html from './img-slider.html';
+import style from './img-slider.component.sass';
 import { cloneElement, clonedElements } from '../../modules/lightbox-module';
 
 const template = document.createElement('template');
@@ -147,6 +148,7 @@ template.innerHTML = `
        }
 
     </style>
+    <style>${style}</style>
     ${html}
 `;
 
