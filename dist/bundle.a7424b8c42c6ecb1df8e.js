@@ -2148,7 +2148,7 @@ module.exports = __webpack_require__.p + "assets/image-product-4.jpg";
   \*****************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('[{"id":1,"title":"Home","url":"/"},{"id":2,"title":"Collections","url":"#"},{"id":3,"title":"Men","url":"#"},{"id":4,"title":"Women","url":"#"},{"id":5,"title":"About","url":"#"},{"id":6,"title":"Contact","url":"#"}]');
+module.exports = /*#__PURE__*/JSON.parse('[{"id":1,"title":"Home","url":"#"},{"id":2,"title":"Collections","url":"#"},{"id":3,"title":"Men","url":"#"},{"id":4,"title":"Women","url":"#"},{"id":5,"title":"About","url":"#"},{"id":6,"title":"Contact","url":"#"}]');
 
 /***/ })
 
@@ -2318,4 +2318,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
-//# sourceMappingURL=bundle.49dcdcf68b9109adf623.js.map
+//# sourceMappingURL=bundle.a7424b8c42c6ecb1df8e.js.map
